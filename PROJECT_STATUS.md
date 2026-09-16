@@ -217,10 +217,10 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 - [ ] Medir carga, memoria y rendimiento.
 - [ ] Probar Chrome, Edge y Firefox.
 - [x] Probar audio después de interacción del usuario.
-- [ ] Crear o conectar repositorio remoto de GitHub.
+- [x] Crear y conectar el repositorio público `jonathnadelgadoCH/simulador-digestivo-gallina`.
 - [x] Configurar GitHub Actions y preparación automática compatible con GitHub Pages.
-- [ ] Publicar en GitHub Pages.
-- [ ] Confirmar URL final.
+- [x] Publicar en GitHub Pages.
+- [x] Confirmar la URL pública `https://jonathnadelgadoch.github.io/simulador-digestivo-gallina/`.
 - [ ] Completar README para usuarios y desarrolladores.
 - [ ] Preparar reporte académico final.
 - [ ] Añadir bibliografía en el formato requerido.

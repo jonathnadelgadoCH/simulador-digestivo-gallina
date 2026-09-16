@@ -31,3 +31,5 @@ El avance, los pendientes y los insumos requeridos están centralizados en [PROJ
 ## Publicación web
 
 El repositorio incluye un workflow de GitHub Pages. Al subir la rama `main`, prepara `WebGLBuild/` para hosting estático y publica el simulador. Consulte [Documentation/WEBGL_DEPLOYMENT.md](Documentation/WEBGL_DEPLOYMENT.md).
+
+Simulador público: <https://jonathnadelgadoch.github.io/simulador-digestivo-gallina/>
