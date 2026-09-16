@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.2.0",
+  "scientificStatus": "pending",
+  "id": "ileum",
+  "speciesId": "chicken",
+  "commonName": "Íleon",
+  "anatomicalName": "Ileum",
+  "anatomy": {
+    "location": "Porción distal del intestino delgado, desde el divertículo de Meckel hasta la unión ileocecocolónica.",
+    "morphology": "Segmento tubular que termina junto a los dos ciegos.",
+    "relations": "Recibe contenido del yeyuno y desemboca junto a ciegos y colon.",
+    "histology": "Vellosidades y criptas con enterocitos, células caliciformes y tejido linfoide."
+  },
+  "physiology": {
+    "mainFunction": "Completar digestión y absorción antes del intestino posterior.",
+    "mechanicalDigestion": "Mezcla y propulsión del contenido residual.",
+    "chemicalDigestion": "Continúa la hidrólisis por enzimas pancreáticas residuales y del borde en cepillo.",
+    "motility": "Segmentación, peristalsis y coordinación con el llenado cecal.",
+    "secretions": [
+      "Moco",
+      "Fluido intestinal"
+    ],
+    "enzymes": [
+      "Peptidasas",
+      "Disacaridasas"
+    ],
+    "absorption": [
+      "Nutrientes remanentes",
+      "Agua y electrolitos"
+    ],
+    "digestiveProducts": [
+      "Nutrientes absorbibles",
+      "Residuo destinado a ciegos y colon"
+    ]
+  },
+  "regulation": {
+    "nervousControl": "Circuitos entéricos coordinan tránsito y mezcla.",
+    "autonomicControl": "Modulación vagal y simpática de motilidad y secreción.",
+    "signals": []
+  },
+  "nutrition": {
+    "nutrients": [
+      "Aminoácidos",
+      "Monosacáridos",
+      "Lípidos",
+      "Agua",
+      "Electrolitos"
+    ],
+    "foodInteractions": [
+      "Sitio habitual para estimar digestibilidad ileal antes de fermentación posterior."
+    ],
+    "limitations": [
+      "La digestibilidad ileal requiere método de muestreo y marcador definidos."
+    ]
+  },
+  "microbiology": {
+    "applicable": true,
+    "microorganisms": [
+      "Comunidades menos densas que en los ciegos"
+    ],
+    "fermentation": [
+      "Fermentación limitada"
+    ],
+    "products": [
+      "Ácidos orgánicos variables"
+    ]
+  },
+  "narrationFile": "audio/narration/es-GT/chicken/10_ileum.mp3",
+  "model": {
+    "file": "",
+    "objectId": "ileum",
+    "scale": 1
+  },
+  "referenceIds": [
+    "svihus_2014",
+    "scanes_pierzchala_2014",
+    "scanes_2020",
+    "shang_et_al_2018",
+    "ravindran_abdollahi_2021"
+  ]
+}

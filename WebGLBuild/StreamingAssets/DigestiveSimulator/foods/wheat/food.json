@@ -1,0 +1,4 @@
+{
+  "schemaVersion":"1.0","contentVersion":"0.2.0","scientificStatus":"pending","id":"wheat","commonName":"Trigo","scientificOrSourceName":"Triticum spp., grano","category":"cereal_grain","description":"Cereal energético rico en almidón; su composición varía con especie, cultivar, ambiente y peso específico del grano.",
+  "composition":{"dryMatter":87.0,"crudeProtein":12.6,"starch":69.1,"crudeFiber":2.6,"etherExtract":1.7,"energy":null,"basis":"Materia seca sobre producto fresco; los demás valores sobre materia seca. Promedios de trigo en grano.","units":"%"},"visual":{"modelFile":"","iconFile":"","color":"#D6A85F","scale":1.0},"compositionReferenceIds":["heuze_et_al_wheat_2015"]
+}

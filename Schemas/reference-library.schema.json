@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digestive-simulator.local/schemas/reference-library.schema.json",
+  "title": "ReferenceLibrary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contentVersion", "references"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "contentVersion": { "type": "string" },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "authors", "title", "year", "journal", "book", "edition", "volume", "issue", "pages", "doi", "url"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$" },
+          "authors": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "year": { "type": "integer", "minimum": 1800 },
+          "journal": { "type": "string" },
+          "book": { "type": "string" },
+          "edition": { "type": "string" },
+          "volume": { "type": "string" },
+          "issue": { "type": "string" },
+          "pages": { "type": "string" },
+          "doi": { "type": "string" },
+          "url": { "type": "string", "format": "uri" }
+        }
+      }
+    }
+  }
+}

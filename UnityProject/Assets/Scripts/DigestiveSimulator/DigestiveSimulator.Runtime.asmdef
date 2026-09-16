@@ -1,0 +1,14 @@
+{
+  "name": "DigestiveSimulator.Runtime",
+  "rootNamespace": "DigestiveSimulator",
+  "references": ["Unity.Newtonsoft.Json", "glTFast"],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

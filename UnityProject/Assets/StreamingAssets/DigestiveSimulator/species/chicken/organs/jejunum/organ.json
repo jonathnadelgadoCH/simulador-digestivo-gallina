@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.2.0",
+  "scientificStatus": "pending",
+  "id": "jejunum",
+  "speciesId": "chicken",
+  "commonName": "Yeyuno",
+  "anatomicalName": "Jejunum",
+  "anatomy": {
+    "location": "Porción media del intestino delgado, entre duodeno e íleon.",
+    "morphology": "Asas intestinales largas suspendidas por mesenterio.",
+    "relations": "Se extiende desde duodeno hasta la referencia del divertículo de Meckel.",
+    "histology": "Mucosa con vellosidades, criptas y enterocitos con borde en cepillo."
+  },
+  "physiology": {
+    "mainFunction": "Completar gran parte de la digestión y absorber nutrientes, agua y minerales.",
+    "mechanicalDigestion": "La segmentación mezcla quimo y enzimas y aproxima nutrientes a la mucosa.",
+    "chemicalDigestion": "Enzimas pancreáticas y del borde en cepillo completan hidrólisis; sales biliares facilitan digestión lipídica.",
+    "motility": "Segmentación y peristalsis regulan mezcla y avance.",
+    "secretions": [
+      "Moco",
+      "Fluido intestinal"
+    ],
+    "enzymes": [
+      "Disacaridasas del borde en cepillo",
+      "Peptidasas del borde en cepillo"
+    ],
+    "absorption": [
+      "Monosacáridos",
+      "Aminoácidos y péptidos pequeños",
+      "Productos lipídicos",
+      "Agua, vitaminas y minerales"
+    ],
+    "digestiveProducts": [
+      "Monosacáridos",
+      "Aminoácidos y péptidos",
+      "Ácidos grasos y monoglicéridos"
+    ]
+  },
+  "regulation": {
+    "nervousControl": "El sistema entérico coordina segmentación, peristalsis y secreción.",
+    "autonomicControl": "Vago y simpático modulan la actividad intestinal.",
+    "signals": []
+  },
+  "nutrition": {
+    "nutrients": [
+      "Carbohidratos",
+      "Proteínas",
+      "Lípidos",
+      "Vitaminas",
+      "Minerales"
+    ],
+    "foodInteractions": [
+      "Viscosidad y fibra soluble pueden reducir contacto enzimático y transporte."
+    ],
+    "limitations": [
+      "La absorción depende de edad, dieta y velocidad de tránsito."
+    ]
+  },
+  "microbiology": {
+    "applicable": true,
+    "microorganisms": [
+      "Lactobacillus spp. y comunidades variables"
+    ],
+    "fermentation": [
+      "Fermentación limitada de sustratos no absorbidos"
+    ],
+    "products": [
+      "Ácidos orgánicos variables"
+    ]
+  },
+  "narrationFile": "audio/narration/es-GT/chicken/09_jejunum.mp3",
+  "model": {
+    "file": "",
+    "objectId": "jejunum",
+    "scale": 1
+  },
+  "referenceIds": [
+    "svihus_2014",
+    "scanes_pierzchala_2014",
+    "scanes_2020",
+    "shang_et_al_2018",
+    "ravindran_abdollahi_2021"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.2.0",
+  "speciesId": "chicken",
+  "entryNodeId": "n_beak",
+  "nodes": [
+    { "id": "n_beak", "organId": "beak", "type": "lumen", "process": "ingestion", "nextNodeIds": ["n_oral_cavity"], "optional": false, "accessory": false },
+    { "id": "n_oral_cavity", "organId": "oral_cavity", "type": "lumen", "process": "initial_processing", "nextNodeIds": ["n_pharynx"], "optional": false, "accessory": false },
+    { "id": "n_tongue", "organId": "tongue", "type": "mechanical_accessory", "process": "mechanical_assistance", "nextNodeIds": ["n_oral_cavity"], "optional": false, "accessory": true },
+    { "id": "n_salivary_glands", "organId": "salivary_glands", "type": "secretory_accessory", "process": "secretion", "nextNodeIds": ["n_oral_cavity"], "optional": false, "accessory": true },
+    { "id": "n_pharynx", "organId": "pharynx", "type": "lumen", "process": "transit", "nextNodeIds": ["n_esophagus"], "optional": false, "accessory": false },
+    { "id": "n_esophagus", "organId": "esophagus", "type": "lumen", "process": "transit", "nextNodeIds": ["n_crop"], "optional": false, "accessory": false },
+    { "id": "n_crop", "organId": "crop", "type": "lumen", "process": "storage", "nextNodeIds": ["n_proventriculus"], "optional": false, "accessory": false },
+    { "id": "n_proventriculus", "organId": "proventriculus", "type": "lumen", "process": "chemical_digestion", "nextNodeIds": ["n_gizzard"], "optional": false, "accessory": false },
+    { "id": "n_gizzard", "organId": "gizzard", "type": "lumen", "process": "mechanical_digestion", "nextNodeIds": ["n_duodenum"], "optional": false, "accessory": false },
+    { "id": "n_duodenum", "organId": "duodenum", "type": "lumen", "process": "digestion_absorption", "nextNodeIds": ["n_jejunum"], "optional": false, "accessory": false },
+    { "id": "n_pancreas", "organId": "pancreas", "type": "secretory_accessory", "process": "secretion", "nextNodeIds": ["n_duodenum"], "optional": false, "accessory": true },
+    { "id": "n_liver", "organId": "liver", "type": "secretory_accessory", "process": "secretion", "nextNodeIds": ["n_biliary_tract"], "optional": false, "accessory": true },
+    { "id": "n_biliary_tract", "organId": "biliary_tract", "type": "secretory_accessory", "process": "secretion", "nextNodeIds": ["n_duodenum"], "optional": false, "accessory": true },
+    { "id": "n_jejunum", "organId": "jejunum", "type": "lumen", "process": "absorption", "nextNodeIds": ["n_ileum"], "optional": false, "accessory": false },
+    { "id": "n_meckels_diverticulum", "organId": "meckels_diverticulum", "type": "landmark", "process": "landmark", "nextNodeIds": ["n_ileum"], "optional": true, "accessory": true },
+    { "id": "n_ileum", "organId": "ileum", "type": "lumen", "process": "absorption", "nextNodeIds": ["n_ceca"], "optional": false, "accessory": false },
+    { "id": "n_ceca", "organId": "ceca", "type": "branch", "process": "fermentation", "nextNodeIds": ["n_colon"], "optional": false, "accessory": false },
+    { "id": "n_colon", "organId": "colon", "type": "lumen", "process": "water_recovery", "nextNodeIds": ["n_cloaca"], "optional": false, "accessory": false },
+    { "id": "n_cloaca", "organId": "cloaca", "type": "terminal", "process": "elimination", "nextNodeIds": [], "optional": false, "accessory": false }
+  ]
+}

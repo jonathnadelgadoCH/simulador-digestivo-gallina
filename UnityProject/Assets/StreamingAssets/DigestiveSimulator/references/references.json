@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.3.0",
+  "references": [
+    {
+      "id": "svihus_2014",
+      "authors": "Svihus, B.",
+      "title": "Function of the digestive system",
+      "year": 2014,
+      "journal": "Journal of Applied Poultry Research",
+      "book": "",
+      "edition": "",
+      "volume": "23",
+      "issue": "2",
+      "pages": "306-314",
+      "doi": "10.3382/japr.2014-00937",
+      "url": "https://doi.org/10.3382/japr.2014-00937"
+    },
+    {
+      "id": "scanes_pierzchala_2014",
+      "authors": "Scanes, C. G.; Pierzchala-Koziec, K.",
+      "title": "Biology of the Gastrointestinal Tract in Poultry",
+      "year": 2014,
+      "journal": "Avian Biology Research",
+      "book": "",
+      "edition": "",
+      "volume": "7",
+      "issue": "4",
+      "pages": "193-222",
+      "doi": "10.3184/175815514X14162292284822",
+      "url": "https://doi.org/10.3184/175815514X14162292284822"
+    },
+    {
+      "id": "scanes_2020",
+      "authors": "Scanes, C. G.",
+      "title": "Avian Physiology: Are Birds Simply Feathered Mammals?",
+      "year": 2020,
+      "journal": "Frontiers in Physiology",
+      "book": "",
+      "edition": "",
+      "volume": "11",
+      "issue": "",
+      "pages": "542466",
+      "doi": "10.3389/fphys.2020.542466",
+      "url": "https://doi.org/10.3389/fphys.2020.542466"
+    },
+    {
+      "id": "shang_et_al_2018",
+      "authors": "Shang, Y.; Kumar, S.; Oakley, B.; Kim, W. K.",
+      "title": "Chicken Gut Microbiota: Importance and Detection Technology",
+      "year": 2018,
+      "journal": "Frontiers in Veterinary Science",
+      "book": "",
+      "edition": "",
+      "volume": "5",
+      "issue": "",
+      "pages": "254",
+      "doi": "10.3389/fvets.2018.00254",
+      "url": "https://doi.org/10.3389/fvets.2018.00254"
+    },
+    {
+      "id": "tashani_leek_1994",
+      "authors": "Tashani, O. A.; Leek, B. F.",
+      "title": "Mechanoreceptors in the crop of the domestic fowl",
+      "year": 1994,
+      "journal": "Poultry Science",
+      "book": "",
+      "edition": "",
+      "volume": "73",
+      "issue": "5",
+      "pages": "744-748",
+      "doi": "10.3382/ps.0730744",
+      "url": "https://doi.org/10.3382/ps.0730744"
+    },
+    {
+      "id": "ravindran_abdollahi_2021",
+      "authors": "Ravindran, V.; Abdollahi, M. R.",
+      "title": "Nutrition and Digestive Physiology of the Broiler Chick: State of the Art and Outlook",
+      "year": 2021,
+      "journal": "Animals",
+      "book": "",
+      "edition": "",
+      "volume": "11",
+      "issue": "10",
+      "pages": "2795",
+      "doi": "10.3390/ani11102795",
+      "url": "https://doi.org/10.3390/ani11102795"
+    },
+    {
+      "id": "heuze_tran_lebas_2017",
+      "authors": "Heuzé, V.; Tran, G.; Lebas, F.",
+      "title": "Maize grain",
+      "year": 2017,
+      "journal": "Feedipedia, programa de INRAE, CIRAD, AFZ y FAO",
+      "book": "",
+      "edition": "",
+      "volume": "",
+      "issue": "",
+      "pages": "",
+      "doi": "",
+      "url": "https://www.feedipedia.org/node/556"
+    },
+    {
+      "id": "heuze_et_al_wheat_2015", "authors": "Heuzé, V.; Tran, G.; Renaudeau, D.; Lessire, M.; Lebas, F.", "title": "Wheat grain", "year": 2015,
+      "journal": "Feedipedia, programa de INRAE, CIRAD, AFZ y FAO", "book": "", "edition": "", "volume": "", "issue": "", "pages": "", "doi": "", "url": "https://www.feedipedia.org/node/223"
+    },
+    {
+      "id": "heuze_tran_lebas_sorghum_2015", "authors": "Heuzé, V.; Tran, G.; Lebas, F.", "title": "Sorghum grain", "year": 2015,
+      "journal": "Feedipedia, programa de INRAE, CIRAD, AFZ y FAO", "book": "", "edition": "", "volume": "", "issue": "", "pages": "", "doi": "", "url": "https://www.feedipedia.org/node/224"
+    },
+    {
+      "id": "heuze_tran_kaushik_2020", "authors": "Heuzé, V.; Tran, G.; Kaushik, S.", "title": "Soybean meal", "year": 2020,
+      "journal": "Feedipedia, programa de INRAE, CIRAD, AFZ y FAO", "book": "", "edition": "", "volume": "", "issue": "", "pages": "", "doi": "", "url": "https://www.feedipedia.org/node/674"
+    },
+    {
+      "id": "heuze_et_al_barley_2016", "authors": "Heuzé, V.; Tran, G.; Nozière, P.; Noblet, J.; Renaudeau, D.; Lessire, M.; Lebas, F.", "title": "Barley grain", "year": 2016,
+      "journal": "Feedipedia, programa de INRAE, CIRAD, AFZ y FAO", "book": "", "edition": "", "volume": "", "issue": "", "pages": "", "doi": "", "url": "https://www.feedipedia.org/node/227"
+    },
+    {
+      "id": "heuze_et_al_oats_2016", "authors": "Heuzé, V.; Tran, G.; Nozière, P.; Renaudeau, D.; Lessire, M.; Lebas, F.", "title": "Oats", "year": 2016,
+      "journal": "Feedipedia, programa de INRAE, CIRAD, AFZ y FAO", "book": "", "edition": "", "volume": "", "issue": "", "pages": "", "doi": "", "url": "https://www.feedipedia.org/node/231"
+    },
+    {
+      "id": "heuze_et_al_rapeseed_2020", "authors": "Heuzé, V.; Tran, G.; Sauvant, D.; Lessire, M.; Lebas, F.", "title": "Rapeseed meal", "year": 2020,
+      "journal": "Feedipedia, programa de INRAE, CIRAD, AFZ y FAO", "book": "", "edition": "", "volume": "", "issue": "", "pages": "", "doi": "", "url": "https://www.feedipedia.org/node/52"
+    },
+    {
+      "id": "heuze_et_al_sunflower_2019", "authors": "Heuzé, V.; Tran, G.; Hassoun, P.; Lessire, M.; Lebas, F.", "title": "Sunflower meal", "year": 2019,
+      "journal": "Feedipedia, programa de INRAE, CIRAD, AFZ y FAO", "book": "", "edition": "", "volume": "", "issue": "", "pages": "", "doi": "", "url": "https://www.feedipedia.org/node/732"
+    },
+    {
+      "id": "heuze_et_al_alfalfa_2016", "authors": "Heuzé, V.; Tran, G.; Boval, M.; Noblet, J.; Renaudeau, D.; Lessire, M.; Lebas, F.", "title": "Alfalfa (Medicago sativa)", "year": 2016,
+      "journal": "Feedipedia, programa de INRAE, CIRAD, AFZ y FAO", "book": "", "edition": "", "volume": "", "issue": "", "pages": "", "doi": "", "url": "https://www.feedipedia.org/node/275"
+    },
+    {
+      "id": "hyline_brown_2025", "authors": "Hy-Line International", "title": "Management Guide: Brown Commercial Layers", "year": 2025,
+      "journal": "Hy-Line International", "book": "", "edition": "", "volume": "", "issue": "", "pages": "", "doi": "", "url": "https://images.proultry.com/files/company/3559/BRN_COM_ENG_Interactive.pdf"
+    },
+    {
+      "id": "ravindran_et_al_1999", "authors": "Ravindran, V.; Cabahug, S.; Ravindran, G.; Bryden, W. L.", "title": "Influence of microbial phytase on apparent ileal amino acid digestibility of feedstuffs for broilers", "year": 1999,
+      "journal": "Poultry Science", "book": "", "edition": "", "volume": "78", "issue": "5", "pages": "699-706", "doi": "10.1093/ps/78.5.699", "url": "https://doi.org/10.1093/ps/78.5.699"
+    },
+    {
+      "id": "selle_et_al_2021", "authors": "Selle, P. H.; Moss, A. F.; Khoddami, A.; Chrystal, P. V.; Liu, S. Y.", "title": "Starch digestion rates in multiple samples of commonly used feed grains in diets for broiler chickens", "year": 2021,
+      "journal": "Animal Nutrition", "book": "", "edition": "", "volume": "7", "issue": "2", "pages": "450-459", "doi": "10.1016/j.aninu.2020.12.006", "url": "https://doi.org/10.1016/j.aninu.2020.12.006"
+    },
+    {
+      "id": "tancharoenrat_et_al_2014", "authors": "Tancharoenrat, P.; Ravindran, V.; Zaefarian, F.; Ravindran, G.", "title": "Digestion of fat and fatty acids along the gastrointestinal tract of broiler chickens", "year": 2014,
+      "journal": "Poultry Science", "book": "", "edition": "", "volume": "93", "issue": "2", "pages": "371-379", "doi": "10.3382/ps.2013-03344", "url": "https://doi.org/10.3382/ps.2013-03344"
+    },
+    {
+      "id": "shibata_et_al_2023", "authors": "Shibata, M.; Takahashi, T.; Kozakai, T.; Shindo, J.; Kurose, Y.", "title": "Development of active jejunal glucose absorption in broiler chickens", "year": 2023,
+      "journal": "Poultry Science", "book": "", "edition": "", "volume": "102", "issue": "8", "pages": "102804", "doi": "10.1016/j.psj.2023.102804", "url": "https://doi.org/10.1016/j.psj.2023.102804"
+    },
+    {
+      "id": "lerner_1984", "authors": "Lerner, J.", "title": "Cell membrane amino acid transport processes in the domestic fowl (Gallus domesticus)", "year": 1984,
+      "journal": "Comparative Biochemistry and Physiology Part A: Physiology", "book": "", "edition": "", "volume": "78", "issue": "2", "pages": "205-215", "doi": "10.1016/0300-9629(84)90133-6", "url": "https://doi.org/10.1016/0300-9629(84)90133-6"
+    },
+    {
+      "id": "fraser_et_al_1986", "authors": "Fraser, R.; Heslop, V. R.; Murray, F. E.; Day, W. A.", "title": "Ultrastructural studies of the portal transport of fat in chickens", "year": 1986,
+      "journal": "British Journal of Experimental Pathology", "book": "", "edition": "", "volume": "67", "issue": "6", "pages": "783-791", "doi": "", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2013119/"
+    },
+    {
+      "id": "oketch_et_al_2023", "authors": "Oketch, E. O.; Wickramasuriya, S. S.; Oh, S.; Choi, J. S.; Heo, J. M.", "title": "Physiology of lipid digestion and absorption in poultry: An updated review on the supplementation of exogenous emulsifiers in broiler diets", "year": 2023,
+      "journal": "Journal of Animal Physiology and Animal Nutrition", "book": "", "edition": "", "volume": "107", "issue": "", "pages": "1429-1443", "doi": "10.1111/jpn.13859", "url": "https://doi.org/10.1111/jpn.13859"
+    },
+    {
+      "id": "jozefiak_et_al_2004", "authors": "Józefiak, D.; Rutkowski, A.; Martin, S. A.", "title": "Carbohydrate fermentation in the avian ceca: a review", "year": 2004,
+      "journal": "Animal Feed Science and Technology", "book": "", "edition": "", "volume": "113", "issue": "1-4", "pages": "1-15", "doi": "10.1016/j.anifeedsci.2003.09.007", "url": "https://doi.org/10.1016/j.anifeedsci.2003.09.007"
+    }
+  ]
+}

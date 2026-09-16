@@ -1,0 +1,4 @@
+{
+  "schemaVersion":"1.0","contentVersion":"0.2.0","scientificStatus":"pending","id":"soybean_oil","commonName":"Aceite de soya","scientificOrSourceName":"Glycine max (L.) Merr., aceite","category":"oil","description":"Ingrediente lipídico concentrado utilizado para elevar la densidad energética y aportar ácidos grasos, especialmente linoleico.",
+  "composition":{"dryMatter":99.0,"crudeProtein":0.0,"starch":0.0,"crudeFiber":0.0,"etherExtract":99.0,"energy":null,"basis":"Valores sobre producto fresco en la guía de ponedoras; la energía se conserva en el perfil por depender del sistema de valoración.","units":"%"},"visual":{"modelFile":"","iconFile":"","color":"#E3C34E","scale":1.0},"compositionReferenceIds":["hyline_brown_2025"]
+}

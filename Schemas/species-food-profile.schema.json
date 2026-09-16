@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digestive-simulator.local/schemas/species-food-profile.schema.json",
+  "title": "SpeciesFoodProfile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contentVersion", "scientificStatus", "speciesId", "foodId", "digestibility", "physiologicalResponse", "studyConditions", "simulation", "referenceIds"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" }, "contentVersion": { "type": "string" },
+    "scientificStatus": { "enum": ["pending", "reviewed", "approved"] },
+    "speciesId": { "$ref": "#/$defs/id" }, "foodId": { "$ref": "#/$defs/id" },
+    "digestibility": { "type": "object", "additionalProperties": false, "required": ["dryMatter", "protein", "starch", "fat", "energy", "type", "method", "units", "energyUnits"], "properties": { "dryMatter": { "$ref": "#/$defs/nullableNumber" }, "protein": { "$ref": "#/$defs/nullableNumber" }, "starch": { "$ref": "#/$defs/nullableNumber" }, "fat": { "$ref": "#/$defs/nullableNumber" }, "energy": { "$ref": "#/$defs/nullableNumber" }, "type": { "type": ["string", "null"] }, "method": { "type": ["string", "null"] }, "units": { "type": "string" }, "energyUnits": { "type": "string" } } },
+    "physiologicalResponse": { "type": "object", "additionalProperties": false, "required": ["mainOrganIds", "motilityEffects", "secretions", "neuroendocrineResponses", "metabolicNotes"], "properties": { "mainOrganIds": { "$ref": "#/$defs/strings" }, "motilityEffects": { "$ref": "#/$defs/strings" }, "secretions": { "$ref": "#/$defs/strings" }, "neuroendocrineResponses": { "$ref": "#/$defs/strings" }, "metabolicNotes": { "$ref": "#/$defs/strings" } } },
+    "studyConditions": { "type": "object", "additionalProperties": false, "required": ["age", "geneticLine", "diet", "processing", "method"], "properties": { "age": { "type": "string" }, "geneticLine": { "type": "string" }, "diet": { "type": "string" }, "processing": { "type": "string" }, "method": { "type": "string" } } },
+    "simulation": { "type": "object", "additionalProperties": false, "required": ["particleColor", "speedMultiplier", "highlightedNutrients", "stageOverrides"], "properties": { "particleColor": { "type": "string" }, "speedMultiplier": { "type": "number", "exclusiveMinimum": 0 }, "highlightedNutrients": { "$ref": "#/$defs/strings" }, "stageOverrides": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["organId", "durationSeconds", "message", "audioFile"], "properties": { "organId": { "$ref": "#/$defs/id" }, "durationSeconds": { "type": "number", "minimum": 0 }, "message": { "type": ["string", "null"] }, "audioFile": { "type": ["string", "null"] } } } } } },
+    "referenceIds": { "$ref": "#/$defs/strings" }
+  },
+  "$defs": { "id": { "type": "string", "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$" }, "nullableNumber": { "type": ["number", "null"] }, "strings": { "type": "array", "uniqueItems": true, "items": { "type": "string" } } }
+}

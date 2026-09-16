@@ -1,0 +1,4 @@
+{
+  "schemaVersion":"1.0","contentVersion":"0.2.0","scientificStatus":"pending","id":"sorghum","commonName":"Sorgo","scientificOrSourceName":"Sorghum bicolor (L.) Moench, grano","category":"cereal_grain","description":"Cereal utilizado principalmente como fuente de energía; la presencia de taninos y la variedad pueden modificar su valor nutritivo.",
+  "composition":{"dryMatter":87.4,"crudeProtein":10.8,"starch":74.5,"crudeFiber":2.8,"etherExtract":3.4,"energy":null,"basis":"Materia seca sobre producto fresco; los demás valores sobre materia seca. Promedios de sorgo de todos los tipos.","units":"%"},"visual":{"modelFile":"","iconFile":"","color":"#B96B43","scale":1.0},"compositionReferenceIds":["heuze_tran_lebas_sorghum_2015"]
+}

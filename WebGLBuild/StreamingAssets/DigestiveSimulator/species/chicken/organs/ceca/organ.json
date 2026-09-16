@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.2.0",
+  "scientificStatus": "pending",
+  "id": "ceca",
+  "speciesId": "chicken",
+  "commonName": "Ciegos",
+  "anatomicalName": "Ceca",
+  "anatomy": {
+    "location": "Dos sacos ciegos que nacen en la unión ileocecocolónica.",
+    "morphology": "Órganos pares, alargados, con cuello estrecho y cuerpo distal.",
+    "relations": "Reciben selectivamente parte del contenido ileal y se vacían hacia colon y cloaca.",
+    "histology": "Mucosa con criptas, abundante tejido linfoide proximal y alta densidad microbiana."
+  },
+  "physiology": {
+    "mainFunction": "Fermentar sustratos no digeridos y contribuir a recuperación de agua, electrolitos y metabolitos microbianos.",
+    "mechanicalDigestion": "Contracciones mezclan contenido y permiten llenado y vaciado periódico.",
+    "chemicalDigestion": "La microbiota degrada parte de carbohidratos no digeribles para el ave.",
+    "motility": "Llenado selectivo, mezcla y evacuación intermitente coordinados con movimientos retrógrados.",
+    "secretions": [
+      "Moco"
+    ],
+    "enzymes": [],
+    "absorption": [
+      "Agua",
+      "Electrolitos",
+      "Ácidos grasos de cadena corta"
+    ],
+    "digestiveProducts": [
+      "Acetato",
+      "Propionato",
+      "Butirato",
+      "Gases"
+    ]
+  },
+  "regulation": {
+    "nervousControl": "Circuitos entéricos coordinan llenado, mezcla y evacuación.",
+    "autonomicControl": "Modulación autónoma de la motilidad cecal.",
+    "signals": []
+  },
+  "nutrition": {
+    "nutrients": [
+      "Fibra fermentable",
+      "Almidón resistente",
+      "Agua",
+      "Electrolitos"
+    ],
+    "foodInteractions": [
+      "Tipo de fibra y sustrato no digerido modifican fermentación y microbiota."
+    ],
+    "limitations": [
+      "La contribución energética varía con dieta, edad y tiempo de retención."
+    ]
+  },
+  "microbiology": {
+    "applicable": true,
+    "microorganisms": [
+      "Comunidades anaerobias diversas"
+    ],
+    "fermentation": [
+      "Fermentación de polisacáridos y otros sustratos no absorbidos"
+    ],
+    "products": [
+      "Ácidos grasos de cadena corta",
+      "Gases",
+      "Biomasa microbiana"
+    ]
+  },
+  "narrationFile": "audio/narration/es-GT/chicken/11_ceca.mp3",
+  "model": {
+    "file": "",
+    "objectId": "ceca",
+    "scale": 1
+  },
+  "referenceIds": [
+    "svihus_2014",
+    "scanes_pierzchala_2014",
+    "scanes_2020",
+    "shang_et_al_2018"
+  ]
+}

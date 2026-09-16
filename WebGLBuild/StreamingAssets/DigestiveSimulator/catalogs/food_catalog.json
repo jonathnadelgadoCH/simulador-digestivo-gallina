@@ -1,0 +1,16 @@
+{
+  "schemaVersion": "1.0",
+  "foods": [
+    { "id": "corn", "definitionPath": "foods/corn/food.json" },
+    { "id": "wheat", "definitionPath": "foods/wheat/food.json" },
+    { "id": "sorghum", "definitionPath": "foods/sorghum/food.json" },
+    { "id": "soybean_meal", "definitionPath": "foods/soybean_meal/food.json" },
+    { "id": "barley", "definitionPath": "foods/barley/food.json" },
+    { "id": "oats", "definitionPath": "foods/oats/food.json" },
+    { "id": "canola_meal", "definitionPath": "foods/canola_meal/food.json" },
+    { "id": "sunflower_meal", "definitionPath": "foods/sunflower_meal/food.json" },
+    { "id": "soybean_oil", "definitionPath": "foods/soybean_oil/food.json" },
+    { "id": "alfalfa_meal", "definitionPath": "foods/alfalfa_meal/food.json" }
+  ]
+}
+

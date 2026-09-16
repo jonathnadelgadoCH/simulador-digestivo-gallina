@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0", "contentVersion": "0.2.0", "scientificStatus": "pending",
+  "id": "duodenum", "speciesId": "chicken", "commonName": "Duodeno", "anatomicalName": "Duodenum",
+  "anatomy": {
+    "location": "Primera porción del intestino delgado, desde la salida de la molleja hasta la transición con el yeyuno.",
+    "morphology": "Forma un asa que rodea al páncreas y recibe conductos pancreáticos y biliares.",
+    "relations": "Conecta la molleja con el yeyuno; mantiene una relación estrecha con páncreas, hígado y vías biliares.",
+    "histology": "Mucosa con vellosidades, criptas, enterocitos absortivos, células caliciformes y borde en cepillo; la superficie aumenta el área de digestión y transporte."
+  },
+  "physiology": {
+    "mainFunction": "Neutralizar parcialmente el quimo ácido e iniciar de forma intensa la digestión intestinal con bilis, enzimas pancreáticas y enzimas del borde en cepillo.",
+    "mechanicalDigestion": "Mezcla el quimo con secreciones mediante segmentación y peristalsis.",
+    "chemicalDigestion": "Se hidrolizan almidón, proteínas y lípidos; la bilis facilita emulsificación y el bicarbonato favorece un pH apropiado para enzimas pancreáticas.",
+    "motility": "Presenta peristalsis, segmentación y movimientos retrógrados que pueden devolver contenido hacia la molleja.",
+    "secretions": ["Moco intestinal", "Recibe jugo pancreático rico en bicarbonato", "Recibe bilis"],
+    "enzymes": ["Amilasa pancreática", "Tripsina", "Quimotripsina", "Carboxipeptidasas", "Lipasa pancreática", "Aminopeptidasas del borde en cepillo"],
+    "absorption": ["Monosacáridos", "Aminoácidos y péptidos pequeños", "Ácidos grasos y monoacilglicéridos", "Minerales y agua"],
+    "digestiveProducts": ["Glucosa y otros monosacáridos", "Aminoácidos y péptidos", "Ácidos grasos y monoacilglicéridos"]
+  },
+  "regulation": {
+    "nervousControl": "Reflejos entéricos coordinan mezcla y propulsión en respuesta a distensión y composición luminal.",
+    "autonomicControl": "La modulación autónoma se integra con señales enteroendocrinas y aferencias vagales.",
+    "signals": [
+      { "name": "Colecistoquinina (CCK)", "type": "hormone", "origin": "Células enteroendocrinas del intestino delgado", "receptor": "CCK1R", "targetOrganId": "pancreas", "response": "Favorece secreción enzimática pancreática y la entrega de bilis en respuesta a nutrientes luminales", "referenceId": "ravindran_abdollahi_2021" }
+    ]
+  },
+  "nutrition": {
+    "nutrients": ["Almidón", "Proteínas", "Lípidos", "Minerales", "Vitaminas"],
+    "foodInteractions": ["La composición de la dieta modifica la secreción de amilasa, tripsina y lipasa.", "La edad pos-eclosión condiciona la capacidad secretora y absortiva."],
+    "limitations": ["Una parte importante de la absorción continúa en yeyuno e íleon; no debe atribuirse toda la absorción al duodeno."]
+  },
+  "microbiology": { "applicable": true, "microorganisms": ["Comunidades bacterianas de baja densidad relativa frente a segmentos distales"], "fermentation": ["Actividad fermentativa limitada por tránsito rápido y secreciones digestivas"], "products": ["Ácidos orgánicos en cantidades variables"] },
+  "narrationFile": "audio/narration/es-GT/chicken/08_duodenum.mp3",
+  "model": { "file": "", "objectId": "duodenum", "scale": 1.0 },
+  "referenceIds": ["svihus_2014", "scanes_pierzchala_2014", "scanes_2020", "shang_et_al_2018", "ravindran_abdollahi_2021"]
+}

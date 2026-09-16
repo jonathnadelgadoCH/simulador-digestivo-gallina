@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.2.0",
+  "scientificStatus": "pending",
+  "id": "cloaca",
+  "speciesId": "chicken",
+  "commonName": "Cloaca",
+  "anatomicalName": "Cloaca",
+  "anatomy": {
+    "location": "Extremo caudal del tracto, antes del orificio cloacal.",
+    "morphology": "Cámara común dividida en coprodeo, urodeo y proctodeo.",
+    "relations": "Recibe colon, uréteres y conductos reproductivos y comunica con el exterior.",
+    "histology": "Mucosa regional con epitelio y glándulas mucosas; musculatura y esfínter controlan evacuación."
+  },
+  "physiology": {
+    "mainFunction": "Recibir y expulsar material digestivo, urinario y reproductivo.",
+    "mechanicalDigestion": "Mezcla temporalmente excretas y participa en expulsión, no en trituración.",
+    "chemicalDigestion": "No realiza digestión enzimática principal.",
+    "motility": "Contracciones coordinadas y apertura del orificio cloacal durante defecación.",
+    "secretions": [
+      "Moco"
+    ],
+    "enzymes": [],
+    "absorption": [
+      "Recuperación limitada de agua y electrolitos"
+    ],
+    "digestiveProducts": [
+      "Excreta final"
+    ]
+  },
+  "regulation": {
+    "nervousControl": "Reflejos espinales y entéricos coordinan continencia y evacuación.",
+    "autonomicControl": "Control autónomo de musculatura lisa junto con control somático del esfínter.",
+    "signals": []
+  },
+  "nutrition": {
+    "nutrients": [
+      "Agua",
+      "Electrolitos"
+    ],
+    "foodInteractions": [
+      "Dieta y balance hídrico modifican volumen y consistencia de excretas."
+    ],
+    "limitations": [
+      "La mezcla con uratos impide equiparar excreta aviar con heces mamíferas."
+    ]
+  },
+  "microbiology": {
+    "applicable": true,
+    "microorganisms": [
+      "Microbiota transitoria procedente del intestino posterior"
+    ],
+    "fermentation": [
+      "Actividad residual limitada"
+    ],
+    "products": [
+      "Metabolitos residuales"
+    ]
+  },
+  "narrationFile": "audio/narration/es-GT/chicken/13_cloaca.mp3",
+  "model": {
+    "file": "",
+    "objectId": "cloaca",
+    "scale": 1
+  },
+  "referenceIds": [
+    "scanes_pierzchala_2014",
+    "scanes_2020",
+    "shang_et_al_2018"
+  ]
+}

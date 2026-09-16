@@ -1,0 +1,114 @@
+{
+  "schemaVersion": "1.0",
+  "language": "es-GT",
+  "speciesId": "chicken",
+  "voice": "Microsoft Sabina Desktop",
+  "rate": 0,
+  "clips": [
+    {
+      "order": 0,
+      "id": "introduction",
+      "organId": null,
+      "fileName": "00_introduction",
+      "text": "En esta simulación seguiremos el recorrido del alimento por el aparato digestivo de una gallina. Observaremos cómo cada órgano participa en el transporte, el almacenamiento, la trituración, la digestión química, la absorción y la eliminación. La velocidad de la animación es educativa y no representa el tiempo fisiológico real."
+    },
+    {
+      "order": 1,
+      "id": "beak",
+      "organId": "beak",
+      "fileName": "01_beak",
+      "text": "El proceso comienza en el pico. La gallina lo utiliza para localizar, tomar y fraccionar superficialmente el alimento. Como las aves no poseen dientes, aquí no ocurre una masticación verdadera. El tamaño y la textura de las partículas influyen en la facilidad con la que el alimento puede ser ingerido."
+    },
+    {
+      "order": 2,
+      "id": "oral_cavity",
+      "organId": "oral_cavity",
+      "fileName": "02_oral_cavity",
+      "text": "En la cavidad oral, la lengua acomoda las partículas y las dirige hacia la faringe. Las glándulas salivales aportan agua, moco y electrolitos, que humedecen el alimento y facilitan la formación y el desplazamiento del bolo. En la gallina, la saliva no realiza la parte principal de la digestión del almidón."
+    },
+    {
+      "order": 3,
+      "id": "pharynx",
+      "organId": "pharynx",
+      "fileName": "03_pharynx",
+      "text": "La faringe conduce rápidamente el bolo desde la boca hasta la entrada del esófago. La deglución es una respuesta coordinada que orienta el alimento hacia la vía digestiva y protege la entrada de la vía respiratoria. Esta región transporta el bolo, pero no lo digiere."
+    },
+    {
+      "order": 4,
+      "id": "esophagus",
+      "organId": "esophagus",
+      "fileName": "04_esophagus",
+      "text": "El esófago es un tubo muscular y distensible. Sus movimientos coordinados impulsan el bolo hacia el buche y, posteriormente, hacia el estómago glandular. El moco ayuda a lubricar el contenido. Su función principal es el transporte, no la trituración ni la absorción de nutrientes."
+    },
+    {
+      "order": 5,
+      "id": "crop",
+      "organId": "crop",
+      "fileName": "05_crop",
+      "text": "El buche es una dilatación del esófago que almacena temporalmente el alimento. Durante la retención, el contenido se humedece y se ablanda antes de avanzar. Puede producirse una fermentación microbiana limitada, principalmente asociada con lactobacilos, pero el buche no secreta las principales enzimas digestivas. Su llenado y vaciado varían con el patrón de alimentación."
+    },
+    {
+      "order": 6,
+      "id": "proventriculus",
+      "organId": "proventriculus",
+      "fileName": "06_proventriculus",
+      "text": "El alimento llega al proventrículo, también llamado estómago glandular. Aquí se incorporan ácido clorhídrico, moco y pepsinógeno. El ambiente ácido ayuda a transformar el pepsinógeno en pepsina e inicia la descomposición de las proteínas. El contenido pasa entonces a la molleja para continuar el procesamiento gástrico."
+    },
+    {
+      "order": 7,
+      "id": "gizzard",
+      "organId": "gizzard",
+      "fileName": "07_gizzard",
+      "text": "La molleja posee paredes musculares gruesas y una cubierta interna resistente. Sus contracciones trituran, mezclan y clasifican las partículas, compensando la ausencia de dientes. La acidificación y la acción de la pepsina continúan mientras el alimento se convierte en un quimo más uniforme. Las partículas grandes pueden permanecer aquí durante más tiempo."
+    },
+    {
+      "order": 8,
+      "id": "duodenum",
+      "organId": "duodenum",
+      "fileName": "08_duodenum",
+      "text": "En el duodeno comienza una fase intensa de digestión intestinal. El páncreas aporta bicarbonato y enzimas que actúan sobre almidón, proteínas y lípidos. El hígado produce bilis, que llega por las vías biliares y facilita la emulsificación de las grasas. La mezcla y la digestión liberan monosacáridos, aminoácidos y productos lipídicos que pueden empezar a atravesar la mucosa intestinal."
+    },
+    {
+      "order": 9,
+      "id": "jejunum",
+      "organId": "jejunum",
+      "fileName": "09_jejunum",
+      "text": "En el yeyuno continúa la hidrólisis mediante enzimas pancreáticas y enzimas del borde en cepillo. Sus vellosidades aumentan la superficie disponible para absorber nutrientes. Los monosacáridos y aminoácidos pasan principalmente a los capilares y a la circulación porta hepática. Los productos de los lípidos también se absorben y, en las aves, se transportan por la sangre en partículas llamadas portomicrones."
+    },
+    {
+      "order": 10,
+      "id": "ileum",
+      "organId": "ileum",
+      "fileName": "10_ileum",
+      "text": "El íleon es la porción final del intestino delgado. Aquí se completa la absorción de nutrientes remanentes, agua y electrolitos antes de llegar al intestino posterior. El divertículo de Meckel sirve como referencia anatómica aproximada entre yeyuno e íleon. Por esta razón, el contenido ileal también se utiliza en estudios de digestibilidad de los alimentos."
+    },
+    {
+      "order": 11,
+      "id": "ceca",
+      "organId": "ceca",
+      "fileName": "11_ceca",
+      "text": "En la unión entre el íleon y el colon se encuentran dos ciegos. Parte del material no digerido entra en estas cámaras, donde una comunidad microbiana fermenta fracciones aprovechables de fibra y otros sustratos. Se producen ácidos grasos de cadena corta y se recuperan agua y electrolitos. La magnitud de este proceso depende de la dieta, la edad y el tiempo de retención."
+    },
+    {
+      "order": 12,
+      "id": "colon",
+      "organId": "colon",
+      "fileName": "12_colon",
+      "text": "El colon de la gallina es relativamente corto. Recibe el residuo procedente del íleon y el contenido evacuado por los ciegos. Mientras lo conduce hacia la cloaca, recupera parte del agua y los electrolitos y aporta moco para facilitar el tránsito. Aquí no ocurre una digestión enzimática principal."
+    },
+    {
+      "order": 13,
+      "id": "cloaca",
+      "organId": "cloaca",
+      "fileName": "13_cloaca",
+      "text": "La cloaca es la cámara terminal compartida por los sistemas digestivo, urinario y reproductivo. Recibe el residuo intestinal y los uratos antes de la expulsión al exterior. Puede ocurrir una recuperación limitada de agua y electrolitos. La excreta aviar es, por tanto, una mezcla diferente de las heces producidas por los mamíferos."
+    },
+    {
+      "order": 14,
+      "id": "summary",
+      "organId": null,
+      "fileName": "14_summary",
+      "text": "A lo largo de este recorrido, el aparato digestivo transforma el alimento mediante almacenamiento, trituración, secreciones, enzimas, absorción y fermentación. Los nutrientes absorbidos se distribuyen por la sangre y muchos llegan primero al hígado, donde pueden procesarse, almacenarse o dirigirse hacia otros tejidos. La eficiencia de cada etapa cambia con el ingrediente, el procesamiento, la edad y el estado del ave."
+    }
+  ]
+}

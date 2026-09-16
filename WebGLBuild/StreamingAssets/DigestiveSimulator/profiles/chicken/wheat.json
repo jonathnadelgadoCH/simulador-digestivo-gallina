@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.3.0",
+  "scientificStatus": "pending",
+  "speciesId": "chicken",
+  "foodId": "wheat",
+  "digestibility": {
+    "dryMatter": null,
+    "protein": 77.7,
+    "starch": null,
+    "fat": null,
+    "energy": 13.8,
+    "type": "Valores por variable; consultar método y condiciones",
+    "method": "Digestibilidad ileal aparente media de 15 aminoácidos: 77.7 %; no representa digestibilidad de proteína cruda. AMEn expresada en MJ/kg de materia seca; valor tabulado o, para aceite, guía de ponedoras.",
+    "units": "%",
+    "energyUnits": "MJ/kg MS"
+  },
+  "physiologicalResponse": {
+    "mainOrganIds": [
+      "gizzard",
+      "duodenum",
+      "jejunum",
+      "ileum"
+    ],
+    "motilityEffects": [
+      "Los arabinoxilanos solubles pueden elevar viscosidad y alterar tránsito."
+    ],
+    "secretions": [
+      "Ácido y pepsina en estómago; bilis y enzimas pancreáticas en intestino según el nutriente."
+    ],
+    "neuroendocrineResponses": [
+      "Señales intestinales como CCK coordinan secreción pancreática y biliar tras la llegada de nutrientes."
+    ],
+    "metabolicNotes": [
+      "Tasa ileal de digestión del almidón observada: 0.117 min⁻¹.",
+      "Los valores son específicos del método y no deben interpretarse como propiedades constantes de todos los lotes."
+    ]
+  },
+  "studyConditions": {
+    "age": "Pollos de engorde de 5 semanas para aminoácidos; 28 días para dinámica del almidón; edad variable en AMEn tabulada.",
+    "geneticLine": "Pollos de engorde; la línea genética no fue especificada en los resúmenes utilizados.",
+    "diet": "Dietas experimentales del ensayo citado o valores compilados de Feedipedia; no representan una dieta comercial completa.",
+    "processing": "Trigo molido; cultivar, molienda y uso de enzimas modifican el resultado.",
+    "method": "Digestibilidad ileal por marcador para aminoácidos o grasa cuando se informa; AMEn corregida por nitrógeno en base materia seca para energía tabulada."
+  },
+  "simulation": {
+    "particleColor": "#D6A85F",
+    "speedMultiplier": 1,
+    "highlightedNutrients": [
+      "almidón",
+      "proteína",
+      "polisacáridos no amiláceos"
+    ],
+    "stageOverrides": [
+      {
+        "organId": "gizzard",
+        "durationSeconds": 4,
+        "message": "Los arabinoxilanos solubles pueden elevar viscosidad y alterar tránsito.",
+        "audioFile": null
+      },
+      {
+        "organId": "duodenum",
+        "durationSeconds": 5,
+        "message": "El trigo libera almidón con rapidez, pero su fracción soluble puede aumentar la viscosidad.",
+        "audioFile": null
+      },
+      {
+        "organId": "ileum",
+        "durationSeconds": 5,
+        "message": "Tasa ileal de digestión del almidón observada: 0.117 min⁻¹.",
+        "audioFile": null
+      }
+    ]
+  },
+  "referenceIds": [
+    "ravindran_et_al_1999",
+    "selle_et_al_2021",
+    "heuze_et_al_wheat_2015",
+    "svihus_2014"
+  ]
+}

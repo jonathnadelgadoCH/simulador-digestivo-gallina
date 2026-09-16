@@ -1,0 +1,4 @@
+{
+  "schemaVersion":"1.0","contentVersion":"0.2.0","scientificStatus":"pending","id":"canola_meal","commonName":"Harina de canola","scientificOrSourceName":"Brassica spp., harina 00 extraída con solvente","category":"protein_meal","description":"Subproducto proteico de variedades bajas en ácido erúcico y glucosinolatos; contiene más fibra y menos lisina disponible que la harina de soya.",
+  "composition":{"dryMatter":89.0,"crudeProtein":38.1,"starch":6.3,"crudeFiber":14.3,"etherExtract":2.4,"energy":null,"basis":"Materia seca sobre producto fresco; los demás valores sobre materia seca. Harina 00 con menos de 5 % de aceite, extraída con solvente.","units":"%"},"visual":{"modelFile":"","iconFile":"","color":"#75624A","scale":1.0},"compositionReferenceIds":["heuze_et_al_rapeseed_2020"]
+}

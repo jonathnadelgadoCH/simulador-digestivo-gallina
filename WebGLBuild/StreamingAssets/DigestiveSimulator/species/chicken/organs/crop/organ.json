@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "1.0", "contentVersion": "0.2.0", "scientificStatus": "pending",
+  "id": "crop", "speciesId": "chicken", "commonName": "Buche", "anatomicalName": "Ingluvies",
+  "anatomy": {
+    "location": "Dilatación de la porción inferior del esófago cervical, antes del esófago torácico y del proventrículo.",
+    "morphology": "Saco distensible derivado del esófago que aumenta su volumen cuando contiene alimento.",
+    "relations": "Recibe alimento desde el esófago precropal y lo libera gradualmente hacia el esófago distal y el proventrículo.",
+    "histology": "La pared conserva organización esofágica, con mucosa resistente a la fricción y capas musculares que permiten llenado y vaciado."
+  },
+  "physiology": {
+    "mainFunction": "Almacenamiento temporal, humectación y regulación del flujo de alimento hacia el estómago.",
+    "mechanicalDigestion": "Ablanda el alimento por hidratación, sin trituración intensa.",
+    "chemicalDigestion": "No secreta las principales enzimas digestivas; puede ocurrir fermentación microbiana limitada con producción predominante de lactato.",
+    "motility": "Se distiende durante el llenado y se contrae para liberar el contenido; el patrón depende del régimen de alimentación y del periodo de oscuridad.",
+    "secretions": ["Moco"], "enzymes": [], "absorption": ["La relevancia cuantitativa de absorción de productos microbianos permanece incierta"], "digestiveProducts": ["Alimento hidratado", "Lactato de origen microbiano"]
+  },
+  "regulation": {
+    "nervousControl": "La distensión activa mecanorreceptores con aferencias vagales que pueden formar parte de reflejos de motilidad y regulación de la ingesta.",
+    "autonomicControl": "La inervación vagal participa en la información sensorial del llenado y en la coordinación motora del buche.",
+    "signals": [
+      { "name": "Reflejo de distensión del buche", "type": "reflex", "origin": "Mecanorreceptores en las capas musculares del buche", "receptor": "Mecanorreceptores sensibles a presión y contracción", "targetOrganId": "crop", "response": "Señal aferente relacionada con motilidad y control de la ingesta", "referenceId": "tashani_leek_1994" }
+    ]
+  },
+  "nutrition": {
+    "nutrients": ["Carbohidratos fermentables"],
+    "foodInteractions": ["La alimentación intermitente favorece un uso más marcado del buche.", "La humedad y el tamaño de partícula modifican el contenido y tiempo de retención."],
+    "limitations": ["La retención es variable y depende del patrón de alimentación.", "No debe atribuirse al buche una digestión enzimática principal."]
+  },
+  "microbiology": {
+    "applicable": true,
+    "microorganisms": ["Lactobacillus spp. y otros lactobacilos predominantes"],
+    "fermentation": ["Fermentación de carbohidratos durante la retención del alimento"],
+    "products": ["Ácido láctico/lactato", "Otros ácidos orgánicos en menor proporción"]
+  },
+  "narrationFile": "audio/narration/es-GT/chicken/05_crop.mp3",
+  "model": { "file": "", "objectId": "crop", "scale": 1.0 },
+  "referenceIds": ["svihus_2014", "scanes_2020", "shang_et_al_2018", "tashani_leek_1994"]
+}

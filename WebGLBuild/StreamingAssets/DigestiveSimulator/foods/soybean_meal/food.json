@@ -1,0 +1,4 @@
+{
+  "schemaVersion":"1.0","contentVersion":"0.2.0","scientificStatus":"pending","id":"soybean_meal","commonName":"Harina de soya","scientificOrSourceName":"Glycine max (L.) Merr., harina tipo 48","category":"protein_meal","description":"Subproducto de la extracción de aceite y fuente concentrada de proteína; requiere procesamiento térmico adecuado para controlar factores antinutricionales.",
+  "composition":{"dryMatter":88.0,"crudeProtein":52.6,"starch":5.7,"crudeFiber":6.8,"etherExtract":1.8,"energy":null,"basis":"Materia seca sobre producto fresco; los demás valores sobre materia seca. Promedios de harina tipo 48 o similar.","units":"%"},"visual":{"modelFile":"","iconFile":"","color":"#C5A46D","scale":1.0},"compositionReferenceIds":["heuze_tran_kaushik_2020"]
+}

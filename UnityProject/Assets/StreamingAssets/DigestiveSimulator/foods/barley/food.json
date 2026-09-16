@@ -1,0 +1,4 @@
+{
+  "schemaVersion":"1.0","contentVersion":"0.2.0","scientificStatus":"pending","id":"barley","commonName":"Cebada","scientificOrSourceName":"Hordeum vulgare L., grano","category":"cereal_grain","description":"Cereal con almidón y mayor contenido de fibra que maíz y trigo; los beta-glucanos pueden aumentar la viscosidad intestinal en aves.",
+  "composition":{"dryMatter":87.1,"crudeProtein":11.8,"starch":59.7,"crudeFiber":5.2,"etherExtract":2.0,"energy":null,"basis":"Materia seca sobre producto fresco; los demás valores sobre materia seca. Promedios de cebada en grano.","units":"%"},"visual":{"modelFile":"","iconFile":"","color":"#CFAF68","scale":1.0},"compositionReferenceIds":["heuze_et_al_barley_2016"]
+}

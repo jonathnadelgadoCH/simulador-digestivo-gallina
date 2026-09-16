@@ -1,0 +1,4 @@
+{
+  "schemaVersion":"1.0","contentVersion":"0.2.0","scientificStatus":"pending","id":"oats","commonName":"Avena","scientificOrSourceName":"Avena sativa L., grano con cáscara","category":"cereal_grain","description":"Cereal con menos almidón y más fibra y grasa que maíz o trigo; el descascarado cambia considerablemente su composición.",
+  "composition":{"dryMatter":87.9,"crudeProtein":11.0,"starch":40.6,"crudeFiber":13.9,"etherExtract":5.4,"energy":null,"basis":"Materia seca sobre producto fresco; los demás valores sobre materia seca. Promedios de avena de genotipos regulares.","units":"%"},"visual":{"modelFile":"","iconFile":"","color":"#D8BE83","scale":1.0},"compositionReferenceIds":["heuze_et_al_oats_2016"]
+}

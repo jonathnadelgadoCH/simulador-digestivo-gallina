@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digestive-simulator.local/schemas/species.schema.json",
+  "title": "SpeciesDefinition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contentVersion", "scientificStatus", "id", "commonName", "scientificName", "digestiveType", "model", "digestiveSystem", "absorptionRoutes", "referenceIds"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "contentVersion": { "type": "string", "minLength": 1 },
+    "scientificStatus": { "enum": ["pending", "reviewed", "approved"] },
+    "id": { "$ref": "#/$defs/id" },
+    "commonName": { "type": "string", "minLength": 1 },
+    "scientificName": { "type": "string", "minLength": 1 },
+    "digestiveType": { "enum": ["avian_monogastric", "monogastric", "ruminant", "hindgut_fermenter", "carnivore_monogastric"] },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exteriorFile", "digestiveSystemFile", "scale"],
+      "properties": {
+        "exteriorFile": { "type": "string" },
+        "digestiveSystemFile": { "type": "string" },
+        "scale": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+    "digestiveSystem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["graphFile", "organs"],
+      "properties": {
+        "graphFile": { "type": "string", "minLength": 1 },
+        "organs": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }
+      }
+    },
+    "absorptionRoutes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "displayName", "nutrientKeys", "absorbedForm", "siteOrganIds", "transport", "targetOrganId", "destinations", "color", "caveat", "referenceIds"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "displayName": { "type": "string", "minLength": 1 },
+          "nutrientKeys": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+          "absorbedForm": { "type": "string", "minLength": 1 },
+          "siteOrganIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+          "transport": { "type": "string", "minLength": 1 },
+          "targetOrganId": { "$ref": "#/$defs/id" },
+          "destinations": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+          "color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+          "caveat": { "type": "string", "minLength": 1 },
+          "referenceIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }
+        }
+      }
+    },
+    "referenceIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } }
+  },
+  "$defs": { "id": { "type": "string", "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$" } }
+}

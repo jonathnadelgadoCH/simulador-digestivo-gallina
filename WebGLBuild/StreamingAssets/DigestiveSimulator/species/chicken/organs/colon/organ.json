@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.2.0",
+  "scientificStatus": "pending",
+  "id": "colon",
+  "speciesId": "chicken",
+  "commonName": "Colon",
+  "anatomicalName": "Rectum",
+  "anatomy": {
+    "location": "Segmento corto entre unión ileocecal y cloaca.",
+    "morphology": "Tubo relativamente corto y de mayor calibre que el intestino delgado.",
+    "relations": "Recibe contenido ileal y cecal y desemboca en el coprodeo de la cloaca.",
+    "histology": "Mucosa con criptas y abundantes células caliciformes, sin vellosidades largas típicas del yeyuno."
+  },
+  "physiology": {
+    "mainFunction": "Transportar residuos y recuperar agua y electrolitos antes de la excreción.",
+    "mechanicalDigestion": "Mezcla y compacta el contenido fecal.",
+    "chemicalDigestion": "Puede continuar actividad microbiana limitada, sin secreción enzimática digestiva principal.",
+    "motility": "Peristalsis hacia cloaca y movimientos retrógrados que participan en el llenado cecal.",
+    "secretions": [
+      "Moco"
+    ],
+    "enzymes": [],
+    "absorption": [
+      "Agua",
+      "Sodio y otros electrolitos"
+    ],
+    "digestiveProducts": [
+      "Contenido fecal más concentrado"
+    ]
+  },
+  "regulation": {
+    "nervousControl": "Reflejos entéricos coordinan propulsión y movimientos retrógrados.",
+    "autonomicControl": "Modulación autónoma de motilidad y transporte de agua.",
+    "signals": []
+  },
+  "nutrition": {
+    "nutrients": [
+      "Agua",
+      "Electrolitos"
+    ],
+    "foodInteractions": [
+      "Fibra y osmolaridad modifican consistencia y tránsito."
+    ],
+    "limitations": [
+      "La fermentación principal del intestino posterior ocurre en ciegos."
+    ]
+  },
+  "microbiology": {
+    "applicable": true,
+    "microorganisms": [
+      "Microbiota procedente de íleon y ciegos"
+    ],
+    "fermentation": [
+      "Fermentación residual"
+    ],
+    "products": [
+      "Ácidos orgánicos residuales"
+    ]
+  },
+  "narrationFile": "audio/narration/es-GT/chicken/12_colon.mp3",
+  "model": {
+    "file": "",
+    "objectId": "colon",
+    "scale": 1
+  },
+  "referenceIds": [
+    "svihus_2014",
+    "scanes_pierzchala_2014",
+    "scanes_2020",
+    "shang_et_al_2018"
+  ]
+}

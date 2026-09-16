@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.3.0",
+  "scientificStatus": "pending",
+  "id": "chicken",
+  "commonName": "Gallina",
+  "scientificName": "Gallus gallus domesticus",
+  "digestiveType": "avian_monogastric",
+  "model": { "exteriorFile": "model.glb", "digestiveSystemFile": "digestive_system.glb", "scale": 1.0 },
+  "digestiveSystem": {
+    "graphFile": "digestive_graph.json",
+    "organs": ["beak", "oral_cavity", "tongue", "salivary_glands", "pharynx", "esophagus", "crop", "proventriculus", "gizzard", "duodenum", "pancreas", "liver", "biliary_tract", "jejunum", "ileum", "meckels_diverticulum", "ceca", "colon", "cloaca"]
+  },
+  "absorptionRoutes": [
+    {
+      "id": "carbohydrates_portal",
+      "displayName": "Carbohidratos disponibles",
+      "nutrientKeys": ["almidón"],
+      "absorbedForm": "Glucosa y otros monosacáridos",
+      "siteOrganIds": ["duodenum", "jejunum", "ileum"],
+      "transport": "Capilares intestinales → circulación porta hepática",
+      "targetOrganId": "liver",
+      "destinations": ["Oxidación para obtener energía", "Almacenamiento transitorio como glucógeno hepático y muscular", "Conversión metabólica cuando la oferta supera el uso inmediato"],
+      "color": "#F7C843",
+      "caveat": "La contribución de cada segmento cambia con la edad, el alimento y la velocidad de tránsito.",
+      "referenceIds": ["shibata_et_al_2023", "selle_et_al_2021"]
+    },
+    {
+      "id": "amino_acids_portal",
+      "displayName": "Proteínas y aminoácidos",
+      "nutrientKeys": ["proteína", "aminoácidos", "aminoácidos azufrados"],
+      "absorbedForm": "Aminoácidos libres y productos peptídicos procesados por el enterocito",
+      "siteOrganIds": ["duodenum", "jejunum", "ileum"],
+      "transport": "Capilares intestinales → circulación porta hepática",
+      "targetOrganId": "liver",
+      "destinations": ["Síntesis de proteína tisular", "Síntesis de enzimas y otras moléculas nitrogenadas", "Catabolismo cuando no se destinan a síntesis"],
+      "color": "#48B8FF",
+      "caveat": "La animación resume rutas generales y no cuantifica la utilización posabsortiva de cada aminoácido.",
+      "referenceIds": ["lerner_1984", "ravindran_et_al_1999"]
+    },
+    {
+      "id": "lipids_portal",
+      "displayName": "Lípidos y compuestos liposolubles",
+      "nutrientKeys": ["lípidos", "ácido linoleico", "carotenoides"],
+      "absorbedForm": "Ácidos grasos y monoacilglicéridos reesterificados; transporte en portomicrones",
+      "siteOrganIds": ["duodenum", "jejunum", "ileum"],
+      "transport": "Vasos sanguíneos intestinales → vena porta; ruta aviar, no linfática mamífera",
+      "targetOrganId": "liver",
+      "destinations": ["Oxidación en tejidos", "Depósito en tejido adiposo", "Metabolismo y redistribución hepática"],
+      "color": "#FF6B38",
+      "caveat": "La absorción y el destino dependen de la longitud y saturación de los ácidos grasos y de la edad del ave.",
+      "referenceIds": ["fraser_et_al_1986", "oketch_et_al_2023", "tancharoenrat_et_al_2014"]
+    },
+    {
+      "id": "fiber_cecal",
+      "displayName": "Fracciones fermentables",
+      "nutrientKeys": ["fibra", "beta-glucanos", "polisacáridos no amiláceos", "oligosacáridos"],
+      "absorbedForm": "Ácidos grasos de cadena corta producidos por fermentación microbiana",
+      "siteOrganIds": ["ceca"],
+      "transport": "Epitelio cecal → circulación portal",
+      "targetOrganId": "liver",
+      "destinations": ["Uso energético por enterocitos y otros tejidos", "Señalización y mantenimiento del ambiente intestinal"],
+      "color": "#52DB75",
+      "caveat": "La magnitud de la fermentación es variable y no toda la fibra es fermentable.",
+      "referenceIds": ["jozefiak_et_al_2004"]
+    }
+  ],
+  "referenceIds": ["shibata_et_al_2023", "lerner_1984", "fraser_et_al_1986", "oketch_et_al_2023", "jozefiak_et_al_2004"]
+}

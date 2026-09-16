@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digestive-simulator.local/schemas/food.schema.json",
+  "title": "FoodDefinition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contentVersion", "scientificStatus", "id", "commonName", "scientificOrSourceName", "category", "description", "composition", "visual", "compositionReferenceIds"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" }, "contentVersion": { "type": "string" },
+    "scientificStatus": { "enum": ["pending", "reviewed", "approved"] },
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$" },
+    "commonName": { "type": "string" }, "scientificOrSourceName": { "type": "string" }, "category": { "type": "string" }, "description": { "type": "string" },
+    "composition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["dryMatter", "crudeProtein", "starch", "crudeFiber", "etherExtract", "energy", "basis", "units"],
+      "properties": {
+        "dryMatter": { "type": ["number", "null"] }, "crudeProtein": { "type": ["number", "null"] }, "starch": { "type": ["number", "null"] }, "crudeFiber": { "type": ["number", "null"] }, "etherExtract": { "type": ["number", "null"] }, "energy": { "type": ["number", "null"] }, "basis": { "type": "string" }, "units": { "type": "string" }
+      }
+    },
+    "visual": { "type": "object", "additionalProperties": false, "required": ["modelFile", "iconFile", "color", "scale"], "properties": { "modelFile": { "type": "string" }, "iconFile": { "type": "string" }, "color": { "type": "string" }, "scale": { "type": "number", "exclusiveMinimum": 0 } } },
+    "compositionReferenceIds": { "type": "array", "uniqueItems": true, "items": { "type": "string" } }
+  }
+}
+

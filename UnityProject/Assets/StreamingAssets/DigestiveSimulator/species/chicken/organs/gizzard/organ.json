@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0", "contentVersion": "0.2.0", "scientificStatus": "pending",
+  "id": "gizzard", "speciesId": "chicken", "commonName": "Molleja", "anatomicalName": "Ventriculus muscularis",
+  "anatomy": {
+    "location": "Después del proventrículo y antes del duodeno.",
+    "morphology": "Compartimento gástrico de pared muscular gruesa y lumen revestido por una cutícula de koilina.",
+    "relations": "Se comunica cranealmente con el proventrículo y caudalmente con el duodeno; participa en reflujo gastroduodenal.",
+    "histology": "Músculo liso muy desarrollado, mucosa glandular y una cutícula luminal resistente que protege frente a ácido y abrasión."
+  },
+  "physiology": {
+    "mainFunction": "Triturar, mezclar y clasificar partículas, prolongando su contacto con las secreciones gástricas.",
+    "mechanicalDigestion": "Contracciones vigorosas reducen el tamaño de partículas y sustituyen funcionalmente la masticación ausente.",
+    "chemicalDigestion": "Continúan la acidificación y la proteólisis por ácido y pepsina procedentes principalmente del proventrículo.",
+    "motility": "Ciclos de contracción coordinados con proventrículo y duodeno; las partículas grandes pueden retenerse y el contenido puede refluir desde el duodeno.",
+    "secretions": ["Componentes de la cutícula de koilina", "Moco protector"],
+    "enzymes": ["Pepsina presente en el contenido, originada como pepsinógeno proventricular"],
+    "absorption": [],
+    "digestiveProducts": ["Partículas de menor tamaño", "Quimo ácido mezclado", "Péptidos"]
+  },
+  "regulation": {
+    "nervousControl": "La secuencia contráctil depende de circuitos entéricos y coordinación neural del complejo gástrico.",
+    "autonomicControl": "La inervación vagal modula la coordinación motora y la respuesta al contenido.",
+    "signals": []
+  },
+  "nutrition": {
+    "nutrients": ["Proteínas", "Almidón y otros nutrientes liberados al romper partículas"],
+    "foodInteractions": ["Cereales enteros, partículas gruesas y fibra insoluble estructural estimulan el desarrollo y actividad de la molleja.", "Una molienda muy fina puede reducir su estímulo mecánico."],
+    "limitations": ["La respuesta depende de tamaño de partícula, estructura de la dieta y acceso a material insoluble."]
+  },
+  "microbiology": { "applicable": false, "microorganisms": ["Bacterias presentes en menor actividad funcional"], "fermentation": ["Fermentación baja por el pH ácido"], "products": [] },
+  "narrationFile": "audio/narration/es-GT/chicken/07_gizzard.mp3",
+  "model": { "file": "", "objectId": "gizzard", "scale": 1.0 },
+  "referenceIds": ["svihus_2014", "scanes_pierzchala_2014", "shang_et_al_2018"]
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.2.0",
+  "scientificStatus": "pending",
+  "id": "pharynx",
+  "speciesId": "chicken",
+  "commonName": "Faringe",
+  "anatomicalName": "Pharynx",
+  "anatomy": {
+    "location": "Región caudal de la cavidad orofaríngea, entre boca y esófago.",
+    "morphology": "Conducto corto compartido funcionalmente por vías digestiva y respiratoria.",
+    "relations": "Próxima a coanas, glotis y entrada del esófago.",
+    "histology": "Mucosa escamosa estratificada con glándulas mucosas y músculo asociado a la deglución."
+  },
+  "physiology": {
+    "mainFunction": "Transferir coordinadamente el bolo desde la boca al esófago.",
+    "mechanicalDigestion": "No tritura; canaliza y propulsa el bolo.",
+    "chemicalDigestion": "No es un sitio relevante de digestión química.",
+    "motility": "La fase faríngea de la deglución es rápida y refleja.",
+    "secretions": [
+      "Moco"
+    ],
+    "enzymes": [],
+    "absorption": [],
+    "digestiveProducts": [
+      "Bolo deglutido"
+    ]
+  },
+  "regulation": {
+    "nervousControl": "Reflejo de deglución coordinado por aferencias orofaríngeas y nervios craneales.",
+    "autonomicControl": "Participación refleja en secreción mucosa y coordinación con el esófago.",
+    "signals": []
+  },
+  "nutrition": {
+    "nutrients": [],
+    "foodInteractions": [
+      "Partículas inadecuadas pueden dificultar la deglución."
+    ],
+    "limitations": [
+      "Debe distinguirse transporte de digestión."
+    ]
+  },
+  "microbiology": {
+    "applicable": false,
+    "microorganisms": [],
+    "fermentation": [],
+    "products": []
+  },
+  "narrationFile": "audio/narration/es-GT/chicken/03_pharynx.mp3",
+  "model": {
+    "file": "",
+    "objectId": "pharynx",
+    "scale": 1
+  },
+  "referenceIds": [
+    "scanes_pierzchala_2014",
+    "scanes_2020"
+  ]
+}

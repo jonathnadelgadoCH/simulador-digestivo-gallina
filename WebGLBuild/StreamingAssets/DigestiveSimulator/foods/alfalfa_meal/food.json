@@ -1,0 +1,4 @@
+{
+  "schemaVersion":"1.0","contentVersion":"0.2.0","scientificStatus":"pending","id":"alfalfa_meal","commonName":"Harina de alfalfa","scientificOrSourceName":"Medicago sativa L., deshidratada","category":"forage_meal","description":"Forraje deshidratado con fibra elevada y carotenoides; en aves se usa a niveles moderados por su baja densidad energética y puede contribuir a la pigmentación.",
+  "composition":{"dryMatter":90.6,"crudeProtein":18.3,"starch":3.3,"crudeFiber":28.6,"etherExtract":2.7,"energy":null,"basis":"Materia seca sobre producto fresco; los demás valores sobre materia seca. Promedios de alfalfa deshidratada.","units":"%"},"visual":{"modelFile":"","iconFile":"","color":"#6F8F45","scale":1.0},"compositionReferenceIds":["heuze_et_al_alfalfa_2016"]
+}

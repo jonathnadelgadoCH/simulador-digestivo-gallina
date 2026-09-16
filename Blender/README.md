@@ -1,0 +1,19 @@
+# Modelo Blender del MVP
+
+`generate_chicken_mvp.py` crea un modelo de integración low-poly, guarda `chicken_digestive_mvp.blend` y exporta los GLB utilizados por el módulo de gallina.
+
+El modelo es esquemático y está marcado como `schematic_pending_validation`. Sirve para comprobar el pipeline Blender → GLB → Unity, los IDs de órganos, transparencia, selección y rendimiento. No debe presentarse como anatomía validada sin revisión y refinamiento por el equipo.
+
+La silueta actual toma como referencia una gallina ponedora de cuerpo redondeado. El aparato digestivo fue compactado dentro de la envolvente corporal y `validate_chicken_mvp.py` comprueba automáticamente esa restricción para los órganos del torso.
+
+Antes de exportar, el generador aplica escala y rotación, centra los pivotes, recalcula normales, activa suavizado y crea coordenadas UV cuando una malla no las posee. El validador vuelve a importar ambos GLB y revisa esas propiedades, los materiales, los IDs y el presupuesto de triángulos.
+
+Los órganos utilizan una densidad superior a la envolvente exterior: el generador exige esferas de 36 segmentos por 24 anillos y curvas con resolución y bisel de nivel 4. El exterior mantiene su densidad low-poly para reservar el presupuesto de WebGL a las estructuras educativas seleccionables.
+
+Regeneración:
+
+```powershell
+& 'C:\Program Files\Blender Foundation\Blender 5.2\blender.exe' --background --python Blender\generate_chicken_mvp.py
+```
+
+La vista previa reproducible se genera con `Blender/render_preview.py` y se guarda como `Blender/chicken_digestive_preview.png`.

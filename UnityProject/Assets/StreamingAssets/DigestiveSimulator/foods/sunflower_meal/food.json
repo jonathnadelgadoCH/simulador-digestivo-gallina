@@ -1,0 +1,4 @@
+{
+  "schemaVersion":"1.0","contentVersion":"0.2.0","scientificStatus":"pending","id":"sunflower_meal","commonName":"Harina de girasol","scientificOrSourceName":"Helianthus annuus L., harina parcialmente descascarada","category":"protein_meal","description":"Subproducto de la extracción de aceite; su proteína, fibra y grasa varían con el descascarado y el método de extracción.",
+  "composition":{"dryMatter":89.8,"crudeProtein":37.7,"starch":null,"crudeFiber":22.8,"etherExtract":1.8,"energy":null,"basis":"Materia seca sobre producto fresco; los demás valores sobre materia seca. Harina extraída con solvente, descascarada o parcialmente descascarada; la fuente no reporta almidón para esta tabla.","units":"%"},"visual":{"modelFile":"","iconFile":"","color":"#5F5144","scale":1.0},"compositionReferenceIds":["heuze_et_al_sunflower_2019"]
+}

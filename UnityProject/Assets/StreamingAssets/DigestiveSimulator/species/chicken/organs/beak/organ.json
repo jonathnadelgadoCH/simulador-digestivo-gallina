@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0", "contentVersion": "0.2.0", "scientificStatus": "pending",
+  "id": "beak", "speciesId": "chicken", "commonName": "Pico", "anatomicalName": "Rostrum (pico)",
+  "anatomy": {
+    "location": "Extremo rostral de la cabeza; delimita la entrada de la cavidad oral.",
+    "morphology": "Mandíbulas superior e inferior recubiertas por una vaina córnea. La gallina carece de dientes.",
+    "relations": "Continúa caudalmente con la cavidad oral y trabaja junto con lengua, paladar y faringe durante la toma y deglución del alimento.",
+    "histology": "Vaina externa queratinizada apoyada sobre las estructuras óseas de las mandíbulas; no posee superficies dentarias de masticación."
+  },
+  "physiology": {
+    "mainFunction": "Prensión, selección y manipulación inicial del alimento y del agua.",
+    "mechanicalDigestion": "Puede fragmentar o acomodar partículas mediante picoteo, pero no mastica; la trituración principal ocurre en la molleja.",
+    "chemicalDigestion": "No realiza digestión química propia.",
+    "motility": "Movimientos voluntarios de apertura, cierre y picoteo coordinados con lengua y deglución.",
+    "secretions": [], "enzymes": [], "absorption": [], "digestiveProducts": []
+  },
+  "regulation": {
+    "nervousControl": "Predomina el control somático y sensorial asociado a la conducta de alimentación.",
+    "autonomicControl": "No es el mecanismo principal de prensión; la coordinación autonómica participa después en salivación y tránsito.",
+    "signals": []
+  },
+  "nutrition": {
+    "nutrients": [],
+    "foodInteractions": ["El tamaño, dureza y presentación física del ingrediente afectan la facilidad de prensión."],
+    "limitations": ["La ausencia de dientes impide la masticación; partículas grandes deben procesarse posteriormente en la molleja."]
+  },
+  "microbiology": { "applicable": false, "microorganisms": [], "fermentation": [], "products": [] },
+  "narrationFile": "audio/narration/es-GT/chicken/01_beak.mp3",
+  "model": { "file": "", "objectId": "beak", "scale": 1.0 },
+  "referenceIds": ["scanes_pierzchala_2014", "scanes_2020"]
+}

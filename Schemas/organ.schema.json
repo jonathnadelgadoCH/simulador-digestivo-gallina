@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://digestive-simulator.local/schemas/organ.schema.json",
+  "title": "OrganDefinition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contentVersion", "scientificStatus", "id", "speciesId", "commonName", "anatomicalName", "anatomy", "physiology", "regulation", "nutrition", "microbiology", "model", "referenceIds"],
+  "properties": {
+    "schemaVersion": { "const": "1.0" },
+    "contentVersion": { "type": "string" },
+    "scientificStatus": { "enum": ["pending", "reviewed", "approved"] },
+    "id": { "$ref": "#/$defs/id" },
+    "speciesId": { "$ref": "#/$defs/id" },
+    "commonName": { "type": "string" },
+    "anatomicalName": { "type": "string" },
+    "anatomy": { "$ref": "#/$defs/anatomy" },
+    "physiology": { "$ref": "#/$defs/physiology" },
+    "regulation": { "$ref": "#/$defs/regulation" },
+    "nutrition": { "$ref": "#/$defs/nutrition" },
+    "microbiology": { "$ref": "#/$defs/microbiology" },
+    "narrationFile": { "type": "string" },
+    "model": { "$ref": "#/$defs/model" },
+    "referenceIds": { "$ref": "#/$defs/stringArray" }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:_[a-z0-9]+)*$" },
+    "text": { "type": "string" },
+    "stringArray": { "type": "array", "uniqueItems": true, "items": { "type": "string" } },
+    "anatomy": { "type": "object", "additionalProperties": false, "required": ["location", "morphology", "relations", "histology"], "properties": { "location": { "$ref": "#/$defs/text" }, "morphology": { "$ref": "#/$defs/text" }, "relations": { "$ref": "#/$defs/text" }, "histology": { "$ref": "#/$defs/text" } } },
+    "physiology": { "type": "object", "additionalProperties": false, "required": ["mainFunction", "mechanicalDigestion", "chemicalDigestion", "motility", "secretions", "enzymes", "absorption", "digestiveProducts"], "properties": { "mainFunction": { "$ref": "#/$defs/text" }, "mechanicalDigestion": { "$ref": "#/$defs/text" }, "chemicalDigestion": { "$ref": "#/$defs/text" }, "motility": { "$ref": "#/$defs/text" }, "secretions": { "$ref": "#/$defs/stringArray" }, "enzymes": { "$ref": "#/$defs/stringArray" }, "absorption": { "$ref": "#/$defs/stringArray" }, "digestiveProducts": { "$ref": "#/$defs/stringArray" } } },
+    "regulation": { "type": "object", "additionalProperties": false, "required": ["nervousControl", "autonomicControl", "signals"], "properties": { "nervousControl": { "$ref": "#/$defs/text" }, "autonomicControl": { "$ref": "#/$defs/text" }, "signals": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["name", "type", "origin", "receptor", "targetOrganId", "response", "referenceId"], "properties": { "name": { "type": "string" }, "type": { "enum": ["hormone", "neuropeptide", "neurotransmitter", "reflex"] }, "origin": { "type": "string" }, "receptor": { "type": "string" }, "targetOrganId": { "type": "string" }, "response": { "type": "string" }, "referenceId": { "type": "string" } } } } },
+    "nutrition": { "type": "object", "additionalProperties": false, "required": ["nutrients", "foodInteractions", "limitations"], "properties": { "nutrients": { "$ref": "#/$defs/stringArray" }, "foodInteractions": { "$ref": "#/$defs/stringArray" }, "limitations": { "$ref": "#/$defs/stringArray" } } },
+    "microbiology": { "type": "object", "additionalProperties": false, "required": ["applicable", "microorganisms", "fermentation", "products"], "properties": { "applicable": { "type": "boolean" }, "microorganisms": { "$ref": "#/$defs/stringArray" }, "fermentation": { "$ref": "#/$defs/stringArray" }, "products": { "$ref": "#/$defs/stringArray" } } },
+    "model": { "type": "object", "additionalProperties": false, "required": ["file", "objectId", "scale"], "properties": { "file": { "type": "string" }, "objectId": { "$ref": "#/$defs/id" }, "scale": { "type": "number", "exclusiveMinimum": 0 } } }
+  }
+}

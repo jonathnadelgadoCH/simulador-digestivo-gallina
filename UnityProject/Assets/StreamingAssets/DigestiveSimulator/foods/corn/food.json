@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.2.0",
+  "scientificStatus": "pending",
+  "id": "corn",
+  "commonName": "Maíz",
+  "scientificOrSourceName": "Zea mays L., grano",
+  "category": "cereal_grain",
+  "description": "Cereal energético cuyo grano aporta principalmente almidón. Los valores son promedios de numerosas muestras y pueden variar con variedad, origen, humedad, almacenamiento y procesamiento.",
+  "composition": {
+    "dryMatter": 86.3,
+    "crudeProtein": 9.4,
+    "starch": 73.4,
+    "crudeFiber": 2.5,
+    "etherExtract": 4.3,
+    "energy": null,
+    "basis": "Materia seca expresada sobre producto fresco; proteína, almidón, fibra bruta y extracto etéreo expresados sobre materia seca. Energía reservada para perfiles por especie y método.",
+    "units": "%"
+  },
+  "visual": { "modelFile": "", "iconFile": "", "color": "#E9B949", "scale": 1.0 },
+  "compositionReferenceIds": ["heuze_tran_lebas_2017"]
+}

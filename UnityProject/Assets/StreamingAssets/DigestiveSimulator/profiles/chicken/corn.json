@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.3.0",
+  "scientificStatus": "pending",
+  "speciesId": "chicken",
+  "foodId": "corn",
+  "digestibility": {
+    "dryMatter": null,
+    "protein": 78,
+    "starch": null,
+    "fat": null,
+    "energy": 15.1,
+    "type": "Valores por variable; consultar método y condiciones",
+    "method": "Digestibilidad ileal aparente media de 15 aminoácidos: 78 %; no representa digestibilidad de proteína cruda. AMEn expresada en MJ/kg de materia seca; valor tabulado o, para aceite, guía de ponedoras.",
+    "units": "%",
+    "energyUnits": "MJ/kg MS"
+  },
+  "physiologicalResponse": {
+    "mainOrganIds": [
+      "gizzard",
+      "duodenum",
+      "jejunum",
+      "ileum"
+    ],
+    "motilityEffects": [
+      "El tamaño de partícula modifica el trabajo y retención de la molleja."
+    ],
+    "secretions": [
+      "Ácido y pepsina en estómago; bilis y enzimas pancreáticas en intestino según el nutriente."
+    ],
+    "neuroendocrineResponses": [
+      "Señales intestinales como CCK coordinan secreción pancreática y biliar tras la llegada de nutrientes."
+    ],
+    "metabolicNotes": [
+      "Tasa ileal de digestión del almidón observada: 0.086 min⁻¹.",
+      "Los valores son específicos del método y no deben interpretarse como propiedades constantes de todos los lotes."
+    ]
+  },
+  "studyConditions": {
+    "age": "Pollos de engorde de 5 semanas para aminoácidos; 28 días para dinámica del almidón; edad variable en AMEn tabulada.",
+    "geneticLine": "Pollos de engorde; la línea genética no fue especificada en los resúmenes utilizados.",
+    "diet": "Dietas experimentales del ensayo citado o valores compilados de Feedipedia; no representan una dieta comercial completa.",
+    "processing": "Grano de maíz molido; el tamaño de partícula debe registrarse al aplicar los datos.",
+    "method": "Digestibilidad ileal por marcador para aminoácidos o grasa cuando se informa; AMEn corregida por nitrógeno en base materia seca para energía tabulada."
+  },
+  "simulation": {
+    "particleColor": "#E9B949",
+    "speedMultiplier": 1,
+    "highlightedNutrients": [
+      "almidón",
+      "proteína",
+      "lípidos"
+    ],
+    "stageOverrides": [
+      {
+        "organId": "gizzard",
+        "durationSeconds": 4,
+        "message": "El tamaño de partícula modifica el trabajo y retención de la molleja.",
+        "audioFile": null
+      },
+      {
+        "organId": "duodenum",
+        "durationSeconds": 5,
+        "message": "El almidón del maíz se digiere progresivamente y aporta glucosa.",
+        "audioFile": null
+      },
+      {
+        "organId": "ileum",
+        "durationSeconds": 5,
+        "message": "Tasa ileal de digestión del almidón observada: 0.086 min⁻¹.",
+        "audioFile": null
+      }
+    ]
+  },
+  "referenceIds": [
+    "ravindran_et_al_1999",
+    "selle_et_al_2021",
+    "heuze_tran_lebas_2017",
+    "svihus_2014"
+  ]
+}

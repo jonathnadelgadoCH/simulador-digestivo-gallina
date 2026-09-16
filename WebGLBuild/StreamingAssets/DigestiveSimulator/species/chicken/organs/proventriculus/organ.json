@@ -1,0 +1,36 @@
+{
+  "schemaVersion": "1.0", "contentVersion": "0.2.0", "scientificStatus": "pending",
+  "id": "proventriculus", "speciesId": "chicken", "commonName": "Proventrículo", "anatomicalName": "Ventriculus glandularis",
+  "anatomy": {
+    "location": "Entre el esófago distal y la molleja.",
+    "morphology": "Compartimento glandular, alargado y de pared más glandular que muscular.",
+    "relations": "Recibe el contenido del esófago y desemboca en la molleja; ambos forman los dos compartimentos funcionales del estómago aviar.",
+    "histology": "Mucosa con glándulas gástricas profundas productoras de ácido y pepsinógeno, además de una barrera mucosa protectora."
+  },
+  "physiology": {
+    "mainFunction": "Acidificar el alimento e iniciar la digestión gástrica de proteínas.",
+    "mechanicalDigestion": "Mezcla el contenido con secreciones, pero la trituración intensa corresponde a la molleja.",
+    "chemicalDigestion": "El ácido clorhídrico reduce el pH y activa pepsinógeno a pepsina, iniciando la hidrólisis de proteínas.",
+    "motility": "Sus contracciones se coordinan con la molleja y permiten mezcla y movimientos bidireccionales del contenido gástrico.",
+    "secretions": ["Ácido clorhídrico", "Pepsinógeno", "Moco"],
+    "enzymes": ["Pepsina, formada por activación de pepsinógeno"],
+    "absorption": [],
+    "digestiveProducts": ["Quimo acidificado", "Péptidos derivados de proteínas"]
+  },
+  "regulation": {
+    "nervousControl": "La motilidad y secreción se integran mediante sistema nervioso entérico e inervación autónoma.",
+    "autonomicControl": "La actividad vagal participa en la coordinación del complejo proventrículo-molleja.",
+    "signals": [
+      { "name": "Gastrina", "type": "hormone", "origin": "Región antral gástrica", "receptor": "Receptor de gastrina/CCK2", "targetOrganId": "proventriculus", "response": "Favorece la secreción gástrica ácida", "referenceId": "scanes_pierzchala_2014" }
+    ]
+  },
+  "nutrition": {
+    "nutrients": ["Proteínas"],
+    "foodInteractions": ["La proteína dietaria aporta el sustrato para la acción de la pepsina."],
+    "limitations": ["La permanencia suele ser breve y su función depende de la coordinación con la molleja."]
+  },
+  "microbiology": { "applicable": false, "microorganisms": [], "fermentation": ["Actividad fermentativa limitada por la acidez"], "products": [] },
+  "narrationFile": "audio/narration/es-GT/chicken/06_proventriculus.mp3",
+  "model": { "file": "", "objectId": "proventriculus", "scale": 1.0 },
+  "referenceIds": ["svihus_2014", "scanes_pierzchala_2014", "scanes_2020"]
+}

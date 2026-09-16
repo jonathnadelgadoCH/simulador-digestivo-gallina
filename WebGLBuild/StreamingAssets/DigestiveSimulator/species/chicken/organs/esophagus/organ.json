@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "1.0",
+  "contentVersion": "0.2.0",
+  "scientificStatus": "pending",
+  "id": "esophagus",
+  "speciesId": "chicken",
+  "commonName": "Esófago",
+  "anatomicalName": "Oesophagus",
+  "anatomy": {
+    "location": "Desde la faringe hasta el proventrículo; su porción cervical forma el buche.",
+    "morphology": "Tubo muscular muy distensible, dividido funcionalmente por la dilatación del buche.",
+    "relations": "Comunica faringe, buche y estómago glandular.",
+    "histology": "Epitelio escamoso estratificado, glándulas mucosas y capas musculares propulsoras."
+  },
+  "physiology": {
+    "mainFunction": "Transportar el bolo hacia el buche y proventrículo.",
+    "mechanicalDigestion": "No tritura; distensión y contracción desplazan el contenido.",
+    "chemicalDigestion": "No secreta enzimas digestivas principales.",
+    "motility": "Ondas peristálticas coordinadas con llenado y vaciado del buche.",
+    "secretions": [
+      "Moco"
+    ],
+    "enzymes": [],
+    "absorption": [],
+    "digestiveProducts": [
+      "Bolo lubricado y transportado"
+    ]
+  },
+  "regulation": {
+    "nervousControl": "Reflejos de deglución y circuitos entéricos coordinan la propulsión.",
+    "autonomicControl": "La inervación vagal modula motilidad y coordinación esófago-buche.",
+    "signals": []
+  },
+  "nutrition": {
+    "nutrients": [],
+    "foodInteractions": [
+      "Partículas, viscosidad y humedad influyen en el tránsito."
+    ],
+    "limitations": [
+      "Su función principal es transporte, no digestión ni absorción."
+    ]
+  },
+  "microbiology": {
+    "applicable": false,
+    "microorganisms": [],
+    "fermentation": [],
+    "products": []
+  },
+  "narrationFile": "audio/narration/es-GT/chicken/04_esophagus.mp3",
+  "model": {
+    "file": "",
+    "objectId": "esophagus",
+    "scale": 1
+  },
+  "referenceIds": [
+    "svihus_2014",
+    "scanes_pierzchala_2014",
+    "scanes_2020"
+  ]
+}
