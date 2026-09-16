@@ -30,9 +30,14 @@ async function expandGzipFiles(directory) {
       await expandGzipFiles(fullPath);
       continue;
     }
-    if (!entry.isFile() || !entry.name.endsWith(".gz")) continue;
+    const compressedExtension = entry.name.endsWith(".unityweb")
+      ? ".unityweb"
+      : entry.name.endsWith(".gz")
+        ? ".gz"
+        : null;
+    if (!entry.isFile() || compressedExtension === null) continue;
 
-    const outputPath = fullPath.slice(0, -3);
+    const outputPath = fullPath.slice(0, -compressedExtension.length);
     const compressed = await fs.readFile(fullPath);
     await fs.writeFile(outputPath, await gunzipAsync(compressed));
     // Conservar la copia .gz evita que proveedores con archivos bajo demanda
@@ -47,6 +52,9 @@ await expandGzipFiles(destination);
 const indexPath = path.join(destination, "index.html");
 const originalIndex = await fs.readFile(indexPath, "utf8");
 const deployIndex = originalIndex
+  .replaceAll("WebGLBuild.data.unityweb", "WebGLBuild.data")
+  .replaceAll("WebGLBuild.framework.js.unityweb", "WebGLBuild.framework.js")
+  .replaceAll("WebGLBuild.wasm.unityweb", "WebGLBuild.wasm")
   .replaceAll("WebGLBuild.data.gz", "WebGLBuild.data")
   .replaceAll("WebGLBuild.framework.js.gz", "WebGLBuild.framework.js")
   .replaceAll("WebGLBuild.wasm.gz", "WebGLBuild.wasm");
@@ -64,8 +72,8 @@ const required = [
 for (const relativePath of required) {
   await fs.access(path.join(destination, relativePath));
 }
-if (deployIndex.includes(".gz")) {
-  throw new Error("index.html todavía contiene referencias .gz.");
+if (deployIndex.includes(".gz") || deployIndex.includes(".unityweb")) {
+  throw new Error("index.html todavía contiene referencias a contenido comprimido.");
 }
 
 console.log(`Artefacto GitHub Pages preparado en ${destination}`);
