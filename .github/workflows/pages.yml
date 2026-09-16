@@ -23,6 +23,8 @@ jobs:
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
 
       - name: Preparar Unity WebGL para hosting estático
         run: node Tools/prepare-github-pages.mjs WebGLBuild _site
