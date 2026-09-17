@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace DigestiveSimulator.Editor
 {
@@ -16,6 +17,9 @@ namespace DigestiveSimulator.Editor
             // configurable Content-Encoding headers. Keep Unity's JavaScript
             // decompressor in the build so compressed WebGL files remain portable.
             PlayerSettings.WebGL.decompressionFallback = true;
+            // El proyecto crea colliders, primitivas y AudioSource durante la ejecución.
+            PlayerSettings.stripEngineCode = false;
+            PrepareBuildSupportMaterials();
 
             var scenes = EditorBuildSettings.scenes
                 .Where(scene => scene.enabled)
@@ -40,6 +44,61 @@ namespace DigestiveSimulator.Editor
                 throw new BuildFailedException($"Falló el build WebGL: {report.summary.result}");
 
             Debug.Log($"Build WebGL generado en {outputPath} ({report.summary.totalSize} bytes).");
+        }
+
+        private static void PrepareBuildSupportMaterials()
+        {
+            const string folder = "Assets/Resources/DigestiveSimulatorBuildSupport";
+            EnsureFolder("Assets", "Resources");
+            EnsureFolder("Assets/Resources", "DigestiveSimulatorBuildSupport");
+
+            var gltfShader = AssetDatabase.LoadAssetAtPath<Shader>(
+                "Packages/com.unity.cloud.gltfast/Runtime/Shader/glTF-pbrMetallicRoughness.shadergraph");
+            if (gltfShader == null)
+                throw new BuildFailedException("No se encontró el shader PBR de glTFast requerido por los modelos GLB.");
+
+            SaveMaterial($"{folder}/GltfOpaqueDouble.mat", gltfShader, material =>
+            {
+                material.DisableKeyword("_SURFACE_TYPE_TRANSPARENT");
+                material.SetFloat("_Surface", 0f);
+                material.SetFloat("_ZWrite", 1f);
+                material.SetFloat("_Cull", 0f);
+                material.renderQueue = (int)RenderQueue.Geometry;
+            });
+            SaveMaterial($"{folder}/GltfTransparentDouble.mat", gltfShader, material =>
+            {
+                material.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+                material.EnableKeyword("_DISABLE_SSR_TRANSPARENT");
+                material.EnableKeyword("_ENABLE_FOG_ON_TRANSPARENT");
+                material.SetFloat("_Surface", 1f);
+                material.SetFloat("_ZWrite", 0f);
+                material.SetFloat("_Cull", 0f);
+                material.renderQueue = (int)RenderQueue.Transparent;
+            });
+            SaveMaterial($"{folder}/UrpLit.mat", Shader.Find("Universal Render Pipeline/Lit"), _ => { });
+            SaveMaterial($"{folder}/UrpUnlit.mat", Shader.Find("Universal Render Pipeline/Unlit"), _ => { });
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+
+        private static void EnsureFolder(string parent, string name)
+        {
+            var path = $"{parent}/{name}";
+            if (!AssetDatabase.IsValidFolder(path)) AssetDatabase.CreateFolder(parent, name);
+        }
+
+        private static void SaveMaterial(string path, Shader shader, System.Action<Material> configure)
+        {
+            if (shader == null) throw new BuildFailedException($"No se encontró el shader para {path}.");
+            var material = AssetDatabase.LoadAssetAtPath<Material>(path);
+            if (material == null)
+            {
+                material = new Material(shader);
+                AssetDatabase.CreateAsset(material, path);
+            }
+            else material.shader = shader;
+            configure(material);
+            EditorUtility.SetDirty(material);
         }
     }
 }

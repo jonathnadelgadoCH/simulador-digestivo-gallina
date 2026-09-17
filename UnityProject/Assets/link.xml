@@ -1,0 +1,6 @@
+<linker>
+  <!-- Estos módulos se usan mediante AddComponent y primitivas en tiempo de ejecución. -->
+  <assembly fullname="UnityEngine.PhysicsModule" preserve="all" />
+  <assembly fullname="UnityEngine.AudioModule" preserve="all" />
+  <assembly fullname="UnityEngine.UnityWebRequestAudioModule" preserve="all" />
+</linker>

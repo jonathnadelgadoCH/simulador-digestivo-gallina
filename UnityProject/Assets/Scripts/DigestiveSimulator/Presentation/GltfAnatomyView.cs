@@ -20,6 +20,8 @@ namespace DigestiveSimulator.Presentation
         {
             loadedModel = model ?? throw new ArgumentNullException(nameof(model));
             exteriorRenderers = model.ExteriorRoot.GetComponentsInChildren<Renderer>(true);
+            RepairUnsupportedMaterials(exteriorRenderers, true);
+            RepairUnsupportedMaterials(model.DigestiveRoot.GetComponentsInChildren<Renderer>(true), false);
             BindOrgans(species, database);
         }
 
@@ -80,6 +82,51 @@ namespace DigestiveSimulator.Presentation
             {
                 host.AddComponent<BoxCollider>();
             }
+        }
+
+        private static void RepairUnsupportedMaterials(IEnumerable<Renderer> renderers, bool transparent)
+        {
+            var fallbackPath = transparent
+                ? "DigestiveSimulatorBuildSupport/GltfTransparentDouble"
+                : "DigestiveSimulatorBuildSupport/GltfOpaqueDouble";
+            var fallback = Resources.Load<Material>(fallbackPath);
+            if (fallback == null) return;
+
+            foreach (var renderer in renderers)
+            {
+                var materials = renderer.materials;
+                var changed = false;
+                for (var index = 0; index < materials.Length; index++)
+                {
+                    var original = materials[index];
+                    if (original != null && original.shader != null && original.shader.isSupported &&
+                        !string.Equals(original.shader.name, "Hidden/InternalErrorShader", StringComparison.Ordinal)) continue;
+
+                    var replacement = new Material(fallback) { name = $"{renderer.name}_WebGLFallback" };
+                    if (TryReadBaseColor(original, out var color))
+                    {
+                        if (replacement.HasProperty("baseColorFactor")) replacement.SetColor("baseColorFactor", color);
+                        if (replacement.HasProperty("_BaseColor")) replacement.SetColor("_BaseColor", color);
+                        if (replacement.HasProperty("_Color")) replacement.SetColor("_Color", color);
+                    }
+                    materials[index] = replacement;
+                    changed = true;
+                }
+                if (changed) renderer.materials = materials;
+            }
+        }
+
+        private static bool TryReadBaseColor(Material material, out Color color)
+        {
+            color = Color.white;
+            if (material == null) return false;
+            foreach (var property in new[] { "baseColorFactor", "_BaseColor", "_Color" })
+            {
+                if (!material.HasProperty(property)) continue;
+                color = material.GetColor(property);
+                return true;
+            }
+            return false;
         }
 
         private void SetExteriorAlpha(float alpha)

@@ -272,6 +272,27 @@ namespace DigestiveSimulator.Presentation
             UpdateRegulatoryVisuals(step);
         }
 
+        private void PlayOrResumeNarration()
+        {
+            if (narration == null) return;
+            if (narration.State == NarrationState.Paused)
+            {
+                narration.ResumeNarration();
+                return;
+            }
+            if (narration.State == NarrationState.Playing || narration.State == NarrationState.Loading) return;
+            if (!string.IsNullOrWhiteSpace(narration.CurrentFile))
+            {
+                narration.ReplayNarration();
+                return;
+            }
+
+            var step = application.Simulation.CurrentStep;
+            if (step == null) return;
+            var organ = application.SpeciesDatabase.GetOrgan(application.ActiveSpecies.id, step.OrganId);
+            narration.PlayNarration(!string.IsNullOrWhiteSpace(step.AudioFile) ? step.AudioFile : organ?.narrationFile);
+        }
+
         private void HandleStateChanged(SimulationState state)
         {
             if (state == SimulationState.Completed && simulationOrgan != null) simulationOrgan.SetSimulationActive(false);
@@ -517,14 +538,17 @@ namespace DigestiveSimulator.Presentation
             GUILayout.BeginArea(new Rect((Screen.width - width) * 0.5f, Screen.height - height - 10f, width, height), GUI.skin.box);
             GUILayout.BeginHorizontal();
             GUI.enabled = simulationPrepared;
-            if (GUILayout.Button("▶ Reproducir")) { application.Simulation.Play(); narration?.ResumeNarration(); }
+            if (GUILayout.Button("▶ Reproducir")) { application.Simulation.Play(); PlayOrResumeNarration(); }
             if (GUILayout.Button("⏸ Pausar")) { application.Simulation.Pause(); narration?.PauseNarration(); }
             if (GUILayout.Button("⏮ Reiniciar")) { application.Simulation.Restart(); ResetSimulationPresentation(); }
             if (GUILayout.Button("⏭ Siguiente")) application.Simulation.Next();
+            if (GUILayout.Button("🔊 Escuchar")) PlayOrResumeNarration();
             if (GUILayout.Button(narration != null && narration.IsMuted ? "Audio OFF" : "Audio ON")) narration?.SetMuted(!narration.IsMuted);
             GUI.enabled = true;
             GUILayout.EndHorizontal();
-            GUILayout.Label(simulationPrepared ? $"Estado: {application.Simulation.State}" : "Preparando perfil especie–alimento…", statusStyle);
+            GUILayout.Label(simulationPrepared
+                ? $"Estado: {application.Simulation.State} · Narración: {narration?.State}"
+                : "Preparando perfil especie–alimento…", statusStyle);
             GUILayout.EndArea();
         }
 

@@ -59,6 +59,13 @@ namespace DigestiveSimulator.Runtime
             SetState(NarrationState.Playing);
         }
 
+        public void ReplayNarration()
+        {
+            var file = CurrentFile;
+            if (string.IsNullOrWhiteSpace(file)) { SetState(NarrationState.Missing); return; }
+            PlayNarration(file);
+        }
+
         public void SetMuted(bool muted)
         {
             source.mute = muted;
@@ -96,6 +103,12 @@ namespace DigestiveSimulator.Runtime
                     yield break;
                 }
                 source.clip = DownloadHandlerAudioClip.GetContent(request);
+                if (source.clip == null)
+                {
+                    LastError = $"El archivo de narración '{relativePath}' no produjo un clip de audio válido.";
+                    SetState(NarrationState.Error);
+                    yield break;
+                }
                 source.Play();
                 SetState(NarrationState.Playing);
             }

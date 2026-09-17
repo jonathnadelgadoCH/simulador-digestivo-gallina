@@ -27,8 +27,13 @@ namespace DigestiveSimulator.Presentation
         private void RefreshColor()
         {
             if (cachedRenderer == null) return;
-            cachedRenderer.material.color = simulationActive ? new Color(0.2f, 0.95f, 1f) : selected ? new Color(1f, 0.82f, 0.2f) : baseColor;
+            var color = simulationActive ? new Color(0.2f, 0.95f, 1f) : selected ? new Color(1f, 0.82f, 0.2f) : baseColor;
+            foreach (var material in cachedRenderer.materials)
+            {
+                if (material.HasProperty("baseColorFactor")) material.SetColor("baseColorFactor", color);
+                if (material.HasProperty("_BaseColor")) material.SetColor("_BaseColor", color);
+                if (material.HasProperty("_Color")) material.SetColor("_Color", color);
+            }
         }
     }
 }
-
