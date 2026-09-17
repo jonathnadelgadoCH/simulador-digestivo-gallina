@@ -28,6 +28,7 @@ namespace DigestiveSimulator.Runtime
             source.playOnAwake = false;
             source.loop = false;
             source.spatialBlend = 0f;
+            source.volume = 1f;
         }
 
         private void Update()

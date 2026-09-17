@@ -134,6 +134,9 @@ namespace DigestiveSimulator.Presentation
                 camera.backgroundColor = new Color(0.035f, 0.06f, 0.09f);
             }
             orbitCamera = camera.GetComponent<OrbitCameraController>() ?? camera.gameObject.AddComponent<OrbitCameraController>();
+            // AudioSource puede indicar Playing sin emitir sonido si la escena no
+            // contiene un AudioListener. La cámara principal actúa como receptor.
+            if (FindAnyObjectByType<AudioListener>() == null) camera.gameObject.AddComponent<AudioListener>();
 
             if (FindAnyObjectByType<Light>() == null)
             {
