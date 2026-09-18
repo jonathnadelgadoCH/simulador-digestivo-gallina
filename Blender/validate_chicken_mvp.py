@@ -13,6 +13,12 @@ EXPECTED_ORGANS = {
 COMPACT_TORSO_ORGANS = EXPECTED_ORGANS - {
     "beak", "oral_cavity", "tongue", "salivary_glands", "pharynx", "esophagus"
 }
+FIRST_REMODEL_MIN_TRIANGLES = {
+    "crop": 5000,
+    "proventriculus": 4000,
+    "gizzard": 7000,
+    "liver": 10000,
+}
 
 
 def clear():
@@ -60,6 +66,13 @@ if missing:
 if unexpected:
     raise RuntimeError(f"Unexpected organ objects: {unexpected}")
 for organ in digestive:
+    organ.data.calc_loop_triangles()
+    minimum_triangles = FIRST_REMODEL_MIN_TRIANGLES.get(organ.name)
+    if minimum_triangles is not None and len(organ.data.loop_triangles) < minimum_triangles:
+        raise RuntimeError(
+            f"Remodeled organ {organ.name} fell below its detail floor: "
+            f"{len(organ.data.loop_triangles)} < {minimum_triangles}"
+        )
     if organ.name not in COMPACT_TORSO_ORGANS:
         continue
     corners = [organ.matrix_world @ Vector(corner) for corner in organ.bound_box]

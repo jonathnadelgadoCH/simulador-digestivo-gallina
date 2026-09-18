@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-Actualizado: 15 de septiembre de 2026
+Actualizado: 17 de septiembre de 2026
 
 ## Resumen ejecutivo
 
@@ -162,7 +162,7 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 | Diecinueve órganos separados | Terminado técnicamente; pendiente revisión anatómica |
 | Compactación dentro del cuerpo | Terminada y validada automáticamente |
 | Exportación e integración GLB | Terminada |
-| Calidad de malla para WebGL | Validada con 80.348 triángulos totales |
+| Calidad de malla para WebGL | Validada con 96.188 triángulos totales tras el primer bloque de remodelación |
 | Transparencia y selección en Unity | Pendiente de prueba interactiva |
 
 ## Pendiente — prioridad alta
@@ -182,6 +182,7 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 
 - [~] Refinar el modelo exterior esquemático de la gallina en Blender.
 - [~] Refinar los diecinueve órganos digestivos ya separados.
+- [x] Primer bloque anatómico: hígado bilobulado, molleja muscular con conexiones, buche dependiente y proventrículo fusiforme.
 - [x] Corregir y validar escala, pivotes, normales, UV y nombres.
 - [x] Mantener polígonos y materiales dentro del presupuesto técnico para WebGL.
 - [x] Exportar `model.glb` y `digestive_system.glb`.

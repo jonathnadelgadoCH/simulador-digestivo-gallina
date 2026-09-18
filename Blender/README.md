@@ -8,7 +8,9 @@ La silueta actual toma como referencia una gallina ponedora de cuerpo redondeado
 
 Antes de exportar, el generador aplica escala y rotación, centra los pivotes, recalcula normales, activa suavizado y crea coordenadas UV cuando una malla no las posee. El validador vuelve a importar ambos GLB y revisa esas propiedades, los materiales, los IDs y el presupuesto de triángulos.
 
-Los órganos utilizan una densidad superior a la envolvente exterior: el generador exige esferas de 36 segmentos por 24 anillos y curvas con resolución y bisel de nivel 4. El exterior mantiene su densidad low-poly para reservar el presupuesto de WebGL a las estructuras educativas seleccionables.
+Los órganos utilizan una densidad superior a la envolvente exterior: las superficies redondeadas generales parten de 64 segmentos por 48 anillos y las curvas usan resolución 10 y bisel 6. El exterior mantiene su densidad low-poly para reservar el presupuesto de WebGL a las estructuras educativas seleccionables.
+
+El primer bloque de remodelación sustituye las primitivas de buche y proventrículo por perfiles longitudinales cerrados, aumenta la definición muscular y los cuellos de la molleja, y genera lóbulos hepáticos aviares asimétricos con borde ventral, relieve visceral y escotadura craneal. El validador establece pisos individuales de detalle para impedir que estos cuatro órganos vuelvan a geometrías genéricas.
 
 Regeneración:
 

@@ -75,32 +75,92 @@ def ellipsoid(name, location, scale, mat, collection, segments=20, rings=12):
     return obj
 
 
-def build_crop_mesh(name, location, scale, rotation, mat, collection):
-    """Create an asymmetric, dependent crop instead of a scaled sphere."""
+def build_profiled_mesh(name, location, scale, rotation, mat, collection, profile,
+                        radial_segments=64, longitudinal_segments=44):
+    """Create a closed organ from an anatomical longitudinal profile."""
     mesh = bpy.data.meshes.new(name + "_mesh")
-    bm = bmesh.new()
-    bmesh.ops.create_uvsphere(bm, u_segments=48, v_segments=32, radius=1.0)
-    for vertex in bm.verts:
-        x, y, z = vertex.co
-        central_bulge = max(0.0, 1.0 - z * z)
-        # The sac expands to the bird's right and hangs ventrally.  The
-        # deformation is deterministic so later exports remain reproducible.
-        vertex.co.x = x * (1.0 + 0.16 * central_bulge) + 0.18 * central_bulge
-        vertex.co.y = y * (0.92 + 0.10 * central_bulge)
-        if z < 0.15:
-            drop = 0.15 - z
-            vertex.co.z -= 0.12 * drop * drop
-            vertex.co.x += 0.08 * drop
-    bm.normal_update()
-    bm.to_mesh(mesh)
-    bm.free()
+    vertices = []
+    faces = []
+    bottom = profile(0.0)
+    vertices.append((bottom[0], bottom[1], bottom[2]))
+    for ring in range(1, longitudinal_segments):
+        t = ring / longitudinal_segments
+        center_x, center_y, z, radius_x, radius_y = profile(t)
+        for segment in range(radial_segments):
+            angle = math.tau * segment / radial_segments
+            vertices.append((center_x + math.cos(angle) * radius_x,
+                             center_y + math.sin(angle) * radius_y, z))
+    top_index = len(vertices)
+    top = profile(1.0)
+    vertices.append((top[0], top[1], top[2]))
+    for segment in range(radial_segments):
+        following = (segment + 1) % radial_segments
+        faces.append((0, 1 + segment, 1 + following))
+    for ring in range(longitudinal_segments - 2):
+        current = 1 + ring * radial_segments
+        following_ring = current + radial_segments
+        for segment in range(radial_segments):
+            following = (segment + 1) % radial_segments
+            faces.append((current + segment, following_ring + segment,
+                          following_ring + following, current + following))
+    last_ring = 1 + (longitudinal_segments - 2) * radial_segments
+    for segment in range(radial_segments):
+        following = (segment + 1) % radial_segments
+        faces.append((last_ring + following, last_ring + segment, top_index))
+    mesh.from_pydata(vertices, [], faces)
+    mesh.update()
     obj = bpy.data.objects.new(name, mesh)
     obj.location = location
     obj.scale = scale
     obj.rotation_euler = rotation
     collection.objects.link(obj)
     obj.data.materials.append(mat)
-    obj["procedural_form"] = "asymmetric_sacular_crop"
+    return obj
+
+
+def build_crop_mesh(name, location, scale, rotation, mat, collection):
+    """Create a right-sided, dependent crop with narrow esophageal necks."""
+    def crop_profile(t):
+        envelope = math.sin(math.pi * t) ** 0.62
+        dependent_bulge = math.exp(-((t - 0.36) / 0.23) ** 2)
+        upper_shoulder = math.exp(-((t - 0.68) / 0.24) ** 2)
+        center_x = 0.05 + 0.20 * dependent_bulge + 0.04 * upper_shoulder
+        center_y = -0.035 * dependent_bulge
+        z = -1.0 + 2.0 * t - 0.09 * dependent_bulge
+        radius_x = envelope * (0.69 + 0.37 * dependent_bulge + 0.10 * upper_shoulder)
+        radius_y = envelope * (0.65 + 0.22 * dependent_bulge + 0.09 * upper_shoulder)
+        return center_x, center_y, z, radius_x, radius_y
+
+    obj = build_profiled_mesh(name, location, scale, rotation, mat, collection,
+                              crop_profile, radial_segments=64, longitudinal_segments=48)
+    obj["procedural_form"] = "right_sided_dependent_esophageal_diverticulum"
+    obj["connection_profile"] = "tapered_cranial_and_caudal_necks"
+    return obj
+
+
+def build_proventriculus_mesh(name, upper_endpoint, lower_endpoint, mat, collection):
+    """Create a fusiform glandular stomach between esophagus and gizzard."""
+    def proventriculus_profile(t):
+        envelope = math.sin(math.pi * t) ** 0.72
+        glandular_bulge = math.exp(-((t - 0.48) / 0.25) ** 2)
+        caudal_taper = 0.92 - 0.12 * max(0.0, 0.40 - t)
+        center_x = 0.035 * math.sin(math.pi * t)
+        center_y = -0.025 * math.sin(math.tau * t)
+        z = -1.0 + 2.0 * t
+        radius_x = envelope * caudal_taper * (0.50 + 0.52 * glandular_bulge)
+        radius_y = envelope * caudal_taper * (0.48 + 0.46 * glandular_bulge)
+        return center_x, center_y, z, radius_x, radius_y
+
+    upper = Vector(upper_endpoint)
+    lower = Vector(lower_endpoint)
+    direction = upper - lower
+    midpoint = (upper + lower) * 0.5
+    rotation = Vector((0.0, 0.0, 1.0)).rotation_difference(direction.normalized()).to_euler()
+    obj = build_profiled_mesh(name, midpoint, (0.105, 0.095, direction.length * 0.5), rotation,
+                              mat, collection, proventriculus_profile,
+                              radial_segments=56, longitudinal_segments=40)
+    obj["procedural_form"] = "fusiform_glandular_stomach"
+    obj["connection_profile"] = "esophageal_to_ventricular_taper"
     return obj
 
 
@@ -108,17 +168,18 @@ def build_gizzard_mesh(name, location, scale, rotation, mat, collection):
     """Create a thick biconvex muscular disc with a subtle equatorial belt."""
     mesh = bpy.data.meshes.new(name + "_mesh")
     bm = bmesh.new()
-    bmesh.ops.create_uvsphere(bm, u_segments=56, v_segments=36, radius=1.0)
+    bmesh.ops.create_uvsphere(bm, u_segments=72, v_segments=48, radius=1.0)
     for vertex in bm.verts:
         x, y, z = vertex.co
         radial = min(1.0, math.sqrt(y * y + z * z))
         central_dome = (1.0 - radial) ** 2
-        vertex.co.x = x * (0.68 + 0.42 * central_dome)
-        # A mild belt breaks the generic ellipsoid silhouette while keeping a
-        # closed, manifold external organ suitable for GLB.
+        angular_lobe = math.exp(-(((y + 0.12) / 0.48) ** 2 + ((z - 0.18) / 0.40) ** 2))
+        vertex.co.x = x * (0.60 + 0.52 * central_dome + 0.08 * angular_lobe)
         belt = math.exp(-((z / 0.24) ** 2))
-        vertex.co.y = y * (1.0 - 0.045 * belt)
-        vertex.co.z = z * 0.96
+        vertex.co.y = y * (1.0 - 0.10 * belt) + 0.035 * angular_lobe
+        vertex.co.z = z * (0.93 + 0.05 * max(0.0, -y))
+        if z < -0.18:
+            vertex.co.y -= 0.035 * min(1.0, abs(z))
     bm.normal_update()
     bm.to_mesh(mesh)
     bm.free()
@@ -129,6 +190,7 @@ def build_gizzard_mesh(name, location, scale, rotation, mat, collection):
     collection.objects.link(obj)
     obj.data.materials.append(mat)
     obj["procedural_form"] = "thick_biconvex_muscular_disc"
+    obj["surface_features"] = "equatorial_muscular_belt_and_asymmetric_faces"
     return obj
 
 
@@ -136,19 +198,24 @@ def build_liver_lobe(name, location, scale, rotation, mat, collection, is_left):
     """Create an avian liver lobe with a thin ventral edge and visceral relief."""
     mesh = bpy.data.meshes.new(name + "_mesh")
     bm = bmesh.new()
-    bmesh.ops.create_uvsphere(bm, u_segments=44, v_segments=30, radius=1.0)
+    bmesh.ops.create_uvsphere(bm, u_segments=64, v_segments=44, radius=1.0)
     for vertex in bm.verts:
         x, y, z = vertex.co
         if z < 0.0:
             ventral = min(1.0, abs(z))
-            vertex.co.x = x * (1.0 + 0.18 * ventral)
-            vertex.co.y = y * (1.0 - 0.30 * ventral)
-            vertex.co.z = z * (1.0 + 0.08 * ventral)
+            vertex.co.x = x * (1.0 + 0.14 * ventral)
+            vertex.co.y = y * (1.0 - 0.36 * ventral)
+            vertex.co.z = z * (1.0 + 0.13 * ventral)
         # Shallow medial relief suggests the visceral surface around the
         # proventriculus/gizzard without opening or self-intersecting the mesh.
         medial = x > 0.0 if is_left else x < 0.0
         if medial and y > -0.15:
-            vertex.co.y += 0.10 * (1.0 - min(1.0, abs(x)))
+            relief = (1.0 - min(1.0, abs(x))) * max(0.0, 1.0 - abs(z))
+            vertex.co.y += 0.13 * relief
+        cranial_notch = math.exp(-(((x + (0.35 if is_left else -0.35)) / 0.24) ** 2 +
+                                    ((z - 0.55) / 0.28) ** 2))
+        vertex.co.z -= 0.08 * cranial_notch
+        vertex.co.x *= 1.03 if is_left else 0.96
     bm.normal_update()
     bm.to_mesh(mesh)
     bm.free()
@@ -159,6 +226,7 @@ def build_liver_lobe(name, location, scale, rotation, mat, collection, is_left):
     collection.objects.link(obj)
     obj.data.materials.append(mat)
     obj["procedural_form"] = "avian_liver_lobe"
+    obj["surface_features"] = "thin_ventral_edge_visceral_relief_cranial_notch"
     return obj
 
 
@@ -335,16 +403,24 @@ def build_digestive(collection):
                        (0.035, -0.47, 2.05), (0.10, -0.42, 1.91)],
          0.052, tract_mat, collection, radii=[0.82, 0.96, 1.02, 1.05, 1.12])
     # The avian crop is a compliant, asymmetric diverticulum rather than a ball.
-    crop = build_crop_mesh("crop", (0.16, -0.43, 1.88), (0.24, 0.18, 0.31),
+    crop = build_crop_mesh("crop", (0.15, -0.43, 1.87), (0.25, 0.205, 0.30),
                            (math.radians(-8), math.radians(12), math.radians(-10)),
                            tract_mat, collection)
     crop["anatomical_note"] = "right-sided esophageal diverticulum"
-    tube("proventriculus", [(0.095, -0.34, 1.68), (0.055, -0.27, 1.59),
-                            (0.025, -0.18, 1.49), (0.06, -0.10, 1.40)],
-         0.080, stomach_mat, collection, radii=[0.72, 1.0, 1.12, 0.88])
+    proventriculus = build_proventriculus_mesh(
+        "proventriculus", (0.095, -0.34, 1.68), (0.06, -0.10, 1.39),
+        stomach_mat, collection)
+    proventriculus["anatomical_note"] = "fusiform glandular stomach"
     gizzard = build_gizzard_mesh("gizzard", (0.10, -0.02, 1.20), (0.33, 0.28, 0.25),
                                  (math.radians(4), math.radians(-9), math.radians(6)),
                                  stomach_mat, collection)
+    gizzard = join("gizzard", [
+        gizzard,
+        tube("gizzard_inlet", [(0.065, -0.095, 1.39), (0.085, -0.055, 1.31)],
+             0.061, stomach_mat, collection, radii=[0.82, 1.0]),
+        tube("gizzard_outlet", [(0.145, 0.0, 1.12), (0.19, 0.02, 1.10)],
+             0.057, stomach_mat, collection, radii=[1.0, 0.90]),
+    ])
     gizzard["anatomical_note"] = "muscular ventriculus; external model only"
     # Descending and ascending limbs of the duodenal loop surround the pancreas.
     tube("duodenum", [(0.19, 0.02, 1.10), (0.31, 0.045, 1.06), (0.41, 0.09, 0.98),
@@ -355,9 +431,9 @@ def build_digestive(collection):
                       (0.35, 0.16, 0.84), (0.30, 0.175, 0.77)],
          0.050, pancreas_mat, collection, radii=[0.58, 1.0, 0.88, 0.42])
     join("liver", [
-        build_liver_lobe("liver_l", (-0.20, -0.10, 1.48), (0.31, 0.20, 0.39),
+        build_liver_lobe("liver_l", (-0.205, -0.10, 1.48), (0.32, 0.205, 0.40),
                          (math.radians(-5), math.radians(-12), math.radians(5)), liver_mat, collection, True),
-        build_liver_lobe("liver_r", (0.27, -0.08, 1.49), (0.29, 0.21, 0.37),
+        build_liver_lobe("liver_r", (0.265, -0.075, 1.49), (0.295, 0.215, 0.375),
                          (math.radians(4), math.radians(10), math.radians(-6)), liver_mat, collection, False),
     ])
     tube("biliary_tract", [(0.15, -0.02, 1.35), (0.24, 0.05, 1.14), (0.30, 0.10, 1.03)], 0.022, bile_mat, collection)

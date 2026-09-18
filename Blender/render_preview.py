@@ -7,6 +7,7 @@ from mathutils import Vector
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "Blender" / "chicken_digestive_preview.png"
+ORGANS_OUTPUT = ROOT / "Blender" / "chicken_digestive_organs_preview.png"
 
 
 def point_at(obj, target):
@@ -49,3 +50,16 @@ for location, energy, size in (((-4, -4, 6), 1100, 4.0), ((4, 1, 4), 800, 3.0)):
 
 bpy.ops.render.render(write_still=True)
 print(f"Rendered {OUTPUT}")
+
+# A second inspection plate removes the translucent body so silhouettes,
+# junctions and accidental intersections can be reviewed independently.
+for obj in bpy.data.objects:
+    if obj is not None and obj.get("asset_role") == "exterior":
+        obj.hide_render = True
+camera.location = (4.6, -4.8, 2.45)
+camera.data.lens = 68
+point_at(camera, Vector((0.0, 0.0, 1.43)))
+bpy.context.scene.render.filepath = str(ORGANS_OUTPUT)
+bpy.context.scene.world.color = (0.055, 0.065, 0.08)
+bpy.ops.render.render(write_still=True)
+print(f"Rendered {ORGANS_OUTPUT}")
