@@ -12,6 +12,8 @@ Los órganos utilizan una densidad superior a la envolvente exterior: las superf
 
 El primer bloque de remodelación sustituye las primitivas de buche y proventrículo por perfiles longitudinales cerrados, aumenta la definición muscular y los cuellos de la molleja, y genera lóbulos hepáticos aviares asimétricos con borde ventral, relieve visceral y escotadura craneal. El validador establece pisos individuales de detalle para impedir que estos cuatro órganos vuelvan a geometrías genéricas.
 
+El segundo bloque define el duodeno como un asa continua descendente–ascendente que retorna hacia el yeyuno. Dentro del asa, el páncreas combina un núcleo curvo con cuatro lóbulos glandulares superpuestos, evitando la apariencia de tubo uniforme. Además de sus pisos de detalle, el validador comprueba que el centro del páncreas permanezca dentro de la envolvente del duodeno.
+
 Regeneración:
 
 ```powershell

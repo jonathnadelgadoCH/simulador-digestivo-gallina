@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-Actualizado: 17 de septiembre de 2026
+Actualizado: 20 de septiembre de 2026
 
 ## Resumen ejecutivo
 
@@ -100,8 +100,8 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 - [x] Prueba del recorrido y la máquina de estados.
 - [x] URP asignado en Graphics Settings.
 - [x] Los GLB contienen 19 objetos de órgano con IDs coincidentes.
-- [x] Presupuesto geométrico validado: 7.100 triángulos exteriores y 73.248 digestivos.
-- [x] Resolución digestiva elevada hasta 64 segmentos × 48 anillos en órganos redondeados, sin subdivisión redundante; curvas con resolución/bisel 4.
+- [x] Presupuesto geométrico validado: 7.100 triángulos exteriores y 101.872 digestivos.
+- [x] Resolución digestiva elevada hasta 64 segmentos × 48 anillos en órganos redondeados; curvas generales con resolución/bisel 10/6 y duodeno con 18/10.
 - [x] Validación automática de que los órganos del torso permanezcan en la envolvente corporal compacta.
 
 ## Parcialmente terminado
@@ -151,7 +151,8 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 - [x] Los órganos del torso fueron reducidos y reubicados dentro del volumen corporal.
 - [x] Buche, molleja y lóbulos hepáticos tienen formas anatómicas asimétricas generadas mediante BMesh, en lugar de elipsoides genéricos.
 - [x] Duodeno, yeyuno e íleon usan tangentes Bézier explícitas para evitar quiebres y solapamientos bruscos.
-- [x] La densidad digestiva aumentó hasta 73.248 triángulos, manteniendo el conjunto completo en 80.348 triángulos.
+- [x] La densidad digestiva aumentó hasta 101.872 triángulos, manteniendo el conjunto completo en 108.972 triángulos.
+- [x] El duodeno forma un asa descendente–ascendente continua de 9.504 triángulos alrededor de un páncreas alargado y lobulado de 6.160 triángulos.
 - [x] Escala, rotaciones, pivotes, normales, UV, materiales y nombres se validan después de reimportar los GLB.
 - [ ] La forma, posición y proporción anatómica todavía requieren revisión especializada.
 
@@ -162,7 +163,7 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 | Diecinueve órganos separados | Terminado técnicamente; pendiente revisión anatómica |
 | Compactación dentro del cuerpo | Terminada y validada automáticamente |
 | Exportación e integración GLB | Terminada |
-| Calidad de malla para WebGL | Validada con 96.188 triángulos totales tras el primer bloque de remodelación |
+| Calidad de malla para WebGL | Validada con 108.972 triángulos totales tras el segundo bloque de remodelación |
 | Transparencia y selección en Unity | Pendiente de prueba interactiva |
 
 ## Pendiente — prioridad alta
@@ -183,6 +184,7 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 - [~] Refinar el modelo exterior esquemático de la gallina en Blender.
 - [~] Refinar los diecinueve órganos digestivos ya separados.
 - [x] Primer bloque anatómico: hígado bilobulado, molleja muscular con conexiones, buche dependiente y proventrículo fusiforme.
+- [x] Segundo bloque anatómico: asa duodenal descendente–ascendente y páncreas alargado con cuatro lóbulos glandulares.
 - [x] Corregir y validar escala, pivotes, normales, UV y nombres.
 - [x] Mantener polígonos y materiales dentro del presupuesto técnico para WebGL.
 - [x] Exportar `model.glb` y `digestive_system.glb`.

@@ -13,11 +13,13 @@ EXPECTED_ORGANS = {
 COMPACT_TORSO_ORGANS = EXPECTED_ORGANS - {
     "beak", "oral_cavity", "tongue", "salivary_glands", "pharynx", "esophagus"
 }
-FIRST_REMODEL_MIN_TRIANGLES = {
+REMODELED_MIN_TRIANGLES = {
     "crop": 5000,
     "proventriculus": 4000,
     "gizzard": 7000,
     "liver": 10000,
+    "duodenum": 6000,
+    "pancreas": 4000,
 }
 
 
@@ -67,7 +69,7 @@ if unexpected:
     raise RuntimeError(f"Unexpected organ objects: {unexpected}")
 for organ in digestive:
     organ.data.calc_loop_triangles()
-    minimum_triangles = FIRST_REMODEL_MIN_TRIANGLES.get(organ.name)
+    minimum_triangles = REMODELED_MIN_TRIANGLES.get(organ.name)
     if minimum_triangles is not None and len(organ.data.loop_triangles) < minimum_triangles:
         raise RuntimeError(
             f"Remodeled organ {organ.name} fell below its detail floor: "
@@ -78,6 +80,16 @@ for organ in digestive:
     corners = [organ.matrix_world @ Vector(corner) for corner in organ.bound_box]
     if any(not (-0.65 <= point.x <= 0.65 and -0.75 <= point.y <= 0.95 and 0.45 <= point.z <= 2.25) for point in corners):
         raise RuntimeError(f"Torso organ exceeds compact body envelope: {organ.name}")
+by_name = {organ.name: organ for organ in digestive}
+duodenum = by_name["duodenum"]
+pancreas = by_name["pancreas"]
+duodenum_corners = [duodenum.matrix_world @ Vector(corner) for corner in duodenum.bound_box]
+duodenum_minimum = Vector(tuple(min(point[axis] for point in duodenum_corners) for axis in range(3)))
+duodenum_maximum = Vector(tuple(max(point[axis] for point in duodenum_corners) for axis in range(3)))
+pancreas_center = pancreas.matrix_world.translation
+if any(pancreas_center[axis] < duodenum_minimum[axis] - 0.02 or
+       pancreas_center[axis] > duodenum_maximum[axis] + 0.02 for axis in range(3)):
+    raise RuntimeError("Pancreas is not centered within the duodenal loop envelope")
 print(f"Exterior: {len(exterior)} meshes, {exterior_vertices} vertices, {exterior_triangles} triangles")
 print(f"Digestive: {len(digestive)} meshes, {digestive_vertices} vertices, {digestive_triangles} triangles")
 if digestive_triangles > 120000 or exterior_triangles > 120000:
@@ -87,3 +99,4 @@ if digestive_triangles < 15000:
 print("GLB validation passed: all 19 organ IDs are present.")
 print("Compactness validation passed: all torso organs remain inside the body envelope.")
 print("Mesh quality validation passed: transforms, pivots, normals, UVs and materials are valid.")
+print("Anatomical relation passed: pancreas remains centered within the duodenal loop.")

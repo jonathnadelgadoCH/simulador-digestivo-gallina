@@ -241,7 +241,8 @@ def cone(name, location, scale, rotation, mat, collection):
     return obj
 
 
-def tube(name, points, radius, mat, collection, resolution=2, radii=None, cyclic=False, tangent_scale=None):
+def tube(name, points, radius, mat, collection, resolution=2, radii=None, cyclic=False,
+         tangent_scale=None, curve_resolution=None, bevel_resolution=None):
     """Create a smooth tube, optionally tapered at each control point.
 
     ``radii`` contains multipliers relative to ``radius`` and is the key to
@@ -250,9 +251,11 @@ def tube(name, points, radius, mat, collection, resolution=2, radii=None, cyclic
     organ_detail = collection.name == "DigestiveSystem"
     curve = bpy.data.curves.new(name + "_curve", "CURVE")
     curve.dimensions = "3D"
-    curve.resolution_u = max(resolution, ORGAN_CURVE_RESOLUTION) if organ_detail else resolution
+    default_curve_resolution = max(resolution, ORGAN_CURVE_RESOLUTION) if organ_detail else resolution
+    default_bevel_resolution = max(resolution, ORGAN_BEVEL_RESOLUTION) if organ_detail else resolution
+    curve.resolution_u = curve_resolution if curve_resolution is not None else default_curve_resolution
     curve.bevel_depth = radius
-    curve.bevel_resolution = max(resolution, ORGAN_BEVEL_RESOLUTION) if organ_detail else resolution
+    curve.bevel_resolution = bevel_resolution if bevel_resolution is not None else default_bevel_resolution
     curve.twist_smooth = 12
     spline = curve.splines.new("BEZIER")
     spline.bezier_points.add(len(points) - 1)
@@ -287,6 +290,47 @@ def tube(name, points, radius, mat, collection, resolution=2, radii=None, cyclic
     obj["source_geometry"] = "bezier_tube"
     obj["explicit_tangents"] = tangent_scale is not None
     return obj
+
+
+def build_pancreas_lobule(name, center, direction, scale, mat, collection, phase):
+    """Create one softly lobulated spindle along the pancreatic axis."""
+    def lobule_profile(t):
+        envelope = math.sin(math.pi * t) ** 0.66
+        lobulation = 1.0 + 0.11 * math.sin(3.0 * math.pi * t + phase) * envelope
+        center_x = 0.045 * math.sin(math.tau * t + phase) * envelope
+        center_y = 0.025 * math.sin(2.0 * math.tau * t + phase) * envelope
+        z = -1.0 + 2.0 * t
+        radius_x = envelope * lobulation
+        radius_y = envelope * (0.72 + 0.08 * math.cos(3.0 * math.pi * t + phase))
+        return center_x, center_y, z, radius_x, radius_y
+
+    axis = Vector(direction)
+    rotation = Vector((0.0, 0.0, 1.0)).rotation_difference(axis.normalized()).to_euler()
+    return build_profiled_mesh(name, center, scale, rotation, mat, collection,
+                               lobule_profile, radial_segments=28, longitudinal_segments=16)
+
+
+def build_pancreas_mesh(name, points, mat, collection):
+    """Build an elongated, irregular pancreatic gland inside the duodenal loop."""
+    core = tube(name + "_core", points, 0.039, mat, collection,
+                radii=[0.48, 0.82, 1.0, 0.95, 0.72, 0.34], tangent_scale=0.16,
+                curve_resolution=14, bevel_resolution=8)
+    coordinates = [Vector(point) for point in points]
+    lobules = []
+    for sequence, (index, offset, scale, phase) in enumerate((
+        (1, (-0.012, 0.004, 0.000), (0.048, 0.037, 0.070), 0.4),
+        (2, (0.010, -0.002, -0.004), (0.054, 0.040, 0.076), 1.7),
+        (3, (-0.008, 0.006, 0.000), (0.052, 0.038, 0.074), 2.8),
+        (4, (0.008, -0.004, 0.003), (0.046, 0.034, 0.064), 4.0),
+    )):
+        direction = coordinates[index + 1] - coordinates[index - 1]
+        center = coordinates[index] + Vector(offset)
+        lobules.append(build_pancreas_lobule(
+            f"{name}_lobule_{sequence}", center, direction, scale, mat, collection, phase))
+    pancreas = join(name, [core, *lobules])
+    pancreas["procedural_form"] = "elongated_lobulated_gland_within_duodenal_loop"
+    pancreas["surface_features"] = "four_overlapping_glandular_lobules"
+    return pancreas
 
 
 def organic_lobe(name, location, scale, rotation, mat, collection, taper=0.18):
@@ -422,14 +466,24 @@ def build_digestive(collection):
              0.057, stomach_mat, collection, radii=[1.0, 0.90]),
     ])
     gizzard["anatomical_note"] = "muscular ventriculus; external model only"
-    # Descending and ascending limbs of the duodenal loop surround the pancreas.
-    tube("duodenum", [(0.19, 0.02, 1.10), (0.31, 0.045, 1.06), (0.41, 0.09, 0.98),
-                      (0.43, 0.15, 0.86), (0.39, 0.20, 0.75), (0.28, 0.20, 0.72),
-                      (0.19, 0.17, 0.78)], 0.055, intestine_mat, collection,
-         radii=[0.95, 1.02, 1.0, 0.96, 0.92, 0.95, 0.9], tangent_scale=0.20)
-    tube("pancreas", [(0.32, 0.105, 1.01), (0.355, 0.135, 0.93),
-                      (0.35, 0.16, 0.84), (0.30, 0.175, 0.77)],
-         0.050, pancreas_mat, collection, radii=[0.58, 1.0, 0.88, 0.42])
+    # A continuous descending/ascending duodenal loop surrounds the elongated
+    # pancreatic gland and returns medially toward the jejunum.
+    duodenum = tube(
+        "duodenum",
+        [(0.19, 0.02, 1.10), (0.27, 0.045, 1.075), (0.35, 0.075, 1.01),
+         (0.405, 0.115, 0.92), (0.42, 0.165, 0.82), (0.385, 0.205, 0.73),
+         (0.31, 0.225, 0.68), (0.22, 0.22, 0.69), (0.15, 0.185, 0.75),
+         (0.115, 0.15, 0.83), (0.07, 0.13, 0.89), (-0.02, 0.12, 0.91)],
+        0.052, intestine_mat, collection,
+        radii=[0.92, 1.02, 1.05, 1.0, 0.96, 0.93, 0.91, 0.94, 0.98, 0.96, 0.91, 0.86],
+        tangent_scale=0.16, curve_resolution=18, bevel_resolution=10)
+    duodenum["procedural_form"] = "descending_ascending_u_loop"
+    duodenum["anatomical_relation"] = "encloses_pancreas_and_continues_to_jejunum"
+    build_pancreas_mesh(
+        "pancreas",
+        [(0.29, 0.085, 1.01), (0.34, 0.115, 0.95), (0.355, 0.145, 0.87),
+         (0.34, 0.175, 0.79), (0.29, 0.195, 0.73), (0.23, 0.195, 0.71)],
+        pancreas_mat, collection)
     join("liver", [
         build_liver_lobe("liver_l", (-0.205, -0.10, 1.48), (0.32, 0.205, 0.40),
                          (math.radians(-5), math.radians(-12), math.radians(5)), liver_mat, collection, True),
