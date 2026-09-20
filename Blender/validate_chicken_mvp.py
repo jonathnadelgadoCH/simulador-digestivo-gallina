@@ -20,6 +20,9 @@ REMODELED_MIN_TRIANGLES = {
     "liver": 10000,
     "duodenum": 6000,
     "pancreas": 4000,
+    "jejunum": 5000,
+    "ileum": 1500,
+    "meckels_diverticulum": 800,
 }
 
 
@@ -90,6 +93,28 @@ pancreas_center = pancreas.matrix_world.translation
 if any(pancreas_center[axis] < duodenum_minimum[axis] - 0.02 or
        pancreas_center[axis] > duodenum_maximum[axis] + 0.02 for axis in range(3)):
     raise RuntimeError("Pancreas is not centered within the duodenal loop envelope")
+
+
+def world_bounds(obj):
+    corners = [obj.matrix_world @ Vector(corner) for corner in obj.bound_box]
+    return (
+        Vector(tuple(min(point[axis] for point in corners) for axis in range(3))),
+        Vector(tuple(max(point[axis] for point in corners) for axis in range(3))),
+    )
+
+
+def require_bounds_contact(first_name, second_name, margin=0.025):
+    first_minimum, first_maximum = world_bounds(by_name[first_name])
+    second_minimum, second_maximum = world_bounds(by_name[second_name])
+    if any(first_maximum[axis] + margin < second_minimum[axis] or
+           second_maximum[axis] + margin < first_minimum[axis] for axis in range(3)):
+        raise RuntimeError(f"Digestive transition is spatially discontinuous: {first_name} -> {second_name}")
+
+
+require_bounds_contact("duodenum", "jejunum")
+require_bounds_contact("jejunum", "ileum")
+require_bounds_contact("jejunum", "meckels_diverticulum")
+require_bounds_contact("ileum", "ceca")
 print(f"Exterior: {len(exterior)} meshes, {exterior_vertices} vertices, {exterior_triangles} triangles")
 print(f"Digestive: {len(digestive)} meshes, {digestive_vertices} vertices, {digestive_triangles} triangles")
 if digestive_triangles > 120000 or exterior_triangles > 120000:
@@ -100,3 +125,4 @@ print("GLB validation passed: all 19 organ IDs are present.")
 print("Compactness validation passed: all torso organs remain inside the body envelope.")
 print("Mesh quality validation passed: transforms, pivots, normals, UVs and materials are valid.")
 print("Anatomical relation passed: pancreas remains centered within the duodenal loop.")
+print("Intestinal continuity passed: duodenum, jejunum, ileum, Meckel landmark and ceca overlap at their transitions.")

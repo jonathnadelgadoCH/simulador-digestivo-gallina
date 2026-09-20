@@ -256,6 +256,7 @@ def tube(name, points, radius, mat, collection, resolution=2, radii=None, cyclic
     curve.resolution_u = curve_resolution if curve_resolution is not None else default_curve_resolution
     curve.bevel_depth = radius
     curve.bevel_resolution = bevel_resolution if bevel_resolution is not None else default_bevel_resolution
+    curve.use_fill_caps = True
     curve.twist_smooth = 12
     spline = curve.splines.new("BEZIER")
     spline.bezier_points.add(len(points) - 1)
@@ -491,15 +492,38 @@ def build_digestive(collection):
                          (math.radians(4), math.radians(10), math.radians(-6)), liver_mat, collection, False),
     ])
     tube("biliary_tract", [(0.15, -0.02, 1.35), (0.24, 0.05, 1.14), (0.30, 0.10, 1.03)], 0.022, bile_mat, collection)
-    tube("jejunum", [(-0.02, 0.12, 0.91), (-0.19, 0.17, 0.90), (-0.31, 0.27, 0.84),
-                     (-0.25, 0.40, 0.76), (-0.08, 0.43, 0.72), (0.12, 0.39, 0.80),
-                     (0.27, 0.29, 0.82), (0.28, 0.18, 0.72), (0.14, 0.11, 0.65),
-                     (-0.02, 0.12, 0.67)], 0.050, intestine_mat, collection,
-         radii=[0.9, 1.02, 1.0, 0.94, 1.04, 1.0, 0.96, 1.03, 0.94, 0.88], tangent_scale=0.18)
-    tube("ileum", [(0.00, 0.12, 0.67), (0.08, 0.18, 0.64), (0.17, 0.28, 0.63),
-                   (0.15, 0.37, 0.62), (0.11, 0.43, 0.62)],
-         0.048, intestine_mat, collection, radii=[0.92, 1.0, 0.96, 0.91, 0.88], tangent_scale=0.18)
-    ellipsoid("meckels_diverticulum", (-0.02, 0.27, 0.76), (0.055, 0.055, 0.075), landmark_mat, collection)
+    jejunum = tube(
+        "jejunum",
+        [(-0.02, 0.12, 0.91), (-0.16, 0.15, 0.93), (-0.29, 0.23, 0.88),
+         (-0.34, 0.34, 0.78), (-0.25, 0.42, 0.70), (-0.09, 0.44, 0.68),
+         (0.08, 0.40, 0.75), (0.23, 0.32, 0.84), (0.30, 0.21, 0.79),
+         (0.24, 0.13, 0.69), (0.10, 0.10, 0.63), (-0.06, 0.14, 0.64),
+         (-0.18, 0.23, 0.70), (-0.15, 0.33, 0.77), (-0.03, 0.36, 0.75),
+         (0.06, 0.30, 0.70), (-0.02, 0.25, 0.68)],
+        0.047, intestine_mat, collection,
+        radii=[0.86, 0.94, 1.03, 0.97, 1.05, 0.96, 1.02, 0.95, 1.04,
+               0.96, 1.0, 0.93, 1.02, 0.96, 1.01, 0.92, 0.86],
+        tangent_scale=0.14, curve_resolution=12, bevel_resolution=7)
+    jejunum["procedural_form"] = "compact_irregular_intestinal_coils"
+    jejunum["anatomical_relation"] = "continuous_from_duodenum_to_meckels_landmark"
+    ileum = tube(
+        "ileum",
+        [(-0.02, 0.25, 0.68), (0.035, 0.24, 0.65), (0.11, 0.27, 0.61),
+         (0.18, 0.33, 0.59), (0.18, 0.39, 0.59), (0.11, 0.43, 0.62)],
+        0.045, intestine_mat, collection,
+        radii=[0.88, 0.96, 1.0, 0.95, 0.91, 0.84],
+        tangent_scale=0.16, curve_resolution=12, bevel_resolution=7)
+    ileum["procedural_form"] = "short_tapered_distal_small_intestine"
+    ileum["anatomical_relation"] = "meckels_landmark_to_ileocecal_junction"
+    meckel = tube(
+        "meckels_diverticulum",
+        [(-0.02, 0.25, 0.68), (-0.065, 0.255, 0.73),
+         (-0.105, 0.27, 0.79), (-0.095, 0.285, 0.83)],
+        0.039, landmark_mat, collection,
+        radii=[0.70, 1.0, 0.72, 0.08], tangent_scale=0.16,
+        curve_resolution=12, bevel_resolution=7)
+    meckel["procedural_form"] = "blind_tapered_embryonic_diverticulum"
+    meckel["anatomical_relation"] = "branches_at_jejunum_ileum_transition"
     ceca_l = tube("ceca_l", [(0.09, 0.42, 0.63), (-0.02, 0.45, 0.65), (-0.18, 0.46, 0.72),
                                   (-0.29, 0.42, 0.86), (-0.30, 0.39, 0.98)],
                   0.043, intestine_mat, collection, radii=[0.82, 1.08, 1.15, 0.82, 0.22])
