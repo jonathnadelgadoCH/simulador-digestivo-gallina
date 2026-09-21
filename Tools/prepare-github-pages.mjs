@@ -16,6 +16,49 @@ if (destination === workspace || !destination.startsWith(`${workspace}${path.sep
 const sourceIndex = path.join(source, "index.html");
 await fs.access(sourceIndex);
 
+const forbiddenSourceExtensions = new Set([
+  ".asmdef",
+  ".blend",
+  ".cs",
+  ".meta",
+  ".pdb",
+  ".py",
+  ".pyc",
+]);
+
+async function collectForbiddenFiles(directory, root = directory) {
+  const forbidden = [];
+  const entries = await fs.readdir(directory, { withFileTypes: true });
+  for (const entry of entries) {
+    const fullPath = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      if (entry.name.includes("BurstDebugInformation_DoNotShip")) {
+        if (root !== source) forbidden.push(path.relative(root, fullPath));
+        continue;
+      }
+      forbidden.push(...await collectForbiddenFiles(fullPath, root));
+      continue;
+    }
+
+    const lowerName = entry.name.toLowerCase();
+    if (
+      forbiddenSourceExtensions.has(path.extname(lowerName))
+      || lowerName.endsWith(".symbols.json")
+      || lowerName.endsWith(".map")
+    ) {
+      forbidden.push(path.relative(root, fullPath));
+    }
+  }
+  return forbidden;
+}
+
+const forbiddenAtSource = await collectForbiddenFiles(source);
+if (forbiddenAtSource.length > 0) {
+  throw new Error(
+    `El build contiene fuentes, símbolos o mapas que no deben publicarse:\n${forbiddenAtSource.join("\n")}`,
+  );
+}
+
 await fs.rm(destination, { recursive: true, force: true });
 await fs.cp(source, destination, {
   recursive: true,
@@ -57,9 +100,24 @@ const deployIndex = originalIndex
   .replaceAll("WebGLBuild.wasm.unityweb", "WebGLBuild.wasm")
   .replaceAll("WebGLBuild.data.gz", "WebGLBuild.data")
   .replaceAll("WebGLBuild.framework.js.gz", "WebGLBuild.framework.js")
-  .replaceAll("WebGLBuild.wasm.gz", "WebGLBuild.wasm");
+  .replaceAll("WebGLBuild.wasm.gz", "WebGLBuild.wasm")
+  .replace(
+    /<head>/i,
+    `<head>
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; worker-src 'self' blob:; connect-src 'self' blob: data:; img-src 'self' data: blob:; media-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:">`,
+  );
 await fs.writeFile(indexPath, deployIndex);
 await fs.writeFile(path.join(destination, ".nojekyll"), "");
+await fs.writeFile(
+  path.join(destination, "_headers"),
+  `/*
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'none'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; worker-src 'self' blob:; connect-src 'self' blob: data:; img-src 'self' data: blob:; media-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:
+  Referrer-Policy: no-referrer
+  X-Content-Type-Options: nosniff
+  Permissions-Policy: camera=(), geolocation=(), microphone=(), payment=(), usb=()
+`,
+);
 
 const required = [
   "index.html",
@@ -74,6 +132,13 @@ for (const relativePath of required) {
 }
 if (deployIndex.includes(".gz") || deployIndex.includes(".unityweb")) {
   throw new Error("index.html todavía contiene referencias a contenido comprimido.");
+}
+
+const forbiddenAtDestination = await collectForbiddenFiles(destination);
+if (forbiddenAtDestination.length > 0) {
+  throw new Error(
+    `El artefacto preparado contiene archivos no publicables:\n${forbiddenAtDestination.join("\n")}`,
+  );
 }
 
 console.log(`Artefacto GitHub Pages preparado en ${destination}`);

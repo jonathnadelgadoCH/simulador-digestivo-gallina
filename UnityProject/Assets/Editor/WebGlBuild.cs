@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -19,6 +20,7 @@ namespace DigestiveSimulator.Editor
             PlayerSettings.WebGL.decompressionFallback = true;
             // El proyecto crea colliders, primitivas y AudioSource durante la ejecución.
             PlayerSettings.stripEngineCode = false;
+            ConfigureProductionProtection();
             PrepareBuildSupportMaterials();
 
             var scenes = EditorBuildSettings.scenes
@@ -43,7 +45,43 @@ namespace DigestiveSimulator.Editor
             if (report.summary.result != BuildResult.Succeeded)
                 throw new BuildFailedException($"Falló el build WebGL: {report.summary.result}");
 
+            ValidateProductionOutput(outputPath);
             Debug.Log($"Build WebGL generado en {outputPath} ({report.summary.totalSize} bytes).");
+        }
+
+        private static void ConfigureProductionProtection()
+        {
+            // Un build WebGL siempre debe enviar código compilado al navegador. Estas
+            // opciones evitan acompañarlo con símbolos, nombres de pila y diagnósticos
+            // que facilitan reconstruir la implementación desde DevTools.
+            PlayerSettings.WebGL.debugSymbolMode = WebGLDebugSymbolMode.Off;
+            PlayerSettings.WebGL.exceptionSupport = WebGLExceptionSupport.ExplicitlyThrownExceptionsOnly;
+            PlayerSettings.WebGL.showDiagnostics = false;
+
+            foreach (LogType logType in Enum.GetValues(typeof(LogType)))
+                PlayerSettings.SetStackTraceLogType(logType, StackTraceLogType.None);
+        }
+
+        private static void ValidateProductionOutput(string outputPath)
+        {
+            var forbiddenFiles = Directory
+                .EnumerateFiles(outputPath, "*", SearchOption.AllDirectories)
+                .Where(path =>
+                {
+                    var extension = Path.GetExtension(path).ToLowerInvariant();
+                    return extension == ".map"
+                        || extension == ".pdb"
+                        || extension == ".cs"
+                        || extension == ".py"
+                        || path.EndsWith(".symbols.json", StringComparison.OrdinalIgnoreCase);
+                })
+                .Select(path => Path.GetRelativePath(outputPath, path))
+                .ToArray();
+
+            if (forbiddenFiles.Length > 0)
+                throw new BuildFailedException(
+                    "El build contiene archivos de desarrollo que no deben publicarse:\n"
+                    + string.Join("\n", forbiddenFiles));
         }
 
         private static void PrepareBuildSupportMaterials()
