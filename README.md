@@ -26,6 +26,8 @@ El modelo actual sirve para validar el pipeline técnico y todavía requiere rev
 
 Consulte [Documentation/ARCHITECTURE.md](Documentation/ARCHITECTURE.md) para el diseño y el orden de implementación.
 
+La explicación detallada del generador de órganos, los mapas de proceso y la integración Blender → GLB → Unity → WebGL está en [Documentation/MODEL_GENERATION_AND_INTEGRATION.md](Documentation/MODEL_GENERATION_AND_INTEGRATION.md).
+
 El avance, los pendientes y los insumos requeridos están centralizados en [PROJECT_STATUS.md](PROJECT_STATUS.md).
 
 ## Publicación web
