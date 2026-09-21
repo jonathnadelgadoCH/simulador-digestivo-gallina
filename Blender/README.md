@@ -18,6 +18,8 @@ El tercer bloque convierte el yeyuno en un conjunto compacto de asas irregulares
 
 El cuarto bloque alarga los dos ciegos desde un origen ileocecal compartido hasta extremos ciegos afinados, define un colon corto con ensanchamiento progresivo y representa la cloaca mediante tres cámaras solapadas con colores sutilmente diferenciados: coprodeo, urodeo y proctodeo. Las cámaras conservan un único `organId` para selección y el validador comprueba la continuidad ciegos–colon–cloaca.
 
+El quinto bloque sustituye las primitivas del tracto superior por pico superior e inferior afinados, cavidad oral aplanada, lengua puntiaguda, grupos salivales multilobulados, faringe en embudo y esófago cervical continuo hasta el buche. El tracto biliar integra vesícula, conducto hepático y conexión cística, y se valida su continuidad desde el hígado hasta el duodeno.
+
 Regeneración:
 
 ```powershell

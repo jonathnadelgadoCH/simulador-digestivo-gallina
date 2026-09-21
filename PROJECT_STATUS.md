@@ -100,7 +100,7 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 - [x] Prueba del recorrido y la máquina de estados.
 - [x] URP asignado en Graphics Settings.
 - [x] Los GLB contienen 19 objetos de órgano con IDs coincidentes.
-- [x] Presupuesto geométrico validado: 7.196 triángulos exteriores y 105.976 digestivos.
+- [x] Presupuesto geométrico validado: 7.196 triángulos exteriores y 85.132 digestivos.
 - [x] Resolución digestiva elevada hasta 64 segmentos × 48 anillos en órganos redondeados; curvas generales con resolución/bisel 10/6 y duodeno con 18/10.
 - [x] Validación automática de que los órganos del torso permanezcan en la envolvente corporal compacta.
 
@@ -151,10 +151,11 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 - [x] Los órganos del torso fueron reducidos y reubicados dentro del volumen corporal.
 - [x] Buche, molleja y lóbulos hepáticos tienen formas anatómicas asimétricas generadas mediante BMesh, en lugar de elipsoides genéricos.
 - [x] Duodeno, yeyuno e íleon usan tangentes Bézier explícitas para evitar quiebres y solapamientos bruscos.
-- [x] La densidad digestiva aumentó hasta 105.976 triángulos, manteniendo el conjunto completo en 113.172 triángulos.
+- [x] La geometría digestiva quedó optimizada en 85.132 triángulos, manteniendo el conjunto completo en 92.328 triángulos.
 - [x] El duodeno forma un asa descendente–ascendente continua de 9.504 triángulos alrededor de un páncreas alargado y lobulado de 6.160 triángulos.
 - [x] El yeyuno forma asas irregulares de 6.944 triángulos, el íleon se afina hacia la unión ileocecal con 2.192 y el divertículo de Meckel es una rama ciega de 1.328.
 - [x] Los ciegos pares alcanzan 6.112 triángulos, el colon 1.760 y la cloaca 4.968 distribuidos en coprodeo, urodeo y proctodeo.
+- [x] Pico, cavidad oral, lengua, glándulas salivales, faringe y esófago tienen formas específicas y continuidad validada; el tracto biliar integra vesícula y conductos.
 - [x] Escala, rotaciones, pivotes, normales, UV, materiales y nombres se validan después de reimportar los GLB.
 - [ ] La forma, posición y proporción anatómica todavía requieren revisión especializada.
 
@@ -165,7 +166,7 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 | Diecinueve órganos separados | Terminado técnicamente; pendiente revisión anatómica |
 | Compactación dentro del cuerpo | Terminada y validada automáticamente |
 | Exportación e integración GLB | Terminada |
-| Calidad de malla para WebGL | Validada con 113.172 triángulos totales tras el cuarto bloque de remodelación |
+| Calidad de malla para WebGL | Validada con 92.328 triángulos totales tras el quinto bloque de remodelación |
 | Transparencia y selección en Unity | Pendiente de prueba interactiva |
 
 ## Pendiente — prioridad alta
@@ -189,6 +190,7 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 - [x] Segundo bloque anatómico: asa duodenal descendente–ascendente y páncreas alargado con cuatro lóbulos glandulares.
 - [x] Tercer bloque anatómico: asas yeyunales irregulares, íleon afinado y divertículo de Meckel como rama ciega.
 - [x] Cuarto bloque anatómico: ciegos pares alargados, colon continuo y cloaca dividida visualmente en tres regiones.
+- [x] Quinto bloque anatómico: tracto superior continuo y sistema biliar con vesícula y conductos diferenciados.
 - [x] Corregir y validar escala, pivotes, normales, UV y nombres.
 - [x] Mantener polígonos y materiales dentro del presupuesto técnico para WebGL.
 - [x] Exportar `model.glb` y `digestive_system.glb`.

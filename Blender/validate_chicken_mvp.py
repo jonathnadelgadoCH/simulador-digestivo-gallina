@@ -14,6 +14,12 @@ COMPACT_TORSO_ORGANS = EXPECTED_ORGANS - {
     "beak", "oral_cavity", "tongue", "salivary_glands", "pharynx", "esophagus"
 }
 REMODELED_MIN_TRIANGLES = {
+    "beak": 2500,
+    "oral_cavity": 1700,
+    "tongue": 1400,
+    "salivary_glands": 2800,
+    "pharynx": 1400,
+    "esophagus": 2200,
     "crop": 5000,
     "proventriculus": 4000,
     "gizzard": 7000,
@@ -26,6 +32,7 @@ REMODELED_MIN_TRIANGLES = {
     "ceca": 5000,
     "colon": 1500,
     "cloaca": 4000,
+    "biliary_tract": 2000,
 }
 
 
@@ -115,6 +122,14 @@ def require_bounds_contact(first_name, second_name, margin=0.025):
 
 
 require_bounds_contact("duodenum", "jejunum")
+require_bounds_contact("beak", "oral_cavity")
+require_bounds_contact("oral_cavity", "tongue")
+require_bounds_contact("oral_cavity", "salivary_glands")
+require_bounds_contact("oral_cavity", "pharynx")
+require_bounds_contact("pharynx", "esophagus")
+require_bounds_contact("esophagus", "crop")
+require_bounds_contact("liver", "biliary_tract")
+require_bounds_contact("biliary_tract", "duodenum")
 require_bounds_contact("jejunum", "ileum")
 require_bounds_contact("jejunum", "meckels_diverticulum")
 require_bounds_contact("ileum", "ceca")
@@ -132,3 +147,5 @@ print("Mesh quality validation passed: transforms, pivots, normals, UVs and mate
 print("Anatomical relation passed: pancreas remains centered within the duodenal loop.")
 print("Intestinal continuity passed: duodenum, jejunum, ileum, Meckel landmark and ceca overlap at their transitions.")
 print("Terminal tract continuity passed: paired ceca, colon and three-region cloaca remain connected.")
+print("Upper tract continuity passed: beak, oral structures, pharynx, esophagus and crop remain connected.")
+print("Biliary continuity passed: gallbladder and ducts bridge liver to duodenum.")

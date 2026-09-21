@@ -126,7 +126,7 @@ La exportación usa `export_yup=True`. Blender convierte la orientación al conv
 | Límite automático digestivo | 120.000 triángulos | Se aplica al GLB digestivo completo. |
 | Límite automático exterior | 120.000 triángulos | Se aplica por separado al GLB exterior. |
 
-El modelo actual utiliza 105.976 triángulos digestivos y 7.196 exteriores. Quedan aproximadamente 14.024 triángulos disponibles dentro del límite digestivo automático.
+El modelo actual utiliza 85.132 triángulos digestivos y 7.196 exteriores. Quedan aproximadamente 34.868 triángulos disponibles dentro del límite digestivo automático.
 
 ## Generador de Blender
 
@@ -161,12 +161,14 @@ Esta limpieza vuelve el proceso reproducible: ejecutar el script dos veces no du
 | `material()` | Nombre, RGB, alfa, metalizado y rugosidad | Material Principled BSDF | Todos los componentes. |
 | `move_to_collection()` | Objeto y colección | Objeto movido sin duplicar enlaces | Primitivas creadas por operadores de Blender. |
 | `ellipsoid()` | Posición, escala, material, segmentos y anillos | Esfera UV escalada | Órganos todavía esquemáticos y partes exteriores. |
-| `build_profiled_mesh()` | Perfil matemático, segmentos radiales y longitudinales | Superficie cerrada por anillos | Buche y proventrículo. |
+| `build_profiled_mesh()` | Perfil matemático, segmentos radiales y longitudinales | Superficie cerrada por anillos | Buche, proventrículo, tracto superior, glándulas y vesícula. |
 | `tube()` | Puntos, radio, multiplicadores y tangentes | Tubo Bézier convertido a malla | Esófago, intestino, conductos y conexiones. |
 | `cone()` | Posición, escala y rotación | Cono de 16 lados | Pico exterior y plumas de cola. |
 | `join()` | Lista de objetos | Una sola malla con un solo nombre | Lóbulos, pares y regiones que deben compartir `organId`. |
 | `finalize_collection()` | Colección y rol | Mallas normalizadas para GLB | Exterior y aparato digestivo. |
 | `export_collection()` | Colección y ruta | Archivo GLB binario | Exportación final. |
+
+Las funciones anatómicas especializadas incluyen `build_beak_mesh()`, `build_oral_cavity_mesh()`, `build_tongue_mesh()`, `build_salivary_glands_mesh()`, `build_pharynx_mesh()` y `build_biliary_tract_mesh()`. `rotation_between()` orienta perfiles generados sobre un eje definido por dos puntos anatómicos.
 
 ### Cómo funciona `build_profiled_mesh()`
 
@@ -275,26 +277,26 @@ Algunos órganos se construyen con varias piezas y después se unen:
 
 | `organId` | Método geométrico | Rasgo representado | Triángulos |
 |---|---|---|---:|
-| `beak` | Elipsoide UV | Entrada oral interna | 6.016 |
-| `oral_cavity` | Elipsoide UV | Cavidad oral | 6.016 |
-| `tongue` | Elipsoide aplanado | Lengua | 6.016 |
-| `salivary_glands` | Dos elipsoides unidos | Par glandular | 12.032 |
-| `pharynx` | Elipsoide | Transición orofaríngea | 6.016 |
-| `esophagus` | Tubo Bézier | Conducto cervical continuo | 1.308 |
+| `beak` | Dos perfiles afinados unidos | Pico superior e inferior | 3.024 |
+| `oral_cavity` | Perfil longitudinal aplanado | Cavidad oral hacia la faringe | 1.840 |
+| `tongue` | Perfil estrecho con relieve dorsal | Lengua puntiaguda | 1.512 |
+| `salivary_glands` | Seis lóbulos unidos | Grupos glandulares bilaterales | 3.744 |
+| `pharynx` | Perfil longitudinal cónico | Embudo orofaríngeo | 1.512 |
+| `esophagus` | Tubo Bézier de siete puntos | Conducto cervical continuo | 2.624 |
 | `crop` | Perfil longitudinal | Dilatación lateral dependiente | 6.016 |
 | `proventriculus` | Perfil fusiforme | Estómago glandular | 4.368 |
 | `gizzard` | BMesh más dos cuellos | Disco muscular biconvexo | 7.464 |
 | `duodenum` | Tubo Bézier de alta resolución | Asa descendente y ascendente | 9.548 |
 | `pancreas` | Núcleo tubular más cuatro lóbulos | Glándula alargada dentro del asa | 6.196 |
 | `liver` | Dos lóbulos BMesh | Hígado aviar bilobulado | 11.008 |
-| `biliary_tract` | Tubo Bézier fino | Conexión hepatoduodenal | 668 |
+| `biliary_tract` | Vesícula perfilada más dos conductos | Conexión hepatoduodenal ramificada | 2.972 |
 | `jejunum` | Tubo Bézier con 17 puntos | Asas intestinales irregulares | 6.944 |
 | `ileum` | Tubo Bézier afinado | Tramo distal a unión ileocecal | 2.192 |
 | `meckels_diverticulum` | Rama tubular ciega | Hito yeyuno-ileal | 1.328 |
 | `ceca` | Dos tubos largos unidos | Ciegos pares con extremos afinados | 6.112 |
 | `colon` | Tubo corto ensanchado | Recuperación de agua y tránsito | 1.760 |
 | `cloaca` | Tres cámaras BMesh unidas | Coprodeo, urodeo y proctodeo | 4.968 |
-| **Total digestivo** | 19 objetos | Un objeto por ID oficial | **105.976** |
+| **Total digestivo** | 19 objetos | Un objeto por ID oficial | **85.132** |
 
 ### Bloques anatómicos implementados
 
@@ -312,6 +314,10 @@ flowchart TB
     D[Bloque 4] --> D1[Ciegos pares]
     D --> D2[Colon]
     D --> D3[Cloaca en tres regiones]
+    E[Bloque 5] --> E1[Pico y cavidad oral]
+    E --> E2[Lengua y glándulas salivales]
+    E --> E3[Faringe y esófago]
+    E --> E4[Vesícula y conductos biliares]
 ```
 
 ### Ruta anatómica principal

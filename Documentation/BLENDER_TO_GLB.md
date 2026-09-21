@@ -18,8 +18,8 @@ Los órganos redondeados de alta resolución usan hasta 64 segmentos × 48 anill
 Conteo validado el 20 de septiembre de 2026:
 
 - Exterior: 7.196 triángulos.
-- Aparato digestivo: 105.976 triángulos.
-- Total combinado: 113.172 triángulos. El límite automático de 120.000 se aplica por separado a cada GLB.
+- Aparato digestivo: 85.132 triángulos.
+- Total combinado: 92.328 triángulos. El límite automático de 120.000 se aplica por separado a cada GLB.
 
 La documentación completa de funciones, órganos, IDs, validaciones, integración con Unity y publicación está en [MODEL_GENERATION_AND_INTEGRATION.md](MODEL_GENERATION_AND_INTEGRATION.md).
 

@@ -374,6 +374,150 @@ def build_cloaca_mesh(name, collection, materials):
     return cloaca
 
 
+def rotation_between(start, end):
+    """Return midpoint, length and rotation aligning local Z to an anatomical axis."""
+    start_vector = Vector(start)
+    end_vector = Vector(end)
+    direction = end_vector - start_vector
+    rotation = Vector((0.0, 0.0, 1.0)).rotation_difference(direction.normalized()).to_euler()
+    return (start_vector + end_vector) * 0.5, direction.length, rotation
+
+
+def build_beak_mesh(name, mat, collection):
+    """Build joined upper and lower tapered rhamphothecal elements."""
+    def beak_profile(t):
+        envelope = math.sin(math.pi * t) ** 0.46
+        taper = 1.0 - 0.34 * t
+        center_x = 0.018 * math.sin(math.pi * t)
+        center_y = 0.025 * math.sin(math.pi * t)
+        z = -1.0 + 2.0 * t
+        return center_x, center_y, z, envelope * taper, envelope * (0.42 - 0.10 * t)
+
+    midpoint, length, rotation = rotation_between((0.0, -1.055, 2.63), (0.0, -1.355, 2.63))
+    upper = build_profiled_mesh(
+        name + "_upper", midpoint + Vector((0.0, 0.0, 0.038)),
+        (0.185, 0.092, length * 0.5), rotation, mat, collection, beak_profile,
+        radial_segments=36, longitudinal_segments=22)
+    lower = build_profiled_mesh(
+        name + "_lower", midpoint + Vector((0.0, 0.0, -0.034)),
+        (0.165, 0.075, length * 0.5), rotation, mat, collection, beak_profile,
+        radial_segments=36, longitudinal_segments=22)
+    beak = join(name, [upper, lower])
+    beak["procedural_form"] = "paired_tapered_upper_and_lower_beak"
+    beak["anatomical_relation"] = "continuous_with_oral_cavity"
+    return beak
+
+
+def build_oral_cavity_mesh(name, mat, collection):
+    """Build a dorsoventrally flattened cavity from beak base to pharynx."""
+    def oral_profile(t):
+        envelope = math.sin(math.pi * t) ** 0.58
+        caudal_bulge = math.exp(-((t - 0.68) / 0.28) ** 2)
+        center_x = 0.018 * math.sin(math.tau * t)
+        center_y = -0.035 * math.sin(math.pi * t)
+        z = -1.0 + 2.0 * t
+        return center_x, center_y, z, envelope * (0.78 + 0.18 * caudal_bulge), envelope * 0.48
+
+    midpoint, length, rotation = rotation_between((0.0, -1.075, 2.615), (0.0, -0.755, 2.53))
+    cavity = build_profiled_mesh(
+        name, midpoint, (0.205, 0.125, length * 0.5), rotation, mat, collection,
+        oral_profile, radial_segments=40, longitudinal_segments=24)
+    cavity["procedural_form"] = "flattened_oropharyngeal_cavity"
+    cavity["anatomical_relation"] = "beak_base_to_pharyngeal_funnel"
+    return cavity
+
+
+def build_tongue_mesh(name, mat, collection):
+    """Build a narrow pointed tongue with a subtle dorsal ridge."""
+    def tongue_profile(t):
+        envelope = math.sin(math.pi * t) ** 0.52
+        caudal_root = 0.72 + 0.30 * (1.0 - t)
+        center_x = 0.0
+        center_y = 0.11 * math.sin(math.pi * t) ** 2
+        z = -1.0 + 2.0 * t
+        return center_x, center_y, z, envelope * caudal_root, envelope * 0.38
+
+    midpoint, length, rotation = rotation_between((0.0, -0.815, 2.555), (0.0, -1.085, 2.555))
+    tongue = build_profiled_mesh(
+        name, midpoint, (0.092, 0.052, length * 0.5), rotation, mat, collection,
+        tongue_profile, radial_segments=36, longitudinal_segments=22)
+    tongue["procedural_form"] = "narrow_pointed_tongue_with_dorsal_ridge"
+    tongue["anatomical_relation"] = "seated_on_oral_floor"
+    return tongue
+
+
+def build_salivary_glands_mesh(name, mat, collection):
+    """Build bilateral compact clusters instead of two generic spheres."""
+    def gland_profile(t):
+        envelope = math.sin(math.pi * t) ** 0.66
+        lobulation = 1.0 + 0.12 * math.sin(3.0 * math.pi * t) * envelope
+        return 0.025 * math.sin(math.tau * t) * envelope, 0.0, -1.0 + 2.0 * t, envelope * lobulation, envelope * 0.72
+
+    lobules = []
+    for side, x in (("l", -0.145), ("r", 0.145)):
+        for index, (y, z, scale) in enumerate((
+            (-0.895, 2.600, (0.048, 0.035, 0.070)),
+            (-0.845, 2.570, (0.043, 0.032, 0.060)),
+            (-0.805, 2.535, (0.037, 0.029, 0.052)),
+        )):
+            lobules.append(build_profiled_mesh(
+                f"{name}_{side}_{index}", (x, y, z), scale,
+                (math.radians(10 * (-1 if side == "l" else 1)), math.radians(8), 0.0),
+                mat, collection, gland_profile, radial_segments=24, longitudinal_segments=14))
+    glands = join(name, lobules)
+    glands["procedural_form"] = "bilateral_multilobular_salivary_clusters"
+    glands["anatomical_relation"] = "lateral_to_oral_cavity"
+    return glands
+
+
+def build_pharynx_mesh(name, mat, collection):
+    """Build a funnel-shaped transition from oral cavity into esophagus."""
+    def pharynx_profile(t):
+        envelope = math.sin(math.pi * t) ** 0.62
+        oral_width = 1.0 - 0.28 * t
+        center_x = 0.0
+        center_y = -0.025 * math.sin(math.pi * t)
+        z = -1.0 + 2.0 * t
+        return center_x, center_y, z, envelope * oral_width, envelope * (0.78 - 0.18 * t)
+
+    midpoint, length, rotation = rotation_between((0.0, -0.765, 2.535), (0.0, -0.610, 2.430))
+    pharynx = build_profiled_mesh(
+        name, midpoint, (0.135, 0.115, length * 0.5), rotation, mat, collection,
+        pharynx_profile, radial_segments=36, longitudinal_segments=22)
+    pharynx["procedural_form"] = "tapered_pharyngeal_funnel"
+    pharynx["anatomical_relation"] = "oral_cavity_to_esophagus"
+    return pharynx
+
+
+def build_biliary_tract_mesh(name, mat, collection):
+    """Build gallbladder, hepatic duct and cystic connection as one selectable organ."""
+    def gallbladder_profile(t):
+        envelope = math.sin(math.pi * t) ** 0.58
+        fundus = math.exp(-((t - 0.35) / 0.28) ** 2)
+        neck_taper = 0.92 - 0.34 * max(0.0, t - 0.62)
+        return 0.05 * fundus, 0.0, -1.0 + 2.0 * t, envelope * neck_taper * (0.72 + 0.30 * fundus), envelope * 0.72
+
+    gallbladder = build_profiled_mesh(
+        name + "_gallbladder", (0.275, -0.015, 1.315), (0.052, 0.040, 0.115),
+        (math.radians(-6), math.radians(8), math.radians(-5)), mat, collection,
+        gallbladder_profile, radial_segments=28, longitudinal_segments=18)
+    hepatic_duct = tube(
+        name + "_hepatic_duct",
+        [(0.145, -0.025, 1.38), (0.19, 0.015, 1.29),
+         (0.225, 0.045, 1.18), (0.255, 0.075, 1.10), (0.295, 0.10, 1.035)],
+        0.017, mat, collection, radii=[0.72, 0.92, 1.0, 0.94, 0.78],
+        tangent_scale=0.17, curve_resolution=11, bevel_resolution=6)
+    cystic_duct = tube(
+        name + "_cystic_duct",
+        [(0.275, -0.010, 1.245), (0.255, 0.015, 1.205), (0.225, 0.045, 1.18)],
+        0.014, mat, collection, radii=[0.62, 0.90, 0.74],
+        tangent_scale=0.16, curve_resolution=10, bevel_resolution=5)
+    biliary = join(name, [gallbladder, hepatic_duct, cystic_duct])
+    biliary["procedural_form"] = "gallbladder_with_hepatic_and_cystic_ducts"
+    biliary["anatomical_relation"] = "liver_to_duodenal_entry"
+    return biliary
+
+
 def organic_lobe(name, location, scale, rotation, mat, collection, taper=0.18):
     """Asymmetric lobe used for liver and glandular organs."""
     obj = ellipsoid(name, location, scale, mat, collection)
@@ -479,17 +623,21 @@ def build_digestive(collection):
     cloaca_urodeum_mat = material("Organ_Cloaca_Urodeum", (0.86, 0.38, 0.45))
     cloaca_proctodeum_mat = material("Organ_Cloaca_Proctodeum", (0.70, 0.24, 0.34))
 
-    ellipsoid("beak", (0, -1.24, 2.63), (0.20, 0.25, 0.12), oral_mat, collection)
-    ellipsoid("oral_cavity", (0, -0.92, 2.61), (0.21, 0.25, 0.15), oral_mat, collection)
-    ellipsoid("tongue", (0, -0.96, 2.56), (0.09, 0.19, 0.045), tract_mat, collection)
-    join("salivary_glands", [
-        ellipsoid("salivary_l", (-0.14, -0.86, 2.58), (0.05, 0.09, 0.06), pancreas_mat, collection),
-        ellipsoid("salivary_r", (0.14, -0.86, 2.58), (0.05, 0.09, 0.06), pancreas_mat, collection),
-    ])
-    ellipsoid("pharynx", (0, -0.69, 2.48), (0.13, 0.14, 0.17), tract_mat, collection)
-    tube("esophagus", [(0, -0.62, 2.43), (-0.015, -0.57, 2.31), (0.0, -0.51, 2.18),
-                       (0.035, -0.47, 2.05), (0.10, -0.42, 1.91)],
-         0.052, tract_mat, collection, radii=[0.82, 0.96, 1.02, 1.05, 1.12])
+    build_beak_mesh("beak", oral_mat, collection)
+    build_oral_cavity_mesh("oral_cavity", oral_mat, collection)
+    build_tongue_mesh("tongue", tract_mat, collection)
+    build_salivary_glands_mesh("salivary_glands", pancreas_mat, collection)
+    build_pharynx_mesh("pharynx", tract_mat, collection)
+    esophagus = tube(
+        "esophagus",
+        [(0.0, -0.61, 2.43), (-0.010, -0.585, 2.34), (-0.005, -0.545, 2.24),
+         (0.010, -0.505, 2.14), (0.035, -0.475, 2.05),
+         (0.070, -0.445, 1.97), (0.105, -0.425, 1.91)],
+        0.049, tract_mat, collection,
+        radii=[0.76, 0.88, 0.96, 1.0, 1.03, 1.08, 1.12],
+        tangent_scale=0.17, curve_resolution=12, bevel_resolution=7)
+    esophagus["procedural_form"] = "slender_curved_cervical_esophagus"
+    esophagus["anatomical_relation"] = "pharynx_to_crop"
     # The avian crop is a compliant, asymmetric diverticulum rather than a ball.
     crop = build_crop_mesh("crop", (0.15, -0.43, 1.87), (0.25, 0.205, 0.30),
                            (math.radians(-8), math.radians(12), math.radians(-10)),
@@ -534,7 +682,7 @@ def build_digestive(collection):
         build_liver_lobe("liver_r", (0.265, -0.075, 1.49), (0.295, 0.215, 0.375),
                          (math.radians(4), math.radians(10), math.radians(-6)), liver_mat, collection, False),
     ])
-    tube("biliary_tract", [(0.15, -0.02, 1.35), (0.24, 0.05, 1.14), (0.30, 0.10, 1.03)], 0.022, bile_mat, collection)
+    build_biliary_tract_mesh("biliary_tract", bile_mat, collection)
     jejunum = tube(
         "jejunum",
         [(-0.02, 0.12, 0.91), (-0.16, 0.15, 0.93), (-0.29, 0.23, 0.88),
