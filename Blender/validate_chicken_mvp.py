@@ -23,6 +23,9 @@ REMODELED_MIN_TRIANGLES = {
     "jejunum": 5000,
     "ileum": 1500,
     "meckels_diverticulum": 800,
+    "ceca": 5000,
+    "colon": 1500,
+    "cloaca": 4000,
 }
 
 
@@ -115,6 +118,8 @@ require_bounds_contact("duodenum", "jejunum")
 require_bounds_contact("jejunum", "ileum")
 require_bounds_contact("jejunum", "meckels_diverticulum")
 require_bounds_contact("ileum", "ceca")
+require_bounds_contact("ceca", "colon")
+require_bounds_contact("colon", "cloaca")
 print(f"Exterior: {len(exterior)} meshes, {exterior_vertices} vertices, {exterior_triangles} triangles")
 print(f"Digestive: {len(digestive)} meshes, {digestive_vertices} vertices, {digestive_triangles} triangles")
 if digestive_triangles > 120000 or exterior_triangles > 120000:
@@ -126,3 +131,4 @@ print("Compactness validation passed: all torso organs remain inside the body en
 print("Mesh quality validation passed: transforms, pivots, normals, UVs and materials are valid.")
 print("Anatomical relation passed: pancreas remains centered within the duodenal loop.")
 print("Intestinal continuity passed: duodenum, jejunum, ileum, Meckel landmark and ceca overlap at their transitions.")
+print("Terminal tract continuity passed: paired ceca, colon and three-region cloaca remain connected.")

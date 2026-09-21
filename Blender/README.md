@@ -16,6 +16,8 @@ El segundo bloque define el duodeno como un asa continua descendente–ascendent
 
 El tercer bloque convierte el yeyuno en un conjunto compacto de asas irregulares, afina progresivamente el íleon hacia la unión ileocecal y modela el divertículo de Meckel como una rama ciega en la transición yeyuno–íleon. Las curvas cierran ahora sus extremos y el validador comprueba contacto espacial entre duodeno, yeyuno, íleon, divertículo y ciegos.
 
+El cuarto bloque alarga los dos ciegos desde un origen ileocecal compartido hasta extremos ciegos afinados, define un colon corto con ensanchamiento progresivo y representa la cloaca mediante tres cámaras solapadas con colores sutilmente diferenciados: coprodeo, urodeo y proctodeo. Las cámaras conservan un único `organId` para selección y el validador comprueba la continuidad ciegos–colon–cloaca.
+
 Regeneración:
 
 ```powershell

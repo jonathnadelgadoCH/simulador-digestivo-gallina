@@ -334,6 +334,46 @@ def build_pancreas_mesh(name, points, mat, collection):
     return pancreas
 
 
+def build_cloaca_region(name, location, scale, mat, collection, region_index):
+    """Create one externally distinguishable chamber of the avian cloaca."""
+    mesh = bpy.data.meshes.new(name + "_mesh")
+    bm = bmesh.new()
+    bmesh.ops.create_uvsphere(bm, u_segments=36, v_segments=24, radius=1.0)
+    for vertex in bm.verts:
+        x, y, z = vertex.co
+        equator = max(0.0, 1.0 - y * y)
+        asymmetry = 0.05 * math.sin((region_index + 1) * math.pi * (z + 1.0) * 0.5)
+        vertex.co.x = x * (0.92 + 0.12 * equator) + asymmetry * equator
+        vertex.co.y = y * (0.94 + 0.06 * max(0.0, -z))
+        vertex.co.z = z * (0.88 + 0.10 * equator)
+    bm.normal_update()
+    bm.to_mesh(mesh)
+    bm.free()
+    obj = bpy.data.objects.new(name, mesh)
+    obj.location = location
+    obj.scale = scale
+    collection.objects.link(obj)
+    obj.data.materials.append(mat)
+    obj["cloacal_region_index"] = region_index
+    return obj
+
+
+def build_cloaca_mesh(name, collection, materials):
+    """Build three joined chambers while preserving one selectable organ ID."""
+    regions = [
+        build_cloaca_region(name + "_coprodeum", (0.055, 0.690, 0.645),
+                            (0.100, 0.090, 0.100), materials[0], collection, 0),
+        build_cloaca_region(name + "_urodeum", (0.030, 0.770, 0.660),
+                            (0.108, 0.092, 0.108), materials[1], collection, 1),
+        build_cloaca_region(name + "_proctodeum", (0.000, 0.850, 0.675),
+                            (0.114, 0.088, 0.105), materials[2], collection, 2),
+    ]
+    cloaca = join(name, regions)
+    cloaca["procedural_form"] = "three_overlapping_cloacal_chambers"
+    cloaca["visible_regions"] = "coprodeum_urodeum_proctodeum"
+    return cloaca
+
+
 def organic_lobe(name, location, scale, rotation, mat, collection, taper=0.18):
     """Asymmetric lobe used for liver and glandular organs."""
     obj = ellipsoid(name, location, scale, mat, collection)
@@ -435,6 +475,9 @@ def build_digestive(collection):
     pancreas_mat = material("Organ_Pancreas", (0.94, 0.72, 0.32))
     bile_mat = material("Organ_Bile", (0.24, 0.48, 0.12))
     landmark_mat = material("Organ_Landmark", (0.32, 0.66, 0.88))
+    cloaca_coprodeum_mat = material("Organ_Cloaca_Coprodeum", (0.78, 0.30, 0.39))
+    cloaca_urodeum_mat = material("Organ_Cloaca_Urodeum", (0.86, 0.38, 0.45))
+    cloaca_proctodeum_mat = material("Organ_Cloaca_Proctodeum", (0.70, 0.24, 0.34))
 
     ellipsoid("beak", (0, -1.24, 2.63), (0.20, 0.25, 0.12), oral_mat, collection)
     ellipsoid("oral_cavity", (0, -0.92, 2.61), (0.21, 0.25, 0.15), oral_mat, collection)
@@ -524,15 +567,35 @@ def build_digestive(collection):
         curve_resolution=12, bevel_resolution=7)
     meckel["procedural_form"] = "blind_tapered_embryonic_diverticulum"
     meckel["anatomical_relation"] = "branches_at_jejunum_ileum_transition"
-    ceca_l = tube("ceca_l", [(0.09, 0.42, 0.63), (-0.02, 0.45, 0.65), (-0.18, 0.46, 0.72),
-                                  (-0.29, 0.42, 0.86), (-0.30, 0.39, 0.98)],
-                  0.043, intestine_mat, collection, radii=[0.82, 1.08, 1.15, 0.82, 0.22])
-    ceca_r = tube("ceca_r", [(0.12, 0.43, 0.63), (0.22, 0.46, 0.66), (0.32, 0.46, 0.74),
-                                  (0.36, 0.42, 0.88), (0.34, 0.38, 0.98)],
-                  0.043, intestine_mat, collection, radii=[0.82, 1.08, 1.15, 0.82, 0.22])
-    join("ceca", [ceca_l, ceca_r])
-    tube("colon", [(0.11, 0.43, 0.62), (0.08, 0.55, 0.61), (0.03, 0.66, 0.64)], 0.055, tract_mat, collection)
-    ellipsoid("cloaca", (0.02, 0.72, 0.66), (0.10, 0.12, 0.12), tract_mat, collection)
+    ceca_l = tube(
+        "ceca_l",
+        [(0.09, 0.42, 0.63), (0.03, 0.45, 0.65), (-0.08, 0.47, 0.68),
+         (-0.18, 0.47, 0.75), (-0.27, 0.44, 0.84), (-0.32, 0.39, 0.93),
+         (-0.31, 0.33, 1.01), (-0.27, 0.29, 1.07)],
+        0.041, intestine_mat, collection,
+        radii=[0.78, 0.98, 1.10, 1.15, 1.02, 0.76, 0.43, 0.08],
+        tangent_scale=0.15, curve_resolution=12, bevel_resolution=7)
+    ceca_r = tube(
+        "ceca_r",
+        [(0.12, 0.43, 0.63), (0.20, 0.45, 0.65), (0.29, 0.46, 0.70),
+         (0.36, 0.43, 0.78), (0.39, 0.38, 0.88), (0.38, 0.33, 0.98),
+         (0.34, 0.30, 1.05), (0.30, 0.31, 1.09)],
+        0.041, intestine_mat, collection,
+        radii=[0.78, 0.98, 1.10, 1.14, 1.00, 0.74, 0.40, 0.08],
+        tangent_scale=0.15, curve_resolution=12, bevel_resolution=7)
+    ceca = join("ceca", [ceca_l, ceca_r])
+    ceca["procedural_form"] = "paired_long_blind_cecal_pouches"
+    ceca["anatomical_relation"] = "shared_ileocecal_origin_with_independent_organic_paths"
+    colon = tube(
+        "colon", [(0.11, 0.43, 0.62), (0.10, 0.50, 0.605),
+                  (0.085, 0.56, 0.61), (0.070, 0.62, 0.625), (0.055, 0.68, 0.645)],
+        0.050, tract_mat, collection, radii=[0.86, 0.94, 1.0, 1.04, 0.96],
+        tangent_scale=0.18, curve_resolution=12, bevel_resolution=7)
+    colon["procedural_form"] = "short_slightly_widening_colorectum"
+    colon["anatomical_relation"] = "ileocecal_junction_to_coprodeum"
+    build_cloaca_mesh(
+        "cloaca", collection,
+        (cloaca_coprodeum_mat, cloaca_urodeum_mat, cloaca_proctodeum_mat))
 
 
 def export_collection(collection, filepath):
