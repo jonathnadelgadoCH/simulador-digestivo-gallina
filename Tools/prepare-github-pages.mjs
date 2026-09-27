@@ -65,6 +65,23 @@ await fs.cp(source, destination, {
   filter: (entry) => !entry.includes("UnityProject_BurstDebugInformation_DoNotShip"),
 });
 
+// StreamingAssets contiene datos, modelos y narraciones que no requieren
+// recompilar WebAssembly. Superponer la fuente garantiza que Pages publique
+// la revisión científica y los audios más recientes del repositorio.
+const streamingAssetsSource = path.join(
+  workspace,
+  "UnityProject",
+  "Assets",
+  "StreamingAssets",
+);
+if (source === path.join(workspace, "WebGLBuild")) {
+  await fs.cp(streamingAssetsSource, path.join(destination, "StreamingAssets"), {
+    recursive: true,
+    force: true,
+    filter: (entry) => !entry.toLowerCase().endsWith(".meta"),
+  });
+}
+
 async function expandGzipFiles(directory) {
   const entries = await fs.readdir(directory, { withFileTypes: true });
   for (const entry of entries) {

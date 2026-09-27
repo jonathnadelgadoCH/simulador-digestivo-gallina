@@ -56,19 +56,19 @@
         "organId": "gizzard",
         "durationSeconds": 4,
         "message": "Los arabinoxilanos solubles pueden elevar viscosidad y alterar tránsito.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_wheat_gizzard.mp3"
       },
       {
         "organId": "duodenum",
         "durationSeconds": 5,
         "message": "El trigo libera almidón con rapidez, pero su fracción soluble puede aumentar la viscosidad.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_wheat_duodenum.mp3"
       },
       {
         "organId": "ileum",
         "durationSeconds": 5,
         "message": "Tasa ileal de digestión del almidón observada: 0.117 min⁻¹.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_wheat_ileum.mp3"
       }
     ]
   },

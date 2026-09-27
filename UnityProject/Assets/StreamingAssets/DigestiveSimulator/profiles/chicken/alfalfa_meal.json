@@ -56,19 +56,19 @@
         "organId": "gizzard",
         "durationSeconds": 4,
         "message": "La fibra aumenta volumen y trabajo mecánico, con baja densidad energética.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_alfalfa_meal_gizzard.mp3"
       },
       {
         "organId": "duodenum",
         "durationSeconds": 5,
         "message": "La alfalfa aporta fibra y pigmentos; su inclusión debe ser moderada en aves.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_alfalfa_meal_duodenum.mp3"
       },
       {
         "organId": "ileum",
         "durationSeconds": 5,
         "message": "No se seleccionó un coeficiente ileal comparable; AMEn tabulada para gallos: 3.8 MJ/kg MS.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_alfalfa_meal_ileum.mp3"
       }
     ]
   },

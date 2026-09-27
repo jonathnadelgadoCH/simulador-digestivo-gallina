@@ -56,19 +56,19 @@
         "organId": "gizzard",
         "durationSeconds": 4,
         "message": "La fibra y el grado de descascarado condicionan tránsito y utilización.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_sunflower_meal_gizzard.mp3"
       },
       {
         "organId": "duodenum",
         "durationSeconds": 5,
         "message": "La harina de girasol aporta proteína, pero su fibra puede limitar la digestión.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_sunflower_meal_duodenum.mp3"
       },
       {
         "organId": "ileum",
         "durationSeconds": 5,
         "message": "Digestibilidad ileal aparente media de 15 aminoácidos: 76.7 % sin fitasa.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_sunflower_meal_ileum.mp3"
       }
     ]
   },

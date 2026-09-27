@@ -13,4 +13,6 @@ audio/narration/es-GT/chicken/03_pharynx.mp3
 
 La ruta se registra en `OrganDefinition.narrationFile` o en el `audioFile` de una sobrescritura de etapa dentro de `SpeciesFoodProfile`. Todas las rutas son relativas a `StreamingAssets/DigestiveSimulator/`.
 
+Los archivos con prefijo `food_` son narraciones específicas del alimento. Cada uno de los diez perfiles de gallina sobrescribe el audio general en molleja, duodeno e íleon, de modo que granos, harinas y aceite no describan el mismo comportamiento digestivo.
+
 No se incluyen grabaciones provisionales: el audio debe basarse en el guion científico elaborado y validado por los estudiantes.

@@ -1,6 +1,6 @@
 # Estado del proyecto
 
-Actualizado: 20 de septiembre de 2026
+Actualizado: 27 de septiembre de 2026
 
 ## Resumen ejecutivo
 
@@ -17,7 +17,7 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 | Alimentos | 10 |
 | Perfiles gallina–alimento | 10 |
 | Modelos Blender/GLB | 3 — 1 fuente y 2 exportaciones |
-| Archivos de narración | 15 MP3 integrados; pendientes de aprobación auditiva |
+| Archivos de narración | 45 MP3 integrados: 15 generales y 30 específicos por alimento; pendientes de aprobación auditiva |
 | Referencias normalizadas | 24 |
 | Órganos con primer borrador citado | 19 de 19 |
 | Ingredientes con composición citada | 10 de 10 |
@@ -91,6 +91,7 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 - [x] Pausa, reanudación, silencio y detención.
 - [x] Narración predeterminada por órgano o específica por perfil.
 - [x] Sincronización para esperar el final del audio antes de avanzar.
+- [x] Narración diferenciada en molleja, duodeno e íleon para cinco granos, cuatro harinas y aceite de soya.
 
 ### Verificación técnica
 
@@ -134,8 +135,8 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 
 - [~] El sistema de reproducción está terminado.
 - [x] Guion base en español preparado para introducción, trece etapas digestivas y cierre, con referencias trazables.
-- [x] Generador reproducible basado en Windows SAPI y FFmpeg, con manifiesto editable y validación automática.
-- [~] Quince WAV maestros y quince MP3 WebGL generados con Microsoft Sabina; pendientes de revisión auditiva y aprobación.
+- [x] Generador reproducible compatible con Windows SAPI, Edge TTS y Piper local, con manifiestos editables y validación automática.
+- [~] Quince narraciones anatómicas generales y treinta narraciones específicas por alimento integradas en WebGL; pendientes de revisión auditiva y aprobación.
 - [ ] Faltan créditos de voz y revisión de duración/volumen.
 
 ### Extensibilidad

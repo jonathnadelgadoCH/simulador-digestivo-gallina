@@ -33,6 +33,7 @@ __pycache__/
 UnityProject/Data/
 WebGLBuild/Build/*.unityweb
 AudioMasters/
+Tools/Narration/voices/
 _site/
 WebGLBuild/UnityProject_BurstDebugInformation_DoNotShip/
 sysinfo.txt

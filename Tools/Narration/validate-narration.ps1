@@ -30,7 +30,24 @@ foreach ($clip in $manifest.clips) {
         }
     }
 
-    if (-not [string]::IsNullOrWhiteSpace([string]$clip.organId)) {
+    if (-not [string]::IsNullOrWhiteSpace([string]$clip.foodId)) {
+        if ([string]::IsNullOrWhiteSpace([string]$clip.organId)) {
+            $failures.Add("$($clip.id): un clip de alimento debe indicar organId")
+            continue
+        }
+        $profilePath = Join-Path $runtimeRoot "profiles\$($manifest.speciesId)\$($clip.foodId).json"
+        if (-not (Test-Path -LiteralPath $profilePath -PathType Leaf)) {
+            $failures.Add("No existe el perfil de alimento $($clip.foodId)")
+            continue
+        }
+        $profile = Get-Content -LiteralPath $profilePath -Raw -Encoding UTF8 | ConvertFrom-Json
+        $stage = @($profile.simulation.stageOverrides | Where-Object organId -eq $clip.organId)
+        if ($stage.Count -ne 1) {
+            $failures.Add("$($clip.foodId): se esperaba una etapa única para $($clip.organId)")
+        } elseif ([string]$stage[0].audioFile -ne $relativePath) {
+            $failures.Add("$($clip.foodId)/$($clip.organId): audioFile no coincide con $relativePath")
+        }
+    } elseif (-not [string]::IsNullOrWhiteSpace([string]$clip.organId)) {
         $organPath = Join-Path $runtimeRoot "species\$($manifest.speciesId)\organs\$($clip.organId)\organ.json"
         if (-not (Test-Path -LiteralPath $organPath -PathType Leaf)) {
             $failures.Add("No existe la ficha del órgano $($clip.organId)")
@@ -48,4 +65,4 @@ if ($failures.Count -gt 0) {
     exit 1
 }
 
-Write-Host "Narración validada: $($manifest.clips.Count) clips y todas las rutas de órganos coinciden."
+Write-Host "Narración validada: $($manifest.clips.Count) clips y todas las rutas de órganos o perfiles coinciden."

@@ -3,6 +3,10 @@ param(
     [string]$ManifestPath,
     [string]$Voice,
     [int]$Rate = 0,
+    [ValidateSet('Sapi', 'Edge', 'Piper')]
+    [string]$Engine = 'Sapi',
+    [string]$EdgeVoice,
+    [string]$PiperModelPath,
     [switch]$OnlyMissing
 )
 
@@ -28,6 +32,17 @@ if ([string]::IsNullOrWhiteSpace($Voice)) {
 if (-not $PSBoundParameters.ContainsKey('Rate')) {
     $Rate = [int]$manifest.rate
 }
+if ([string]::IsNullOrWhiteSpace($EdgeVoice)) {
+    $EdgeVoice = if ([string]::IsNullOrWhiteSpace([string]$manifest.edgeVoice)) {
+        'es-GT-MartaNeural'
+    } else {
+        [string]$manifest.edgeVoice
+    }
+}
+if ([string]::IsNullOrWhiteSpace($PiperModelPath)) {
+    $PiperModelPath = Join-Path $PSScriptRoot 'voices\es_MX-ald-medium.onnx'
+}
+$PiperModelPath = [System.IO.Path]::GetFullPath($PiperModelPath)
 
 $ffmpeg = Get-Command ffmpeg -ErrorAction SilentlyContinue
 if ($null -eq $ffmpeg) {
@@ -35,26 +50,50 @@ if ($null -eq $ffmpeg) {
 }
 $ffprobe = Get-Command ffprobe -ErrorAction SilentlyContinue
 
-$synthesizer = New-Object -ComObject SAPI.SpVoice
-$voiceTokens = $synthesizer.GetVoices()
-$selectedVoice = $null
-$voiceDescriptions = [System.Collections.Generic.List[string]]::new()
-for ($index = 0; $index -lt $voiceTokens.Count; $index++) {
-    $candidate = $voiceTokens.Item($index)
-    $description = [string]$candidate.GetDescription()
-    $voiceDescriptions.Add($description)
-    if ($null -eq $selectedVoice -and $description.StartsWith($Voice, [System.StringComparison]::OrdinalIgnoreCase)) {
-        $selectedVoice = $candidate
+$synthesizer = $null
+if ($Engine -eq 'Sapi') {
+    $synthesizer = New-Object -ComObject SAPI.SpVoice
+    $voiceTokens = $synthesizer.GetVoices()
+    $selectedVoice = $null
+    $voiceDescriptions = [System.Collections.Generic.List[string]]::new()
+    for ($index = 0; $index -lt $voiceTokens.Count; $index++) {
+        $candidate = $voiceTokens.Item($index)
+        $description = [string]$candidate.GetDescription()
+        $voiceDescriptions.Add($description)
+        if ($null -eq $selectedVoice -and $description.StartsWith($Voice, [System.StringComparison]::OrdinalIgnoreCase)) {
+            $selectedVoice = $candidate
+        }
+    }
+    if ($null -eq $selectedVoice) {
+        [System.Runtime.InteropServices.Marshal]::FinalReleaseComObject($synthesizer) | Out-Null
+        throw "La voz '$Voice' no está instalada. Voces disponibles: $($voiceDescriptions -join ', ')"
+    }
+
+    $synthesizer.Voice = $selectedVoice
+    $synthesizer.Rate = [Math]::Max(-10, [Math]::Min(10, $Rate))
+    $synthesizer.Volume = 100
+}
+elseif ($Engine -eq 'Edge') {
+    if ($null -eq (Get-Command py -ErrorAction SilentlyContinue)) {
+        throw 'Python no está disponible para ejecutar Edge TTS.'
+    }
+    & py -m edge_tts --version | Out-Null
+    if ($LASTEXITCODE -ne 0) {
+        throw 'Edge TTS no está instalado. Ejecute: py -m pip install --user edge-tts'
     }
 }
-if ($null -eq $selectedVoice) {
-    [System.Runtime.InteropServices.Marshal]::FinalReleaseComObject($synthesizer) | Out-Null
-    throw "La voz '$Voice' no está instalada. Voces disponibles: $($voiceDescriptions -join ', ')"
+else {
+    if ($null -eq (Get-Command py -ErrorAction SilentlyContinue)) {
+        throw 'Python no está disponible para ejecutar Piper.'
+    }
+    if (-not (Test-Path -LiteralPath $PiperModelPath -PathType Leaf)) {
+        throw "No se encontró el modelo Piper: $PiperModelPath. Descárguelo con: py -m piper.download_voices --download-dir Tools/Narration/voices es_MX-ald-medium"
+    }
+    & py -m piper --help | Out-Null
+    if ($LASTEXITCODE -ne 0) {
+        throw 'Piper no está instalado. Ejecute: py -m pip install --user piper-tts'
+    }
 }
-
-$synthesizer.Voice = $selectedVoice
-$synthesizer.Rate = [Math]::Max(-10, [Math]::Min(10, $Rate))
-$synthesizer.Volume = 100
 
 $masterRoot = Join-Path $projectRoot "AudioMasters\narration\$($manifest.language)\$($manifest.speciesId)"
 $runtimeRoot = Join-Path $projectRoot "UnityProject\Assets\StreamingAssets\DigestiveSimulator\audio\narration\$($manifest.language)\$($manifest.speciesId)"
@@ -75,25 +114,56 @@ try {
         }
 
         Write-Host "Sintetizando: $($clip.fileName)"
-        $waveStream = New-Object -ComObject SAPI.SpFileStream
-        $waveFormat = New-Object -ComObject SAPI.SpAudioFormat
-        try {
-            # SpeechAudioFormatType 34 = PCM, 44.1 kHz, 16 bits, mono.
-            $waveFormat.Type = 34
-            $waveStream.Format = $waveFormat
-            # SpeechStreamFileMode 3 = crear o reemplazar para escritura.
-            $waveStream.Open($wavPath, 3, $false)
-            $synthesizer.AudioOutputStream = $waveStream
-            [void]$synthesizer.Speak([string]$clip.text, 0)
-            $waveStream.Close()
-        }
-        finally {
-            if ($null -ne $waveStream) {
-                try { $waveStream.Close() } catch { }
-                [System.Runtime.InteropServices.Marshal]::FinalReleaseComObject($waveStream) | Out-Null
+        if ($Engine -eq 'Edge') {
+            $temporaryMp3 = Join-Path ([System.IO.Path]::GetTempPath()) "digestive-$([guid]::NewGuid().ToString('N')).mp3"
+            try {
+                & py -m edge_tts --voice $EdgeVoice --rate '+0%' --text ([string]$clip.text) --write-media $temporaryMp3
+                if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $temporaryMp3)) {
+                    throw "Edge TTS no pudo sintetizar: $($clip.fileName)"
+                }
+                & $ffmpeg.Source -y -hide_banner -loglevel error -i $temporaryMp3 -ar 44100 -ac 1 -c:a pcm_s16le $wavPath
+                if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $wavPath)) {
+                    throw "FFmpeg no pudo crear el WAV maestro: $wavPath"
+                }
             }
-            if ($null -ne $waveFormat) {
-                [System.Runtime.InteropServices.Marshal]::FinalReleaseComObject($waveFormat) | Out-Null
+            finally {
+                Remove-Item -LiteralPath $temporaryMp3 -Force -ErrorAction SilentlyContinue
+            }
+        }
+        elseif ($Engine -eq 'Piper') {
+            $temporaryText = Join-Path ([System.IO.Path]::GetTempPath()) "digestive-$([guid]::NewGuid().ToString('N')).txt"
+            try {
+                [System.IO.File]::WriteAllText($temporaryText, [string]$clip.text, [System.Text.UTF8Encoding]::new($false))
+                & py -m piper -m $PiperModelPath -f $wavPath --sentence-silence 0.2 --input-file $temporaryText
+                if ($LASTEXITCODE -ne 0 -or -not (Test-Path -LiteralPath $wavPath)) {
+                    throw "Piper no pudo crear el WAV maestro: $wavPath"
+                }
+            }
+            finally {
+                Remove-Item -LiteralPath $temporaryText -Force -ErrorAction SilentlyContinue
+            }
+        }
+        else {
+            $waveStream = New-Object -ComObject SAPI.SpFileStream
+            $waveFormat = New-Object -ComObject SAPI.SpAudioFormat
+            try {
+                # SpeechAudioFormatType 34 = PCM, 44.1 kHz, 16 bits, mono.
+                $waveFormat.Type = 34
+                $waveStream.Format = $waveFormat
+                # SpeechStreamFileMode 3 = crear o reemplazar para escritura.
+                $waveStream.Open($wavPath, 3, $false)
+                $synthesizer.AudioOutputStream = $waveStream
+                [void]$synthesizer.Speak([string]$clip.text, 0)
+                $waveStream.Close()
+            }
+            finally {
+                if ($null -ne $waveStream) {
+                    try { $waveStream.Close() } catch { }
+                    [System.Runtime.InteropServices.Marshal]::FinalReleaseComObject($waveStream) | Out-Null
+                }
+                if ($null -ne $waveFormat) {
+                    [System.Runtime.InteropServices.Marshal]::FinalReleaseComObject($waveFormat) | Out-Null
+                }
             }
         }
 
@@ -137,7 +207,8 @@ finally {
 }
 
 Write-Host ''
-Write-Host "Voz: $Voice | Velocidad: $Rate"
+$voiceLabel = if ($Engine -eq 'Edge') { $EdgeVoice } elseif ($Engine -eq 'Piper') { [System.IO.Path]::GetFileNameWithoutExtension($PiperModelPath) } else { $Voice }
+Write-Host "Motor: $Engine | Voz: $voiceLabel | Velocidad: $Rate"
 Write-Host "WAV maestros: $masterRoot"
 Write-Host "MP3 para Unity/WebGL: $runtimeRoot"
 $results | Format-Table -AutoSize

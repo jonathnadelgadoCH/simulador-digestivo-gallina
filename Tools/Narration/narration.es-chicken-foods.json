@@ -1,0 +1,250 @@
+{
+  "schemaVersion": "1.0",
+  "language": "es-GT",
+  "speciesId": "chicken",
+  "voice": "Microsoft Sabina Desktop",
+  "edgeVoice": "es-GT-MartaNeural",
+  "rate": 0,
+  "clips": [
+    {
+      "order": 100,
+      "id": "corn_gizzard",
+      "foodId": "corn",
+      "organId": "gizzard",
+      "fileName": "food_corn_gizzard",
+      "text": "El maíz de esta ficha se administra como grano molido. En la molleja, el tamaño de partícula determina cuánto tiempo se retiene y cuánto trabajo mecánico se necesita. Las partículas gruesas estimulan más la trituración; las muy finas pasan con menor reducción física."
+    },
+    {
+      "order": 101,
+      "id": "corn_duodenum",
+      "foodId": "corn",
+      "organId": "duodenum",
+      "fileName": "food_corn_duodenum",
+      "text": "En el duodeno, el almidón es el componente principal del maíz. La amilasa pancreática inicia su hidrólisis y las enzimas intestinales continúan liberando azúcares que podrán absorberse como glucosa. La proteína y los lípidos del grano también comienzan su digestión intestinal."
+    },
+    {
+      "order": 102,
+      "id": "corn_ileum",
+      "foodId": "corn",
+      "organId": "ileum",
+      "fileName": "food_corn_ileum",
+      "text": "Al final del intestino delgado se evalúa cuánto almidón y cuántos aminoácidos del maíz fueron aprovechados. En el estudio representado, la tasa ileal observada de digestión del almidón fue de cero punto cero ochenta y seis por minuto. Este valor depende de la molienda, el lote y las condiciones del ensayo."
+    },
+    {
+      "order": 110,
+      "id": "wheat_gizzard",
+      "foodId": "wheat",
+      "organId": "gizzard",
+      "fileName": "food_wheat_gizzard",
+      "text": "El trigo se presenta molido. La molleja mezcla y regula la salida de sus partículas, pero los arabinoxilanos solubles pueden retener agua y aumentar la viscosidad del contenido. Por eso, molienda, cultivar y uso de enzimas pueden modificar su comportamiento digestivo."
+    },
+    {
+      "order": 111,
+      "id": "wheat_duodenum",
+      "foodId": "wheat",
+      "organId": "duodenum",
+      "fileName": "food_wheat_duodenum",
+      "text": "En el duodeno, el almidón del trigo suele quedar disponible con rapidez para la amilasa pancreática. Sin embargo, una mayor viscosidad puede dificultar la mezcla de enzimas y nutrientes y cambiar la velocidad del tránsito. Este comportamiento no es idéntico al de otros granos."
+    },
+    {
+      "order": 112,
+      "id": "wheat_ileum",
+      "foodId": "wheat",
+      "organId": "ileum",
+      "fileName": "food_wheat_ileum",
+      "text": "En el íleon se completa gran parte de la absorción procedente del trigo. La tasa ileal de digestión del almidón observada en el ensayo seleccionado fue de cero punto ciento diecisiete por minuto. No debe extrapolarse sin considerar cultivar, molienda, dieta y enzimas añadidas."
+    },
+    {
+      "order": 120,
+      "id": "barley_gizzard",
+      "foodId": "barley",
+      "organId": "gizzard",
+      "fileName": "food_barley_gizzard",
+      "text": "La cebada molida conserva más fibra estructural que el maíz o el trigo. Esa fracción puede estimular el trabajo de la molleja, mientras sus beta glucanos solubles absorben agua y elevan la viscosidad. El descascarado y la beta glucanasa cambian notablemente esta respuesta."
+    },
+    {
+      "order": 121,
+      "id": "barley_duodenum",
+      "foodId": "barley",
+      "organId": "duodenum",
+      "fileName": "food_barley_duodenum",
+      "text": "En el duodeno, las enzimas actúan sobre el almidón y la proteína de la cebada. Los beta glucanos no se digieren como el almidón y pueden aumentar la viscosidad, reduciendo el contacto entre enzimas, sustratos y superficie intestinal."
+    },
+    {
+      "order": 122,
+      "id": "barley_ileum",
+      "foodId": "barley",
+      "organId": "ileum",
+      "fileName": "food_barley_ileum",
+      "text": "En el íleon se observa el resultado conjunto de la hidrólisis y la viscosidad intestinal. La tasa ileal de digestión del almidón registrada para la cebada fue de cero punto ciento cuatro por minuto. El valor puede cambiar con descascarado, molienda y enzimas específicas."
+    },
+    {
+      "order": 130,
+      "id": "oats_gizzard",
+      "foodId": "oats",
+      "organId": "gizzard",
+      "fileName": "food_oats_gizzard",
+      "text": "Esta ficha representa avena con cáscara. Su mayor volumen y fibra estimulan la actividad mecánica de la molleja de forma distinta a un grano descascarado o a una harina proteica. La respuesta cambia si se retira la cáscara o se reduce demasiado el tamaño de partícula."
+    },
+    {
+      "order": 131,
+      "id": "oats_duodenum",
+      "foodId": "oats",
+      "organId": "duodenum",
+      "fileName": "food_oats_duodenum",
+      "text": "En el duodeno, la avena aporta almidón, proteína y una proporción de grasa mayor que otros cereales, pero también más fibra. Por ello participan amilasa, proteasas, bilis y lipasa, mientras parte de la fibra continúa sin digestión enzimática."
+    },
+    {
+      "order": 132,
+      "id": "oats_ileum",
+      "foodId": "oats",
+      "organId": "ileum",
+      "fileName": "food_oats_ileum",
+      "text": "En el íleon termina la absorción disponible de nutrientes de la avena. Para esta ficha no se seleccionó un coeficiente ileal suficientemente comparable. La simulación muestra el proceso general, pero no presenta un porcentaje que no esté respaldado por condiciones equivalentes."
+    },
+    {
+      "order": 140,
+      "id": "sorghum_gizzard",
+      "foodId": "sorghum",
+      "organId": "gizzard",
+      "fileName": "food_sorghum_gizzard",
+      "text": "El sorgo se presenta como grano molido. La molleja reduce y mezcla sus partículas, pero la matriz proteica que rodea el almidón y, en algunas variedades, los taninos, pueden limitar el acceso de las enzimas. Por eso es importante identificar la variedad y el procesamiento."
+    },
+    {
+      "order": 141,
+      "id": "sorghum_duodenum",
+      "foodId": "sorghum",
+      "organId": "duodenum",
+      "fileName": "food_sorghum_duodenum",
+      "text": "En el duodeno, la amilasa y las proteasas actúan sobre el sorgo. Su digestión puede ser más lenta cuando el almidón permanece asociado con proteínas resistentes o cuando existen taninos. No todos los sorgos producen la misma respuesta."
+    },
+    {
+      "order": 142,
+      "id": "sorghum_ileum",
+      "foodId": "sorghum",
+      "organId": "ileum",
+      "fileName": "food_sorghum_ileum",
+      "text": "En el íleon se mide el material que no fue absorbido. La tasa ileal observada de digestión del almidón del sorgo fue de cero punto cero setenta y cinco por minuto. Este resultado depende especialmente de la variedad, los taninos y la molienda."
+    },
+    {
+      "order": 200,
+      "id": "soybean_meal_gizzard",
+      "foodId": "soybean_meal",
+      "organId": "gizzard",
+      "fileName": "food_soybean_meal_gizzard",
+      "text": "La harina de soya ya llega como partículas molidas y no se comporta como un grano entero. La molleja mezcla el material con las secreciones gástricas, pero suele requerir menos reducción física. El tamaño de partícula y la calidad del tratamiento térmico influyen en la retención y el aprovechamiento."
+    },
+    {
+      "order": 201,
+      "id": "soybean_meal_duodenum",
+      "foodId": "soybean_meal",
+      "organId": "duodenum",
+      "fileName": "food_soybean_meal_duodenum",
+      "text": "En el duodeno, la harina de soya aporta principalmente proteína. Las proteasas pancreáticas liberan péptidos y aminoácidos, mientras los oligosacáridos y parte de la fibra siguen otro recorrido. Un calentamiento insuficiente o excesivo puede reducir la utilización de la proteína."
+    },
+    {
+      "order": 202,
+      "id": "soybean_meal_ileum",
+      "foodId": "soybean_meal",
+      "organId": "ileum",
+      "fileName": "food_soybean_meal_ileum",
+      "text": "En el íleon se estima la fracción de aminoácidos absorbida antes del intestino posterior. La media aparente de quince aminoácidos fue de ochenta y dos punto dos por ciento en el ensayo sin fitasa. No equivale a digestibilidad de proteína cruda ni representa todos los lotes de harina de soya."
+    },
+    {
+      "order": 210,
+      "id": "canola_meal_gizzard",
+      "foodId": "canola_meal",
+      "organId": "gizzard",
+      "fileName": "food_canola_meal_gizzard",
+      "text": "La harina de canola es un material molido procedente de la extracción de aceite, no un grano. Su fibra residual aumenta el volumen y puede prolongar la retención, aunque las partículas finas necesitan menos trituración. Esta ficha representa harina extraída con solvente y no un producto expeller."
+    },
+    {
+      "order": 211,
+      "id": "canola_meal_duodenum",
+      "foodId": "canola_meal",
+      "organId": "duodenum",
+      "fileName": "food_canola_meal_duodenum",
+      "text": "En el duodeno, las proteasas digieren la proteína de la harina de canola. Su mayor cantidad de fibra reduce la densidad energética y puede limitar el contacto enzimático. La composición también depende de la extracción, el calentamiento y la variedad utilizada."
+    },
+    {
+      "order": 212,
+      "id": "canola_meal_ileum",
+      "foodId": "canola_meal",
+      "organId": "ileum",
+      "fileName": "food_canola_meal_ileum",
+      "text": "En el íleon, la digestibilidad aparente media de quince aminoácidos fue de setenta y ocho punto siete por ciento en el ensayo sin fitasa. Este resultado corresponde a harina de canola cero cero extraída con solvente y no debe aplicarse automáticamente a otras presentaciones."
+    },
+    {
+      "order": 220,
+      "id": "sunflower_meal_gizzard",
+      "foodId": "sunflower_meal",
+      "organId": "gizzard",
+      "fileName": "food_sunflower_meal_gizzard",
+      "text": "La harina de girasol ya fue molida después de extraer el aceite. Su comportamiento en la molleja depende sobre todo de la fibra y del grado de descascarado: más restos de cáscara aumentan el volumen y el trabajo mecánico, pero reducen la densidad de nutrientes."
+    },
+    {
+      "order": 221,
+      "id": "sunflower_meal_duodenum",
+      "foodId": "sunflower_meal",
+      "organId": "duodenum",
+      "fileName": "food_sunflower_meal_duodenum",
+      "text": "En el duodeno, las proteasas liberan péptidos y aminoácidos de la harina de girasol. La fracción fibrosa no responde a estas enzimas y puede limitar la disponibilidad de la proteína. El descascarado y el método de extracción explican parte de la variación entre productos."
+    },
+    {
+      "order": 222,
+      "id": "sunflower_meal_ileum",
+      "foodId": "sunflower_meal",
+      "organId": "ileum",
+      "fileName": "food_sunflower_meal_ileum",
+      "text": "En el íleon, la digestibilidad aparente media de quince aminoácidos fue de setenta y seis punto siete por ciento en el ensayo sin fitasa. El valor debe interpretarse junto con el contenido de fibra y el descascarado del producto evaluado."
+    },
+    {
+      "order": 230,
+      "id": "alfalfa_meal_gizzard",
+      "foodId": "alfalfa_meal",
+      "organId": "gizzard",
+      "fileName": "food_alfalfa_meal_gizzard",
+      "text": "La harina de alfalfa es un forraje deshidratado y molido, distinto de las harinas obtenidas al extraer aceite. Su abundante fibra aumenta el volumen del contenido y estimula la mezcla mecánica, pero aporta poca energía por unidad de peso. La madurez y la molienda cambian esta respuesta."
+    },
+    {
+      "order": 231,
+      "id": "alfalfa_meal_duodenum",
+      "foodId": "alfalfa_meal",
+      "organId": "duodenum",
+      "fileName": "food_alfalfa_meal_duodenum",
+      "text": "En el duodeno se digieren las fracciones accesibles de proteína, grasa y carbohidratos de la alfalfa. Gran parte de su fibra vegetal resiste las enzimas de la gallina. También aporta pigmentos, pero su inclusión debe moderarse por la baja densidad energética."
+    },
+    {
+      "order": 232,
+      "id": "alfalfa_meal_ileum",
+      "foodId": "alfalfa_meal",
+      "organId": "ileum",
+      "fileName": "food_alfalfa_meal_ileum",
+      "text": "En el íleon permanece una proporción importante de fibra de la harina de alfalfa. No se seleccionó un coeficiente ileal comparable para esta ficha. La energía metabolizable aparente corregida por nitrógeno reportada para gallos fue de tres punto ocho megajulios por kilogramo de materia seca."
+    },
+    {
+      "order": 300,
+      "id": "soybean_oil_gizzard",
+      "foodId": "soybean_oil",
+      "organId": "gizzard",
+      "fileName": "food_soybean_oil_gizzard",
+      "text": "El aceite de soya es líquido y no necesita trituración como los granos o las harinas. En la molleja se dispersa entre los demás componentes de la dieta. La presencia de grasa puede enlentecer el vaciado digestivo y aumenta notablemente la densidad energética de la ración."
+    },
+    {
+      "order": 301,
+      "id": "soybean_oil_duodenum",
+      "foodId": "soybean_oil",
+      "organId": "duodenum",
+      "fileName": "food_soybean_oil_duodenum",
+      "text": "En el duodeno, la bilis emulsifica el aceite de soya en gotas pequeñas y la lipasa pancreática libera ácidos grasos y monoacilglicéridos. Este proceso es diferente de la digestión del almidón de los granos y de la proteína de las harinas."
+    },
+    {
+      "order": 302,
+      "id": "soybean_oil_ileum",
+      "foodId": "soybean_oil",
+      "organId": "ileum",
+      "fileName": "food_soybean_oil_ileum",
+      "text": "Los productos del aceite absorbidos por el intestino se transportan en la sangre mediante portomicrones. En el ensayo seleccionado, la digestibilidad aparente de la grasa en el íleon distal fue de ochenta y dos por ciento para aves jóvenes alimentadas con una dieta de maíz y soya."
+    }
+  ]
+}
