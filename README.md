@@ -9,12 +9,13 @@ Este incremento contiene:
 - contratos JSON versionados;
 - runtime C# desacoplado para especies, órganos, alimentos y perfiles;
 - grafo digestivo con órganos accesorios y ramificaciones;
-- narración WebGL sincronizada por órgano o etapa, con 15 audios iniciales en español;
+- narración WebGL sincronizada por órgano o etapa, con 15 audios anatómicos y 30 específicos por alimento;
 - catálogos iniciales para gallina y diez alimentos;
 - escena MVP navegable con anatomía, simulación y comparador;
 - modelo esquemático reproducible en Blender y dos GLB cargados mediante glTFast;
 - marcadores explícitos para contenido científico todavía no validado;
 - documentación de Blender, paquetes, WebGL y GitHub Pages.
+- guía interactiva de cinco pasos para orientar a nuevos usuarios.
 
 El modelo actual sirve para validar el pipeline técnico y todavía requiere revisión anatómica. Las narraciones actuales son una primera versión generada y los valores científicos aún requieren revisión humana y bibliografía trazable.
 

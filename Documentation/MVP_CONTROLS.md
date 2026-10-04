@@ -22,6 +22,18 @@ La ficha **Coordinación nerviosa y endocrina** muestra el control nervioso de l
 
 El botón **Qué cambia con este alimento** despliega motilidad, secreciones, respuesta neuroendocrina, notas metabólicas, condiciones del estudio y referencias del perfil seleccionado. Molleja, duodeno e íleon muestran mensajes específicos del ingrediente; las demás etapas presentan la función general documentada del órgano.
 
+## Guía interactiva
+
+La primera vez que se cargan los catálogos aparece un recorrido guiado de cinco pasos. El resto de la pantalla se oscurece y un marco cian resalta el área explicada:
+
+1. navegación principal;
+2. selección del alimento;
+3. exploración del modelo 3D;
+4. controles de simulación y narración;
+5. interpretación del panel científico.
+
+Los botones **Anterior**, **Siguiente**, **Omitir** y **Terminar** controlan el recorrido. Mientras está abierto, la cámara y los controles subyacentes quedan bloqueados para evitar acciones accidentales. Al terminar u omitir, la preferencia se guarda con `PlayerPrefs`; el botón **? Guía** permite repetirlo en cualquier momento. La tecla `Escape` también lo cierra.
+
 ## Controles
 
 - `A−` y `A+`: ajustar el texto entre 90 % y 150 %. El nivel queda guardado para las siguientes ejecuciones.
@@ -31,6 +43,7 @@ El botón **Qué cambia con este alimento** despliega motilidad, secreciones, re
 - Rueda del ratón: zoom.
 - `Exterior`, `Transparente` y `Solo aparato digestivo`: cambiar la visibilidad.
 - `Reproducir`, `Pausar`, `Reiniciar` y `Siguiente`: controlar la secuencia.
+- `? Guía`: abrir nuevamente el recorrido guiado de cinco pasos.
 
 ## Alcance visual
 

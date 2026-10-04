@@ -1,12 +1,12 @@
 # Estado del proyecto
 
-Actualizado: 27 de septiembre de 2026
+Actualizado: 3 de octubre de 2026
 
 ## Resumen ejecutivo
 
 El proyecto ya posee una base Unity funcional, modular y preparada para WebGL. Puede cargar una especie, diez alimentos y sus perfiles, construir una anatomía esquemática desde un grafo, cargar los modelos GLB y ejecutar una simulación educativa por etapas.
 
-Todavía no está listo para la entrega académica final porque el modelo 3D actual es esquemático y requiere validación anatómica. Los diez perfiles gallina–alimento ya cuentan con una primera versión documentada, pero necesitan aprobación académica; también faltan las grabaciones y completar la publicación WebGL.
+Todavía no está listo para la entrega académica final porque el modelo 3D requiere validación anatómica. Los diez perfiles gallina–alimento ya cuentan con una primera versión documentada, pero necesitan aprobación académica; las narraciones integradas también requieren revisión auditiva final.
 
 | Elemento | Estado actual |
 |---|---:|
@@ -80,6 +80,7 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 - [x] Cámara orbital y zoom.
 - [x] Desplazamiento del encuadre con botón central o `Shift + botón derecho`, y control para recentrar.
 - [x] Encuadre automático general y enfoque al seleccionar un órgano.
+- [x] Recorrido guiado de cinco pasos con foco visual, tooltips, persistencia y reapertura manual.
 - [x] Partícula educativa de alimento.
 - [x] Reproducir, pausar, reiniciar y avanzar etapas.
 - [x] Visualización explícita de datos pendientes.
@@ -222,7 +223,7 @@ Todavía no está listo para la entrega académica final porque el modelo 3D act
 
 ## Pendiente — publicación y entrega
 
-- [~] Generador WebGL integrado en Unity; dos intentos batch quedaron bloqueados por pérdida de conexión con Unity Licensing Client antes de compilar.
+- [x] Generador WebGL integrado y build de producción regenerado correctamente el 3 de octubre de 2026.
 - [x] Probar el build mediante servidor HTTP local.
 - [ ] Medir carga, memoria y rendimiento.
 - [ ] Probar Chrome, Edge y Firefox.

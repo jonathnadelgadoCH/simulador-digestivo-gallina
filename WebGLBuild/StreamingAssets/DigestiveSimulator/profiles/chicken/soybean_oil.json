@@ -56,19 +56,19 @@
         "organId": "gizzard",
         "durationSeconds": 4,
         "message": "La grasa insaturada puede enlentecer el tránsito y aumenta la densidad energética.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_soybean_oil_gizzard.mp3"
       },
       {
         "organId": "duodenum",
         "durationSeconds": 5,
         "message": "La bilis emulsifica el aceite y la lipasa pancreática libera productos absorbibles.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_soybean_oil_duodenum.mp3"
       },
       {
         "organId": "ileum",
         "durationSeconds": 5,
         "message": "Digestibilidad aparente de grasa en íleon distal: 82 %.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_soybean_oil_ileum.mp3"
       }
     ]
   },

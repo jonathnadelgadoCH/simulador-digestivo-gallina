@@ -56,19 +56,19 @@
         "organId": "gizzard",
         "durationSeconds": 4,
         "message": "La mayor fibra puede aumentar retención y reducir densidad energética.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_canola_meal_gizzard.mp3"
       },
       {
         "organId": "duodenum",
         "durationSeconds": 5,
         "message": "La canola aporta proteína, aunque su fibra limita la energía disponible.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_canola_meal_duodenum.mp3"
       },
       {
         "organId": "ileum",
         "durationSeconds": 5,
         "message": "Digestibilidad ileal aparente media de 15 aminoácidos: 78.7 % sin fitasa.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_canola_meal_ileum.mp3"
       }
     ]
   },

@@ -56,19 +56,19 @@
         "organId": "gizzard",
         "durationSeconds": 4,
         "message": "La cáscara y fibra aumentan volumen y pueden estimular la molleja.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_oats_gizzard.mp3"
       },
       {
         "organId": "duodenum",
         "durationSeconds": 5,
         "message": "La avena contiene más fibra y grasa y menos almidón que los cereales principales.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_oats_duodenum.mp3"
       },
       {
         "organId": "ileum",
         "durationSeconds": 5,
         "message": "No se seleccionó un ensayo compatible de digestibilidad ileal de nutrientes.",
-        "audioFile": null
+        "audioFile": "audio/narration/es-GT/chicken/food_oats_ileum.mp3"
       }
     ]
   },

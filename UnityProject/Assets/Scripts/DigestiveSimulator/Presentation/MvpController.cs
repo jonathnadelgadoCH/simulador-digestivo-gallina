@@ -15,6 +15,7 @@ namespace DigestiveSimulator.Presentation
     public sealed class MvpController : MonoBehaviour
     {
         private const string TextScalePreference = "DigestiveSimulator.TextScale";
+        private const string ProductTourPreference = "DigestiveSimulator.ProductTour.V1.Completed";
         private IAnatomyView anatomy;
         private DigestiveApplication application;
         private OrbitCameraController orbitCamera;
@@ -55,6 +56,11 @@ namespace DigestiveSimulator.Presentation
         private float userTextScale = 1.1f;
         private float appliedUiScale = -1f;
         private bool showFoodProfileDetails;
+        private bool productTourActive;
+        private int productTourStep;
+        private GUIStyle tourTitleStyle;
+        private GUIStyle tourBodyStyle;
+        private GUIStyle tourCounterStyle;
 
         private float UiScale => Mathf.Clamp(Mathf.Min(Screen.width / 1600f, Screen.height / 900f), 1f, 1.25f) * userTextScale;
         private float LeftPanelWidth => Mathf.Clamp(300f * UiScale, 300f, 390f);
@@ -90,6 +96,7 @@ namespace DigestiveSimulator.Presentation
 
         private void Update()
         {
+            if (productTourActive && Input.GetKeyDown(KeyCode.Escape)) FinishProductTour();
             ConfigureCameraInteraction();
             HandlePicking();
             if (!simulationPrepared || application.Simulation.State != SimulationState.Playing || application.Simulation.CurrentStep == null) return;
@@ -117,7 +124,7 @@ namespace DigestiveSimulator.Presentation
         private void ConfigureCameraInteraction()
         {
             if (orbitCamera == null) return;
-            var modelVisible = currentScreen == MvpScreen.Anatomy || currentScreen == MvpScreen.Simulation;
+            var modelVisible = !productTourActive && (currentScreen == MvpScreen.Anatomy || currentScreen == MvpScreen.Simulation);
             var bottomBoundary = currentScreen == MvpScreen.Simulation ? 82f * UiScale : 10f;
             orbitCamera.ConfigureInteraction(modelVisible, LeftPanelWidth, RightPanelWidth, ContentTop, bottomBoundary);
         }
@@ -162,6 +169,7 @@ namespace DigestiveSimulator.Presentation
             comparisonBId = comparisonFoods.Length > 1 ? comparisonFoods[1].id : comparisonFoods[0].id;
             ReloadComparisonProfiles();
             Navigate(currentScreen);
+            if (PlayerPrefs.GetInt(ProductTourPreference, 0) == 0) StartProductTour();
         }
 
         private void SelectSpecies(string id)
@@ -235,6 +243,7 @@ namespace DigestiveSimulator.Presentation
 
         private void HandlePicking()
         {
+            if (productTourActive) return;
             if (!Input.GetMouseButtonDown(0) || Input.mousePosition.x <= LeftPanelWidth || Input.mousePosition.x >= Screen.width - RightPanelWidth) return;
             var camera = Camera.main;
             if (camera == null) return;
@@ -384,14 +393,26 @@ namespace DigestiveSimulator.Presentation
         private void OnGUI()
         {
             EnsureStyles();
-            if (currentScreen == MvpScreen.MainMenu) { DrawMainMenu(); return; }
-            DrawTopNavigation();
-            if (currentScreen == MvpScreen.Comparison) { DrawComparison(); return; }
-            if (currentScreen == MvpScreen.ProjectInformation) { DrawProjectInformation(); return; }
-            DrawLeftPanel();
-            DrawRightPanel();
-            if (currentScreen == MvpScreen.Simulation) DrawSimulationControls();
-            GUI.Label(new Rect(LeftPanelWidth + 16f, ContentTop, Screen.width - LeftPanelWidth - RightPanelWidth - 32f, 52f * UiScale), "MODELO ESQUEMÁTICO PROVISIONAL — NO REPRESENTA ESCALA ANATÓMICA", statusStyle);
+            GUI.enabled = !productTourActive;
+            if (currentScreen == MvpScreen.MainMenu)
+            {
+                DrawMainMenu();
+            }
+            else
+            {
+                DrawTopNavigation();
+                if (currentScreen == MvpScreen.Comparison) DrawComparison();
+                else if (currentScreen == MvpScreen.ProjectInformation) DrawProjectInformation();
+                else
+                {
+                    DrawLeftPanel();
+                    DrawRightPanel();
+                    if (currentScreen == MvpScreen.Simulation) DrawSimulationControls();
+                    GUI.Label(new Rect(LeftPanelWidth + 16f, ContentTop, Screen.width - LeftPanelWidth - RightPanelWidth - 32f, 52f * UiScale), "MODELO ESQUEMÁTICO PROVISIONAL — NO REPRESENTA ESCALA ANATÓMICA", statusStyle);
+                }
+            }
+            GUI.enabled = true;
+            if (productTourActive) DrawProductTour();
         }
 
         private void DrawMainMenu()
@@ -405,12 +426,13 @@ namespace DigestiveSimulator.Presentation
             GUILayout.Space(18f);
             GUILayout.Label("Prototipo educativo modular para explorar anatomía, alimentos y recorridos digestivos.", wrapStyle);
             GUILayout.Space(18f);
-            GUI.enabled = application != null && application.IsReady;
+            GUI.enabled = !productTourActive && application != null && application.IsReady;
             if (GUILayout.Button("Explorar anatomía", GUILayout.Height(42f))) Navigate(MvpScreen.Anatomy);
             if (GUILayout.Button("Simular digestión", GUILayout.Height(42f))) Navigate(MvpScreen.Simulation);
             if (GUILayout.Button("Comparar alimentos", GUILayout.Height(42f))) Navigate(MvpScreen.Comparison);
             if (GUILayout.Button("Bibliografía y proyecto", GUILayout.Height(42f))) Navigate(MvpScreen.ProjectInformation);
-            GUI.enabled = true;
+            if (GUILayout.Button("? Guía interactiva", GUILayout.Height(36f))) StartProductTour();
+            GUI.enabled = !productTourActive;
             DrawTextSizeControls();
             GUILayout.Space(12f);
             GUILayout.Label(application != null && application.IsReady ? "Catálogos cargados" : "Cargando catálogos…", statusStyle);
@@ -429,6 +451,7 @@ namespace DigestiveSimulator.Presentation
             if (GUILayout.Button("Simulación")) Navigate(MvpScreen.Simulation);
             if (GUILayout.Button("Comparar")) Navigate(MvpScreen.Comparison);
             if (GUILayout.Button("Proyecto")) Navigate(MvpScreen.ProjectInformation);
+            if (GUILayout.Button("? Guía", GUILayout.Width(86f * UiScale))) StartProductTour();
             GUILayout.FlexibleSpace();
             DrawTextSizeControls(true);
             GUILayout.EndHorizontal();
@@ -459,20 +482,20 @@ namespace DigestiveSimulator.Presentation
             GUILayout.Label("Especie", headerStyle);
             foreach (var species in application.SpeciesDatabase.GetAllSpecies())
             {
-                GUI.enabled = application.ActiveSpecies?.id != species.id;
+                GUI.enabled = !productTourActive && application.ActiveSpecies?.id != species.id;
                 if (GUILayout.Button(species.commonName)) SelectSpecies(species.id);
             }
-            GUI.enabled = true;
+            GUI.enabled = !productTourActive;
 
             GUILayout.Space(8f);
             GUILayout.Label("Alimento", headerStyle);
             foodScroll = GUILayout.BeginScrollView(foodScroll, GUILayout.Height(Mathf.Min(260f, Screen.height * 0.34f)));
             foreach (var food in application.FoodDatabase.GetAllFoods())
             {
-                GUI.enabled = application.ActiveFood?.id != food.id;
+                GUI.enabled = !productTourActive && application.ActiveFood?.id != food.id;
                 if (GUILayout.Button(food.commonName)) SelectFood(food.id);
             }
-            GUI.enabled = true;
+            GUI.enabled = !productTourActive;
             GUILayout.EndScrollView();
 
             GUILayout.Space(8f);
@@ -536,23 +559,170 @@ namespace DigestiveSimulator.Presentation
 
         private void DrawSimulationControls()
         {
-            var width = Mathf.Min(700f * UiScale, Screen.width - LeftPanelWidth - RightPanelWidth - 30f);
-            var height = 72f * UiScale;
-            GUILayout.BeginArea(new Rect((Screen.width - width) * 0.5f, Screen.height - height - 10f, width, height), GUI.skin.box);
+            var controlsRect = SimulationControlsRect();
+            GUILayout.BeginArea(controlsRect, GUI.skin.box);
             GUILayout.BeginHorizontal();
-            GUI.enabled = simulationPrepared;
+            GUI.enabled = !productTourActive && simulationPrepared;
             if (GUILayout.Button("▶ Reproducir")) { application.Simulation.Play(); PlayOrResumeNarration(); }
             if (GUILayout.Button("⏸ Pausar")) { application.Simulation.Pause(); narration?.PauseNarration(); }
             if (GUILayout.Button("⏮ Reiniciar")) { application.Simulation.Restart(); ResetSimulationPresentation(); }
             if (GUILayout.Button("⏭ Siguiente")) application.Simulation.Next();
             if (GUILayout.Button("🔊 Escuchar")) PlayOrResumeNarration();
             if (GUILayout.Button(narration != null && narration.IsMuted ? "Audio OFF" : "Audio ON")) narration?.SetMuted(!narration.IsMuted);
-            GUI.enabled = true;
+            GUI.enabled = !productTourActive;
             GUILayout.EndHorizontal();
             GUILayout.Label(simulationPrepared
                 ? $"Estado: {application.Simulation.State} · Narración: {narration?.State}"
                 : "Preparando perfil especie–alimento…", statusStyle);
             GUILayout.EndArea();
+        }
+
+        private Rect SimulationControlsRect()
+        {
+            var width = Mathf.Min(700f * UiScale, Screen.width - LeftPanelWidth - RightPanelWidth - 30f);
+            var height = 72f * UiScale;
+            return new Rect((Screen.width - width) * 0.5f, Screen.height - height - 10f, width, height);
+        }
+
+        private void StartProductTour()
+        {
+            if (application == null || !application.IsReady) return;
+            application.Simulation?.Pause();
+            narration?.PauseNarration();
+            productTourStep = 0;
+            productTourActive = true;
+            Navigate(MvpScreen.MainMenu);
+        }
+
+        private void AdvanceProductTour()
+        {
+            if (productTourStep >= 4)
+            {
+                FinishProductTour();
+                return;
+            }
+
+            productTourStep++;
+            if (productTourStep == 1) Navigate(MvpScreen.Simulation);
+        }
+
+        private void FinishProductTour()
+        {
+            productTourActive = false;
+            PlayerPrefs.SetInt(ProductTourPreference, 1);
+            PlayerPrefs.Save();
+        }
+
+        private void DrawProductTour()
+        {
+            var step = GetProductTourStep(productTourStep);
+            var target = ClampTourTarget(step.Target);
+            DrawTourShade(target);
+            DrawTourOutline(target);
+
+            var tooltip = TourTooltipRect(target);
+            GUILayout.BeginArea(tooltip, GUI.skin.window);
+            GUILayout.Label(step.Title, tourTitleStyle);
+            GUILayout.Label(step.Body, tourBodyStyle);
+            GUILayout.FlexibleSpace();
+            GUILayout.Label($"Paso {productTourStep + 1} de 5", tourCounterStyle);
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("Omitir")) FinishProductTour();
+            GUI.enabled = productTourStep > 0;
+            if (GUILayout.Button("Anterior"))
+            {
+                productTourStep--;
+                if (productTourStep == 0) Navigate(MvpScreen.MainMenu);
+            }
+            GUI.enabled = true;
+            if (GUILayout.Button(productTourStep == 4 ? "Terminar" : "Siguiente")) AdvanceProductTour();
+            GUILayout.EndHorizontal();
+            GUILayout.EndArea();
+        }
+
+        private ProductTourStep GetProductTourStep(int index)
+        {
+            var mainWidth = Mathf.Min(620f, Screen.width - 40f);
+            var mainHeight = Mathf.Min(560f, Screen.height - 40f);
+            switch (index)
+            {
+                case 0:
+                    return new ProductTourStep(
+                        "Bienvenido al simulador",
+                        "La navegación principal permite explorar la anatomía, simular la digestión, comparar alimentos y consultar las fuentes. En los siguientes pasos abriremos la simulación y veremos sus controles esenciales.",
+                        new Rect((Screen.width - mainWidth) * 0.5f, (Screen.height - mainHeight) * 0.5f, mainWidth, mainHeight));
+                case 1:
+                    return new ProductTourStep(
+                        "1. Seleccione el alimento",
+                        "Use este panel para cambiar el ingrediente y la forma de procesamiento. Cada selección carga su propio perfil gallina–alimento, mensajes científicos y narraciones específicas.",
+                        new Rect(10f, ContentTop + 120f * UiScale, LeftPanelWidth - 20f, Mathf.Min(330f * UiScale, Screen.height - ContentTop - 250f * UiScale)));
+                case 2:
+                    return new ProductTourStep(
+                        "2. Explore el modelo 3D",
+                        "Arrastre con el botón izquierdo o derecho para girar. Use la rueda para acercar o alejar, y haga clic sobre un órgano para enfocarlo y abrir su ficha.",
+                        new Rect(LeftPanelWidth + 10f, ContentTop + 58f * UiScale, Screen.width - LeftPanelWidth - RightPanelWidth - 20f, Screen.height - ContentTop - 155f * UiScale));
+                case 3:
+                    return new ProductTourStep(
+                        "3. Controle el recorrido",
+                        "Reproduzca, pause, reinicie o avance manualmente. Escuchar repite la narración de la etapa; cuando existe un audio específico del alimento, tiene prioridad sobre la explicación general del órgano.",
+                        SimulationControlsRect());
+                default:
+                    return new ProductTourStep(
+                        "4. Interprete la información",
+                        "Este panel muestra el órgano actual, el proceso, las diferencias del alimento, los nutrientes, las rutas de absorción y las referencias. Los datos pendientes se señalan explícitamente y no equivalen a cero.",
+                        new Rect(Screen.width - RightPanelWidth + 10f, ContentTop, RightPanelWidth - 20f, Screen.height - ContentTop - 10f));
+            }
+        }
+
+        private static Rect ClampTourTarget(Rect target)
+        {
+            target.x = Mathf.Clamp(target.x, 6f, Screen.width - 12f);
+            target.y = Mathf.Clamp(target.y, 6f, Screen.height - 12f);
+            target.width = Mathf.Clamp(target.width, 20f, Screen.width - target.x - 6f);
+            target.height = Mathf.Clamp(target.height, 20f, Screen.height - target.y - 6f);
+            return target;
+        }
+
+        private void DrawTourShade(Rect target)
+        {
+            var previousColor = GUI.color;
+            GUI.color = new Color(0.01f, 0.02f, 0.035f, 0.78f);
+            GUI.DrawTexture(new Rect(0f, 0f, Screen.width, target.y), Texture2D.whiteTexture);
+            GUI.DrawTexture(new Rect(0f, target.yMax, Screen.width, Screen.height - target.yMax), Texture2D.whiteTexture);
+            GUI.DrawTexture(new Rect(0f, target.y, target.x, target.height), Texture2D.whiteTexture);
+            GUI.DrawTexture(new Rect(target.xMax, target.y, Screen.width - target.xMax, target.height), Texture2D.whiteTexture);
+            GUI.color = previousColor;
+        }
+
+        private static void DrawTourOutline(Rect target)
+        {
+            const float thickness = 4f;
+            var previousColor = GUI.color;
+            GUI.color = new Color(0.25f, 0.9f, 1f, 1f);
+            GUI.DrawTexture(new Rect(target.x - thickness, target.y - thickness, target.width + thickness * 2f, thickness), Texture2D.whiteTexture);
+            GUI.DrawTexture(new Rect(target.x - thickness, target.yMax, target.width + thickness * 2f, thickness), Texture2D.whiteTexture);
+            GUI.DrawTexture(new Rect(target.x - thickness, target.y, thickness, target.height), Texture2D.whiteTexture);
+            GUI.DrawTexture(new Rect(target.xMax, target.y, thickness, target.height), Texture2D.whiteTexture);
+            GUI.color = previousColor;
+        }
+
+        private Rect TourTooltipRect(Rect target)
+        {
+            var width = Mathf.Min(430f * UiScale, Screen.width - 24f);
+            var height = Mathf.Min(245f * UiScale, Screen.height - 24f);
+            var gap = 14f;
+            float x;
+            float y;
+
+            if (target.xMax + gap + width <= Screen.width) { x = target.xMax + gap; y = target.y; }
+            else if (target.x - gap - width >= 0f) { x = target.x - gap - width; y = target.y; }
+            else
+            {
+                x = Mathf.Clamp(target.center.x - width * 0.5f, 12f, Screen.width - width - 12f);
+                y = target.yMax + gap + height <= Screen.height ? target.yMax + gap : target.y - gap - height;
+            }
+
+            return new Rect(Mathf.Clamp(x, 12f, Screen.width - width - 12f), Mathf.Clamp(y, 12f, Screen.height - height - 12f), width, height);
         }
 
         private void DrawComparison()
@@ -1049,6 +1219,20 @@ namespace DigestiveSimulator.Presentation
             public ActiveSignal(NeuroendocrineSignal signal) { Signal = signal; }
         }
 
+        private sealed class ProductTourStep
+        {
+            public readonly string Title;
+            public readonly string Body;
+            public readonly Rect Target;
+
+            public ProductTourStep(string title, string body, Rect target)
+            {
+                Title = title;
+                Body = body;
+                Target = target;
+            }
+        }
+
         private sealed class RegulatoryVisual
         {
             public readonly LineRenderer Line;
@@ -1156,6 +1340,9 @@ namespace DigestiveSimulator.Presentation
             headerStyle = new GUIStyle(GUI.skin.label) { fontSize = Mathf.RoundToInt(19f * scale), fontStyle = FontStyle.Bold, wordWrap = true };
             wrapStyle = new GUIStyle(GUI.skin.label) { wordWrap = true, fontSize = Mathf.RoundToInt(16f * scale), richText = true };
             statusStyle = new GUIStyle(GUI.skin.label) { alignment = TextAnchor.MiddleCenter, wordWrap = true, fontSize = Mathf.RoundToInt(15f * scale) };
+            tourTitleStyle = new GUIStyle(GUI.skin.label) { fontSize = Mathf.RoundToInt(22f * scale), fontStyle = FontStyle.Bold, wordWrap = true, normal = { textColor = new Color(0.25f, 0.9f, 1f) } };
+            tourBodyStyle = new GUIStyle(GUI.skin.label) { fontSize = Mathf.RoundToInt(16f * scale), wordWrap = true, normal = { textColor = Color.white } };
+            tourCounterStyle = new GUIStyle(statusStyle) { fontStyle = FontStyle.Bold, normal = { textColor = new Color(0.75f, 0.9f, 1f) } };
             GUI.skin.button.fontSize = Mathf.RoundToInt(16f * scale);
             GUI.skin.button.fixedHeight = Mathf.Round(30f * scale);
         }
