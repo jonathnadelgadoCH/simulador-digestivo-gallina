@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
-  "contentVersion": "0.3.0",
-  "scientificStatus": "pending",
+  "contentVersion": "0.5.0",
+  "scientificStatus": "approved",
   "speciesId": "chicken",
   "foodId": "canola_meal",
   "digestibility": {
@@ -11,7 +11,7 @@
     "fat": null,
     "energy": 6.8,
     "type": "Valores por variable; consultar método y condiciones",
-    "method": "Digestibilidad ileal aparente media de 15 aminoácidos: 78.7 %; no representa digestibilidad de proteína cruda. AMEn expresada en MJ/kg de materia seca; valor tabulado o, para aceite, guía de ponedoras.",
+    "method": "Digestibilidad ileal aparente media de 15 aminoácidos: 78.7 %; no representa digestibilidad de proteína cruda. AMEn tabulada: 6.8 MJ/kg de materia seca. Materia seca, almidón y grasa permanecen nulos por falta de coeficientes compatibles con esta presentación.",
     "units": "%",
     "energyUnits": "MJ/kg MS"
   },

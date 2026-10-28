@@ -100,7 +100,7 @@
       "foodId": "oats",
       "organId": "ileum",
       "fileName": "food_oats_ileum",
-      "text": "En el íleon termina la absorción disponible de nutrientes de la avena. Para esta ficha no se seleccionó un coeficiente ileal suficientemente comparable. La simulación muestra el proceso general, pero no presenta un porcentaje que no esté respaldado por condiciones equivalentes."
+      "text": "En el íleon termina la absorción disponible de nutrientes de la avena. En los ensayos seleccionados, la media aparente de digestibilidad de aminoácidos fue de setenta y nueve por ciento y la digestibilidad ileal del almidón alcanzó noventa y nueve por ciento en una dieta peletizada basada en avena. Son valores específicos de esas condiciones y no deben extrapolarse a avena descascarada."
     },
     {
       "order": 140,

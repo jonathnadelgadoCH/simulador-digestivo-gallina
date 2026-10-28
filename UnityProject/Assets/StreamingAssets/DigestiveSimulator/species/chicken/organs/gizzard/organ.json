@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0", "contentVersion": "0.2.0", "scientificStatus": "pending",
+  "schemaVersion": "1.0", "contentVersion": "0.4.0", "scientificStatus": "reviewed",
   "id": "gizzard", "speciesId": "chicken", "commonName": "Molleja", "anatomicalName": "Ventriculus muscularis",
   "anatomy": {
     "location": "Después del proventrículo y antes del duodeno.",

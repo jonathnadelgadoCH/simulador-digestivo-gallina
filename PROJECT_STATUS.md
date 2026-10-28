@@ -1,12 +1,12 @@
 # Estado del proyecto
 
-Actualizado: 3 de octubre de 2026
+Actualizado: 27 de octubre de 2026
 
 ## Resumen ejecutivo
 
 El proyecto ya posee una base Unity funcional, modular y preparada para WebGL. Puede cargar una especie, diez alimentos y sus perfiles, construir una anatomía esquemática desde un grafo, cargar los modelos GLB y ejecutar una simulación educativa por etapas.
 
-Todavía no está listo para la entrega académica final porque el modelo 3D requiere validación anatómica. Los diez perfiles gallina–alimento ya cuentan con una primera versión documentada, pero necesitan aprobación académica; las narraciones integradas también requieren revisión auditiva final.
+Todavía no está listo para la entrega académica final porque el modelo 3D requiere validación anatómica externa. Los diez alimentos y diez perfiles gallina–alimento ya están confirmados bibliográficamente; la especie y los órganos permanecen en revisión interna y las narraciones integradas requieren revisión auditiva final.
 
 | Elemento | Estado actual |
 |---|---:|
@@ -18,10 +18,11 @@ Todavía no está listo para la entrega académica final porque el modelo 3D req
 | Perfiles gallina–alimento | 10 |
 | Modelos Blender/GLB | 3 — 1 fuente y 2 exportaciones |
 | Archivos de narración | 45 MP3 integrados: 15 generales y 30 específicos por alimento; pendientes de aprobación auditiva |
-| Referencias normalizadas | 24 |
+| Referencias normalizadas | 28 |
 | Órganos con primer borrador citado | 19 de 19 |
 | Ingredientes con composición citada | 10 de 10 |
-| JSON con contenido pendiente | 40 |
+| JSON científicos en estado `approved` | 20 — 10 alimentos y 10 perfiles |
+| JSON científicos en estado `reviewed` | 20 — 1 especie y 19 órganos |
 
 ## Terminado
 
@@ -112,24 +113,25 @@ Todavía no está listo para la entrega académica final porque el modelo 3D req
 
 - [~] Existen todos los campos y fichas necesarias.
 - [~] Los diecinueve órganos tienen un primer borrador con fuentes; falta la revisión académica.
-- [~] Los diez ingredientes tienen composición documentada; falta revisar los tipos exactos de producto y lotes.
-- [~] Los diez perfiles tienen un primer borrador trazable: seis incluyen digestibilidad ileal media de aminoácidos, uno digestibilidad de grasa y nueve AMEn; permanecen nulos los campos sin evidencia comparable.
-- [x] La biblioteca científica contiene veinticuatro referencias normalizadas en `references.json`.
+- [x] Los diez ingredientes tienen composición documentada y confirmación bibliográfica; los lotes comerciales concretos todavía deben caracterizarse antes de aplicar las cifras como valores de formulación.
+- [x] Los diez perfiles están confirmados bibliográficamente: nueve incluyen un indicador de aminoácidos o grasa, cinco incorporan digestibilidad del almidón, cuatro incorporan materia seca y los diez presentan energía o una limitación explícita.
+- [x] La biblioteca científica contiene veintiocho referencias normalizadas en `references.json`.
 - [x] El validador comprueba que las referencias usadas por alimentos, órganos, señales y perfiles existan en la biblioteca.
-- [ ] Ninguna ficha debe pasar a `approved` hasta completar su revisión y referencias.
+- [x] Los diez alimentos y los diez perfiles gallina–alimento pasaron a `approved` con método, condiciones y referencias explícitas.
+- [ ] La especie y los diecinueve órganos permanecen en `reviewed` hasta la validación anatómica y fisiológica externa.
 
 ### Simulación
 
 - [~] El recorrido y los controles funcionan con geometría provisional.
 - [~] Los alimentos usan colores diferentes.
-- [~] Las diferencias fisiológicas, nutricionales y temporales entre alimentos tienen un primer borrador citado y visible; falta aprobación académica.
+- [x] Las diferencias fisiológicas, nutricionales y temporales entre alimentos están citadas, visibles y confirmadas bibliográficamente; queda recomendada la validación académica externa.
 - [x] Marcadores, leyenda y coeficientes disponibles visualizan los nutrientes destacados.
 - [x] Se integraron capas visuales de absorción, destinos metabólicos y regulación neuroendocrina.
 
 ### Comparador
 
 - [~] La interfaz y carga de perfiles funcionan.
-- [ ] Las celdas científicas permanecen pendientes porque no hay valores aprobados.
+- [x] Las celdas científicas muestran los valores bibliográficamente confirmados y conservan `—` cuando una variable no aplica o no es comparable.
 - [x] La interfaz muestra citas completas y condiciones experimentales detalladas.
 
 ### Audio
@@ -175,14 +177,16 @@ Todavía no está listo para la entrega académica final porque el modelo 3D req
 
 ### Insumos académicos y científicos
 
-- [x] Incorporar un primer conjunto de al menos cinco fuentes científicas válidas (7 incorporadas; pendiente validación del equipo).
+- [x] Incorporar y revisar el catálogo de 28 fuentes científicas y técnicas.
 - [x] Completar la primera versión de `references.json` con referencias normalizadas.
-- [~] Completar y revisar las diecinueve fichas de órganos (19 con borrador citado; pendientes de aprobación).
-- [~] Documentar composición de los diez alimentos (10 con borrador citado; pendientes de aprobación).
+- [x] Completar y revisar las diecinueve fichas de órganos (19 en estado `reviewed`).
+- [x] Documentar y confirmar la composición de los diez alimentos (10 en estado `approved`).
 - [x] Documentar la primera versión de digestibilidad por alimento, nutriente, método y condiciones del estudio.
-- [x] Completar los diez perfiles gallina–alimento como borradores documentados.
-- [~] Revisión científica interna documentada en `Documentation/SCIENTIFIC_REVIEW.md`; pendiente evaluación por especialista.
-- [ ] Aprobar contenido mediante el flujo `pending → reviewed → approved`.
+- [x] Completar, ampliar y confirmar los diez perfiles gallina–alimento (10 en estado `approved`).
+- [x] Revisión científica interna documentada en `Documentation/SCIENTIFIC_REVIEW.md`.
+- [x] Completar la transición editorial `pending → reviewed` para las 40 fichas científicas.
+- [x] Realizar la transición bibliográfica `reviewed → approved` para los diez alimentos y diez perfiles.
+- [ ] Obtener revisión académica externa y registrar el dictamen del especialista por separado.
 
 ### Modelado 3D
 

@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0",
-  "contentVersion": "0.3.0",
-  "scientificStatus": "pending",
+  "contentVersion": "0.5.0",
+  "scientificStatus": "approved",
   "speciesId": "chicken",
   "foodId": "sorghum",
   "digestibility": {
     "dryMatter": null,
     "protein": 74.7,
-    "starch": null,
+    "starch": 95.4,
     "fat": null,
     "energy": 15.4,
     "type": "Valores por variable; consultar método y condiciones",
-    "method": "Digestibilidad ileal aparente media de 15 aminoácidos: 74.7 %; no representa digestibilidad de proteína cruda. AMEn expresada en MJ/kg de materia seca; valor tabulado o, para aceite, guía de ponedoras.",
+    "method": "Proteína: digestibilidad ileal aparente media de 15 aminoácidos, 74.7 %; no representa digestibilidad de proteína cruda. Almidón: digestibilidad en íleon posterior, 95.4 %. AMEn: 15.4 MJ/kg de materia seca, valor tabulado.",
     "units": "%",
     "energyUnits": "MJ/kg MS"
   },
@@ -32,16 +32,17 @@
       "Señales intestinales como CCK coordinan secreción pancreática y biliar tras la llegada de nutrientes."
     ],
     "metabolicNotes": [
+      "La digestibilidad del almidón en íleon posterior fue 95.4 % en el ensayo seleccionado.",
       "Tasa ileal de digestión del almidón observada: 0.075 min⁻¹.",
       "Los valores son específicos del método y no deben interpretarse como propiedades constantes de todos los lotes."
     ]
   },
   "studyConditions": {
-    "age": "Pollos de engorde de 5 semanas para aminoácidos; 28 días para dinámica del almidón; edad variable en AMEn tabulada.",
+    "age": "Pollos de engorde de 5 semanas para aminoácidos; pollos de engorde para almidón; 28 días para dinámica del almidón; edad variable en AMEn tabulada.",
     "geneticLine": "Pollos de engorde; la línea genética no fue especificada en los resúmenes utilizados.",
     "diet": "Dietas experimentales del ensayo citado o valores compilados de Feedipedia; no representan una dieta comercial completa.",
     "processing": "Sorgo molido sin fitasa; variedad y taninos deben identificarse.",
-    "method": "Digestibilidad ileal por marcador para aminoácidos o grasa cuando se informa; AMEn corregida por nitrógeno en base materia seca para energía tabulada."
+    "method": "Marcador ileal para aminoácidos; técnica de sacrificio y marcador para almidón; AMEn corregida por nitrógeno en base materia seca para energía tabulada."
   },
   "simulation": {
     "particleColor": "#B96B43",
@@ -73,6 +74,7 @@
     ]
   },
   "referenceIds": [
+    "weurding_et_al_2001",
     "ravindran_et_al_1999",
     "selle_et_al_2021",
     "heuze_tran_lebas_sorghum_2015",

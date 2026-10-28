@@ -132,4 +132,4 @@ Duración estimada: 4 a 5 minutos, a una velocidad de 125–140 palabras por min
 
 ## Nota científica y editorial
 
-Este guion resume el contenido estructurado de las fichas de órganos y las rutas de absorción del proyecto. Debe conservar el estado `pending` hasta que un especialista en nutrición o fisiología aviar revise la terminología, el alcance y las referencias. Las citas completas se encuentran en `StreamingAssets/DigestiveSimulator/references/references.json` y deben mostrarse en la sección de bibliografía de la aplicación.
+Este guion resume el contenido estructurado de las fichas de órganos y las rutas de absorción del proyecto. En la versión 0.5.0, los diez alimentos y los diez perfiles gallina–alimento quedaron confirmados bibliográficamente en estado `approved`; la especie y los órganos permanecen en `reviewed`. Esta confirmación interna no sustituye el dictamen documentado de un especialista en nutrición o fisiología aviar. Las citas completas se encuentran en `StreamingAssets/DigestiveSimulator/references/references.json` y deben mostrarse en la sección de bibliografía de la aplicación.

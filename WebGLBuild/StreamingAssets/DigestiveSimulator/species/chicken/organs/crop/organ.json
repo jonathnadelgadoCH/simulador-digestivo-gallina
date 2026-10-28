@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0", "contentVersion": "0.2.0", "scientificStatus": "pending",
+  "schemaVersion": "1.0", "contentVersion": "0.4.0", "scientificStatus": "reviewed",
   "id": "crop", "speciesId": "chicken", "commonName": "Buche", "anatomicalName": "Ingluvies",
   "anatomy": {
     "location": "Dilatación de la porción inferior del esófago cervical, antes del esófago torácico y del proventrículo.",

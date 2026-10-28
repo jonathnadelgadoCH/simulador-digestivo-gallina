@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0",
-  "contentVersion": "0.3.0",
-  "scientificStatus": "pending",
+  "contentVersion": "0.5.0",
+  "scientificStatus": "approved",
   "speciesId": "chicken",
   "foodId": "corn",
   "digestibility": {
-    "dryMatter": null,
-    "protein": 78,
-    "starch": null,
+    "dryMatter": 81,
+    "protein": 83,
+    "starch": 97.4,
     "fat": null,
-    "energy": 15.1,
+    "energy": 15.4,
     "type": "Valores por variable; consultar método y condiciones",
-    "method": "Digestibilidad ileal aparente media de 15 aminoácidos: 78 %; no representa digestibilidad de proteína cruda. AMEn expresada en MJ/kg de materia seca; valor tabulado o, para aceite, guía de ponedoras.",
+    "method": "Materia seca: digestibilidad ileal aparente, 81 %. Proteína: media de digestibilidad ileal aparente de aminoácidos, 83 %; no equivale a proteína cruda. Almidón: digestibilidad en íleon posterior de maíz molido con rodillos, 97.4 %. AMEn: 15.4 MJ/kg de materia seca.",
     "units": "%",
     "energyUnits": "MJ/kg MS"
   },
@@ -32,16 +32,17 @@
       "Señales intestinales como CCK coordinan secreción pancreática y biliar tras la llegada de nutrientes."
     ],
     "metabolicNotes": [
+      "En ensayos controlados se observaron 81 % de digestibilidad ileal de materia seca, 83 % de media aparente de aminoácidos y 97.4 % de digestibilidad del almidón en íleon posterior.",
       "Tasa ileal de digestión del almidón observada: 0.086 min⁻¹.",
       "Los valores son específicos del método y no deben interpretarse como propiedades constantes de todos los lotes."
     ]
   },
   "studyConditions": {
-    "age": "Pollos de engorde de 5 semanas para aminoácidos; 28 días para dinámica del almidón; edad variable en AMEn tabulada.",
-    "geneticLine": "Pollos de engorde; la línea genética no fue especificada en los resúmenes utilizados.",
-    "diet": "Dietas experimentales del ensayo citado o valores compilados de Feedipedia; no representan una dieta comercial completa.",
-    "processing": "Grano de maíz molido; el tamaño de partícula debe registrarse al aplicar los datos.",
-    "method": "Digestibilidad ileal por marcador para aminoácidos o grasa cuando se informa; AMEn corregida por nitrógeno en base materia seca para energía tabulada."
+    "age": "Pollos Ross de 24 a 35 días para materia seca, aminoácidos y AMEn; pollos de engorde para almidón; 28 días para la dinámica del almidón.",
+    "geneticLine": "Ross en el ensayo de Perttilä et al.; línea no especificada en los otros ensayos citados.",
+    "diet": "Maíz como única fuente proteica en dieta semipurificada para materia seca y aminoácidos; dieta experimental específica para almidón.",
+    "processing": "Grano molido; el valor de 97.4 % corresponde a maíz molido con rodillos. El tamaño de partícula debe registrarse al aplicar los datos.",
+    "method": "Marcador de cromo y colecta de íleon distal para materia seca y aminoácidos; técnica de sacrificio y marcador para almidón; colecta total de excretas y corrección por nitrógeno para AMEn."
   },
   "simulation": {
     "particleColor": "#E9B949",
@@ -73,6 +74,8 @@
     ]
   },
   "referenceIds": [
+    "perttila_et_al_2005",
+    "weurding_et_al_2001",
     "ravindran_et_al_1999",
     "selle_et_al_2021",
     "heuze_tran_lebas_2017",

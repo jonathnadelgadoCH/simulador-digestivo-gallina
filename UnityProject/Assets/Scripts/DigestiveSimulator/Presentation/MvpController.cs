@@ -823,7 +823,7 @@ namespace DigestiveSimulator.Presentation
             GUILayout.Label("Bibliografía y proyecto", titleStyle);
             GUILayout.Space(10f);
             GUILayout.Label("Estado de la bibliografía", headerStyle);
-            GUILayout.Label($"La biblioteca contiene {references.Length} fuentes. Los diez ingredientes, diecinueve órganos y diez perfiles disponen de un primer borrador citado. Las fichas permanecen en estado pending hasta la revisión del equipo.", wrapStyle);
+            GUILayout.Label($"La biblioteca contiene {references.Length} fuentes. Los diez ingredientes y diez perfiles gallina–alimento están confirmados bibliográficamente en estado approved. La especie y los diecinueve órganos permanecen en reviewed; la validación académica externa sigue recomendada para todo el recurso.", wrapStyle);
             GUILayout.Space(8f);
             bibliographyScroll = GUILayout.BeginScrollView(bibliographyScroll, GUI.skin.box, GUILayout.Height(Mathf.Max(160f, Screen.height * 0.42f)));
             foreach (var reference in references)
@@ -839,7 +839,7 @@ namespace DigestiveSimulator.Presentation
             GUILayout.Label("Separación de responsabilidades", headerStyle);
             GUILayout.Label("FoodDefinition describe el ingrediente. SpeciesDefinition describe el animal. OrganDefinition describe cada órgano. SpeciesFoodProfile contiene los resultados dependientes de especie y condiciones del estudio.", wrapStyle);
             GUILayout.FlexibleSpace();
-            GUILayout.Label("Versión técnica del contenido: 0.3.0 · Esquema: 1.0", statusStyle);
+            GUILayout.Label("Versión técnica del contenido: 0.4.0 · Esquema: 1.0", statusStyle);
             GUILayout.EndArea();
         }
 

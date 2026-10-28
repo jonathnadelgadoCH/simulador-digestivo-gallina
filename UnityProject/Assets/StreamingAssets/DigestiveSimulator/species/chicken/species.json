@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
-  "contentVersion": "0.3.0",
-  "scientificStatus": "pending",
+  "contentVersion": "0.4.0",
+  "scientificStatus": "reviewed",
   "id": "chicken",
   "commonName": "Gallina",
   "scientificName": "Gallus gallus domesticus",

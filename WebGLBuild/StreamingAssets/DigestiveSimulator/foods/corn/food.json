@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
-  "contentVersion": "0.2.0",
-  "scientificStatus": "pending",
+  "contentVersion": "0.5.0",
+  "scientificStatus": "approved",
   "id": "corn",
   "commonName": "Maíz",
   "scientificOrSourceName": "Zea mays L., grano",

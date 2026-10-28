@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0",
-  "contentVersion": "0.3.0",
-  "scientificStatus": "pending",
+  "contentVersion": "0.5.0",
+  "scientificStatus": "approved",
   "speciesId": "chicken",
   "foodId": "barley",
   "digestibility": {
-    "dryMatter": null,
-    "protein": null,
-    "starch": null,
+    "dryMatter": 63,
+    "protein": 77,
+    "starch": 98.3,
     "fat": null,
-    "energy": 11.3,
+    "energy": 11.4,
     "type": "Valores por variable; consultar método y condiciones",
-    "method": "No hay un valor de aminoácidos compatible seleccionado; se conserva nulo. AMEn expresada en MJ/kg de materia seca; valor tabulado o, para aceite, guía de ponedoras.",
+    "method": "Materia seca: digestibilidad ileal aparente, 63 %. Proteína: media de digestibilidad ileal aparente de aminoácidos, 77 %; no equivale a proteína cruda. Almidón: digestibilidad en íleon posterior, 98.3 %. AMEn: 11.4 MJ/kg de materia seca.",
     "units": "%",
     "energyUnits": "MJ/kg MS"
   },
@@ -32,16 +32,17 @@
       "Señales intestinales como CCK coordinan secreción pancreática y biliar tras la llegada de nutrientes."
     ],
     "metabolicNotes": [
+      "En ensayos controlados se observaron 63 % de digestibilidad ileal de materia seca, 77 % de media aparente de aminoácidos y 98.3 % de digestibilidad del almidón en íleon posterior.",
       "Tasa ileal de digestión del almidón observada: 0.104 min⁻¹.",
       "Los valores son específicos del método y no deben interpretarse como propiedades constantes de todos los lotes."
     ]
   },
   "studyConditions": {
-    "age": "Pollos de engorde de 28 días para dinámica del almidón; edad variable en AMEn tabulada.",
-    "geneticLine": "Pollos de engorde; la línea genética no fue especificada en los resúmenes utilizados.",
-    "diet": "Dietas experimentales del ensayo citado o valores compilados de Feedipedia; no representan una dieta comercial completa.",
-    "processing": "Cebada molida; el descascarado y la beta-glucanasa cambian su valor.",
-    "method": "Digestibilidad ileal por marcador para aminoácidos o grasa cuando se informa; AMEn corregida por nitrógeno en base materia seca para energía tabulada."
+    "age": "Pollos Ross de 24 a 35 días para materia seca, aminoácidos y AMEn; pollos de engorde para almidón; 28 días para la dinámica del almidón.",
+    "geneticLine": "Ross en el ensayo de Perttilä et al.; línea no especificada en los otros ensayos citados.",
+    "diet": "Cebada como única fuente proteica en dieta semipurificada para materia seca y aminoácidos; dieta experimental específica para almidón.",
+    "processing": "Cebada molida; en Perttilä et al. se molió con rodillos y tamiz de 4 mm y se peletizó en frío. El descascarado y la beta-glucanasa cambian su valor.",
+    "method": "Marcador de cromo y colecta de íleon distal para materia seca y aminoácidos; técnica de sacrificio y marcador para almidón; colecta total de excretas y corrección por nitrógeno para AMEn."
   },
   "simulation": {
     "particleColor": "#CFAF68",
@@ -73,6 +74,8 @@
     ]
   },
   "referenceIds": [
+    "perttila_et_al_2005",
+    "weurding_et_al_2001",
     "selle_et_al_2021",
     "heuze_et_al_barley_2016",
     "svihus_2014"

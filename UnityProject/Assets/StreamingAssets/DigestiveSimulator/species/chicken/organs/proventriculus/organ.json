@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0", "contentVersion": "0.2.0", "scientificStatus": "pending",
+  "schemaVersion": "1.0", "contentVersion": "0.4.0", "scientificStatus": "reviewed",
   "id": "proventriculus", "speciesId": "chicken", "commonName": "Proventrículo", "anatomicalName": "Ventriculus glandularis",
   "anatomy": {
     "location": "Entre el esófago distal y la molleja.",

@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
-  "contentVersion": "0.3.0",
-  "scientificStatus": "pending",
+  "contentVersion": "0.5.0",
+  "scientificStatus": "approved",
   "speciesId": "chicken",
   "foodId": "alfalfa_meal",
   "digestibility": {
@@ -11,7 +11,7 @@
     "fat": null,
     "energy": 3.8,
     "type": "Valores por variable; consultar método y condiciones",
-    "method": "No hay un valor de aminoácidos compatible seleccionado; se conserva nulo. AMEn expresada en MJ/kg de materia seca; valor tabulado o, para aceite, guía de ponedoras.",
+    "method": "No se localizaron coeficientes ileales comparables para materia seca, aminoácidos, almidón o grasa de la misma presentación; se conservan nulos para evitar extrapolaciones. AMEn tabulada para gallos: 3.8 MJ/kg de materia seca.",
     "units": "%",
     "energyUnits": "MJ/kg MS"
   },

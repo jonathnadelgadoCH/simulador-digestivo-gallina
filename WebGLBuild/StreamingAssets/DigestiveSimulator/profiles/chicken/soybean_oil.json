@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
-  "contentVersion": "0.3.0",
-  "scientificStatus": "pending",
+  "contentVersion": "0.5.0",
+  "scientificStatus": "approved",
   "speciesId": "chicken",
   "foodId": "soybean_oil",
   "digestibility": {
@@ -11,7 +11,7 @@
     "fat": 82,
     "energy": 36.92,
     "type": "Valores por variable; consultar método y condiciones",
-    "method": "No hay un valor de aminoácidos compatible seleccionado; se conserva nulo. AMEn expresada en MJ/kg de materia seca; valor tabulado o, para aceite, guía de ponedoras.",
+    "method": "Digestibilidad aparente de grasa en íleon distal: 82 % en aves jóvenes con aceite añadido a 50 g/kg de dieta. Energía de referencia para aceite de soya: 36.92 MJ/kg. Proteína y almidón no aplican al ingrediente lipídico puro.",
     "units": "%",
     "energyUnits": "MJ/kg MS"
   },

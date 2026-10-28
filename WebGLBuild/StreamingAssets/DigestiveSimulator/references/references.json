@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "contentVersion": "0.3.0",
+  "contentVersion": "0.5.0",
   "references": [
     {
       "id": "svihus_2014",
@@ -147,6 +147,22 @@
     {
       "id": "tancharoenrat_et_al_2014", "authors": "Tancharoenrat, P.; Ravindran, V.; Zaefarian, F.; Ravindran, G.", "title": "Digestion of fat and fatty acids along the gastrointestinal tract of broiler chickens", "year": 2014,
       "journal": "Poultry Science", "book": "", "edition": "", "volume": "93", "issue": "2", "pages": "371-379", "doi": "10.3382/ps.2013-03344", "url": "https://doi.org/10.3382/ps.2013-03344"
+    },
+    {
+      "id": "perttila_et_al_2005", "authors": "Perttilä, S.; Valaja, J.; Jalava, T.", "title": "Apparent ileal digestibility of amino acids and metabolisable energy value in grains for broilers", "year": 2005,
+      "journal": "Agricultural and Food Science", "book": "", "edition": "", "volume": "14", "issue": "4", "pages": "325-334", "doi": "10.2137/145960605775897704", "url": "https://jukuri.luke.fi/server/api/core/bitstreams/c68ef29a-d9cc-48f5-bf98-616be1671183/content"
+    },
+    {
+      "id": "weurding_et_al_2001", "authors": "Weurding, R. E.; Veldman, A.; Veen, W. A. G.; van der Aar, P. J.; Verstegen, M. W. A.", "title": "Starch digestion rate in the small intestine of broiler chickens differs among feedstuffs", "year": 2001,
+      "journal": "The Journal of Nutrition", "book": "", "edition": "", "volume": "131", "issue": "9", "pages": "2329-2335", "doi": "10.1093/jn/131.9.2329", "url": "https://doi.org/10.1093/jn/131.9.2329"
+    },
+    {
+      "id": "bassi_et_al_2025", "authors": "Bassi, L. S.; Hejdysz, M.; Pruszyńska-Oszmałek, E.; Kołodziejski, P. A.; Cowieson, A. J.; Kaczmarek, S. A.; Svihus, B.", "title": "Nutrient digestion efficiency: a comparison between broiler chickens and growing pigs fed maize, barley and oats-based diets with an emphasis on starch", "year": 2025,
+      "journal": "British Journal of Nutrition", "book": "", "edition": "", "volume": "133", "issue": "2", "pages": "182-193", "doi": "10.1017/S0007114524003167", "url": "https://doi.org/10.1017/S0007114524003167"
+    },
+    {
+      "id": "karkelanov_et_al_2021", "authors": "Karkelanov, N.; Chobanova, S.; Whiting, I. M.; Dimitrova, K.; Rose, S. P.; Pirgozliev, V.", "title": "Pelleting increases the metabolizable energy of de-hulled sunflower seed meal for broilers", "year": 2021,
+      "journal": "South African Journal of Animal Science", "book": "", "edition": "", "volume": "51", "issue": "3", "pages": "", "doi": "10.4314/sajas.v51i3.2", "url": "https://doi.org/10.4314/sajas.v51i3.2"
     },
     {
       "id": "shibata_et_al_2023", "authors": "Shibata, M.; Takahashi, T.; Kozakai, T.; Shindo, J.; Kurose, Y.", "title": "Development of active jejunal glucose absorption in broiler chickens", "year": 2023,

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0", "contentVersion": "0.2.0", "scientificStatus": "pending",
+  "schemaVersion": "1.0", "contentVersion": "0.4.0", "scientificStatus": "reviewed",
   "id": "duodenum", "speciesId": "chicken", "commonName": "Duodeno", "anatomicalName": "Duodenum",
   "anatomy": {
     "location": "Primera porción del intestino delgado, desde la salida de la molleja hasta la transición con el yeyuno.",

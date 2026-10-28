@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0", "contentVersion": "0.2.0", "scientificStatus": "pending",
+  "schemaVersion": "1.0", "contentVersion": "0.4.0", "scientificStatus": "reviewed",
   "id": "beak", "speciesId": "chicken", "commonName": "Pico", "anatomicalName": "Rostrum (pico)",
   "anatomy": {
     "location": "Extremo rostral de la cabeza; delimita la entrada de la cavidad oral.",

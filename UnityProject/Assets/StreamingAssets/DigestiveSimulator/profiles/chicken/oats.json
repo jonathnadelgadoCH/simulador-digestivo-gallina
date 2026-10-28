@@ -1,17 +1,17 @@
 {
   "schemaVersion": "1.0",
-  "contentVersion": "0.3.0",
-  "scientificStatus": "pending",
+  "contentVersion": "0.5.0",
+  "scientificStatus": "approved",
   "speciesId": "chicken",
   "foodId": "oats",
   "digestibility": {
-    "dryMatter": null,
-    "protein": null,
-    "starch": null,
+    "dryMatter": 58,
+    "protein": 79,
+    "starch": 99,
     "fat": null,
-    "energy": 11.9,
+    "energy": 11.4,
     "type": "Valores por variable; consultar método y condiciones",
-    "method": "No hay un valor de aminoácidos compatible seleccionado; se conserva nulo. AMEn expresada en MJ/kg de materia seca; valor tabulado o, para aceite, guía de ponedoras.",
+    "method": "Materia seca: digestibilidad ileal aparente, 58 %. Proteína: media de digestibilidad ileal aparente de aminoácidos, 79 %; no equivale a proteína cruda. Almidón: digestibilidad ileal de una dieta peletizada basada en avena, 99 %. AMEn: 11.4 MJ/kg de materia seca.",
     "units": "%",
     "energyUnits": "MJ/kg MS"
   },
@@ -32,16 +32,16 @@
       "Señales intestinales como CCK coordinan secreción pancreática y biliar tras la llegada de nutrientes."
     ],
     "metabolicNotes": [
-      "No se seleccionó un ensayo compatible de digestibilidad ileal de nutrientes.",
+      "En ensayos controlados se observaron 58 % de digestibilidad ileal de materia seca, 79 % de media aparente de aminoácidos y 99 % de digestibilidad ileal del almidón en una dieta basada en avena.",
       "Los valores son específicos del método y no deben interpretarse como propiedades constantes de todos los lotes."
     ]
   },
   "studyConditions": {
-    "age": "Edad variable en las 16 observaciones de AMEn para pollos recopiladas por Feedipedia.",
-    "geneticLine": "Pollos de engorde; la línea genética no fue especificada en los resúmenes utilizados.",
-    "diet": "Dietas experimentales del ensayo citado o valores compilados de Feedipedia; no representan una dieta comercial completa.",
-    "processing": "Avena regular con cáscara; no extrapolar a avena desnuda o descascarada.",
-    "method": "Digestibilidad ileal por marcador para aminoácidos o grasa cuando se informa; AMEn corregida por nitrógeno en base materia seca para energía tabulada."
+    "age": "Pollos Ross de 24 a 35 días para materia seca, aminoácidos y AMEn; pollos de 14 a 24 días para almidón.",
+    "geneticLine": "Ross en el ensayo de Perttilä et al.; pollos de engorde machos en Bassi et al.",
+    "diet": "Avena como única fuente proteica en dieta semipurificada para materia seca y aminoácidos; dieta peletizada basada en avena para almidón.",
+    "processing": "Avena regular con cáscara en Perttilä et al.; dieta peletizada en Bassi et al. No extrapolar a avena desnuda o descascarada.",
+    "method": "Marcador de cromo y colecta de íleon distal para materia seca y aminoácidos; marcador inerte y colecta ileal para almidón; colecta total de excretas y corrección por nitrógeno para AMEn."
   },
   "simulation": {
     "particleColor": "#D8BE83",
@@ -67,12 +67,14 @@
       {
         "organId": "ileum",
         "durationSeconds": 5,
-        "message": "No se seleccionó un ensayo compatible de digestibilidad ileal de nutrientes.",
+        "message": "En las condiciones citadas, la media aparente de aminoácidos fue 79 % y la digestibilidad ileal del almidón alcanzó 99 %.",
         "audioFile": "audio/narration/es-GT/chicken/food_oats_ileum.mp3"
       }
     ]
   },
   "referenceIds": [
+    "perttila_et_al_2005",
+    "bassi_et_al_2025",
     "heuze_et_al_oats_2016",
     "svihus_2014"
   ]

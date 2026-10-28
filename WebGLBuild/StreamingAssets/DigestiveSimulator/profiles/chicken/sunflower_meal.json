@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
-  "contentVersion": "0.3.0",
-  "scientificStatus": "pending",
+  "contentVersion": "0.5.0",
+  "scientificStatus": "approved",
   "speciesId": "chicken",
   "foodId": "sunflower_meal",
   "digestibility": {
@@ -9,9 +9,9 @@
     "protein": 76.7,
     "starch": null,
     "fat": null,
-    "energy": null,
+    "energy": 7.47,
     "type": "Valores por variable; consultar método y condiciones",
-    "method": "Digestibilidad ileal aparente media de 15 aminoácidos: 76.7 %; no representa digestibilidad de proteína cruda. AMEn no reportada para el tipo exacto de producto.",
+    "method": "Digestibilidad ileal aparente media de 15 aminoácidos: 76.7 %; no representa digestibilidad de proteína cruda. AMEn de harina de girasol descascarada, molida y no prepeletizada: 7.47 MJ/kg de materia seca.",
     "units": "%",
     "energyUnits": "MJ/kg MS"
   },
@@ -33,15 +33,16 @@
     ],
     "metabolicNotes": [
       "Digestibilidad ileal aparente media de 15 aminoácidos: 76.7 % sin fitasa.",
+      "La harina descascarada molida aportó 7.47 MJ de AMEn/kg MS; el mismo lote prepeletizado alcanzó 8.79 MJ/kg MS, por lo que el procesamiento no debe omitirse.",
       "Los valores son específicos del método y no deben interpretarse como propiedades constantes de todos los lotes."
     ]
   },
   "studyConditions": {
-    "age": "Pollos de engorde de 5 semanas para aminoácidos.",
-    "geneticLine": "Pollos de engorde; la línea genética no fue especificada en los resúmenes utilizados.",
-    "diet": "Dietas experimentales del ensayo citado o valores compilados de Feedipedia; no representan una dieta comercial completa.",
-    "processing": "Harina de girasol de la muestra experimental, sin fitasa; descascarado no informado en el resumen.",
-    "method": "Digestibilidad ileal por marcador para aminoácidos o grasa cuando se informa; AMEn corregida por nitrógeno en base materia seca para energía tabulada."
+    "age": "Pollos de engorde de 5 semanas para aminoácidos; machos Ross 308 de 8 a 21 días para AMEn.",
+    "geneticLine": "Pollos de engorde en el ensayo de aminoácidos; Ross 308 en el ensayo de energía.",
+    "diet": "Dietas experimentales con harina de girasol; para energía se incluyó 200 g/kg del ingrediente en una dieta de prueba.",
+    "processing": "Muestra de aminoácidos sin fitasa. El valor energético corresponde a harina descascarada, extraída con hexano, molida y no prepeletizada.",
+    "method": "Marcador ileal para aminoácidos; colecta total de excretas, corrección por nitrógeno y método de sustitución para AMEn."
   },
   "simulation": {
     "particleColor": "#5F5144",
@@ -73,6 +74,7 @@
     ]
   },
   "referenceIds": [
+    "karkelanov_et_al_2021",
     "ravindran_et_al_1999",
     "heuze_et_al_sunflower_2019",
     "ravindran_abdollahi_2021"

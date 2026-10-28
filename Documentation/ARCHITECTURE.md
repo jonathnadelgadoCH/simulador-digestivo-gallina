@@ -41,8 +41,8 @@ UnityProject/Assets/
 ## Política científica
 
 - Un valor desconocido se representa con `null`, arreglo vacío o texto `[DATO PENDIENTE DE FUENTE CIENTÍFICA]`.
-- `scientificStatus` usa `pending`, `reviewed` o `approved`.
-- Un registro no puede considerarse aprobado sin referencias.
+- `scientificStatus` usa `pending`, `reviewed` o `approved`: `pending` indica información sin revisión; `reviewed`, coherencia interna comprobada; y `approved`, dato confirmado contra sus fuentes para uso en el proyecto.
+- Un registro no puede considerarse aprobado sin referencias y condiciones de interpretación; la validación académica externa se documenta por separado.
 - Composición y digestibilidad mantienen referencias separadas.
 - El guion oral científico no forma parte de este repositorio hasta que lo elaboren y validen los estudiantes.
 
